@@ -1,0 +1,6 @@
+[
+    {
+        "name": "plutus",
+        "imageUri": "public.ecr.aws/z9v1y9p9/plutus:latest"
+    }
+]
