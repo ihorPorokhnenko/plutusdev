@@ -15,5 +15,9 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Creating imagedefinitions
+      - printf '[{"name":"plutus","imageUri":"public.ecr.aws/z9v1y9p9/plutus:latest"}]' public.ecr.aws/z9v1y9p9/plutus:latest > imagedefinitions.json
       - echo Pushing the Docker image...
       - docker push public.ecr.aws/z9v1y9p9/plutus:latest
+artifacts:
+  files: imagedefinitions.json
