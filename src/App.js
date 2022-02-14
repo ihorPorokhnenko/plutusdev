@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import { UserContext } from './context/UserContext'
 import Signup from './pages/Signup'
+import Home from './pages/Home'
 
 
 
@@ -13,7 +14,8 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Signup />
+      {/* <Signup /> */}
+      <Home />
     </UserContext.Provider>
   );
 

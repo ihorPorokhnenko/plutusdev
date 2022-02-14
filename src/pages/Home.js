@@ -28,13 +28,13 @@ export default function Home() {
 
     
 
-    if(authState === "Logged-out"){
-    return (
-      <>
-         <Redirect to="/" />
-      </>
-    )
-    }else{
+    // if(authState === "Logged-out"){
+    // return (
+    //   <>
+    //      <Redirect to="/" />
+    //   </>
+    // )
+    // }else{
       return(
       <>
       <Navbar/>
@@ -46,5 +46,5 @@ export default function Home() {
       </>
       )
     }
-}
+// }
 

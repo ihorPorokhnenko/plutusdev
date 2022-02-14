@@ -43,7 +43,7 @@ useEffect(() => {
 }, [])
 
 
-  if (context.user == null) {
+  if (context === undefined || context.user == null) {
     return (
       <div>
       <ToastContainer/>

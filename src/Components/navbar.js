@@ -70,7 +70,7 @@ const Logout = () => {
       <Nav.Link as={Link} to="/"
       className={pos === "top" ? "text-light": "text-dark"}
       >Home</Nav.Link>
-      {authState ? (
+      {/* {authState ? ( */}
        <React.Fragment>
         <Nav.Link as={Link} to="/personal-rooms"
         className={pos === "top" ? "text-light": "text-dark"}
@@ -79,7 +79,7 @@ const Logout = () => {
         className={pos === "top" ? "text-light": "text-dark"}
         >Listings</Nav.Link>
       </React.Fragment>
-      ):""}
+      {/* ):""} */}
     </Nav>
     <Navbar.Collapse className="justify-content-end">
     <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg"
