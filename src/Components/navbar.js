@@ -110,7 +110,7 @@ const Logout = () => {
     {authState ? (
     <>
     <Navbar.Text>
-      <Link to="/become-host"><Button className="host-btn" variant="outline-primary">Become a Host</Button></Link>
+      <Link to="/become-host"><Button className="host-btn" variant="outline-primary">List a Property</Button></Link>
     </Navbar.Text>
     </>
       ):""}

@@ -1,0 +1,10 @@
+ensure your aws cli is configured with the proper credentials
+
+run the following commands to build docker image and push to ecr
+
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/z9v1y9p9
+docker build -t plutus .
+docker tag plutus:latest public.ecr.aws/z9v1y9p9/plutus:latest
+docker push public.ecr.aws/z9v1y9p9/plutus:latest
+
+go to the ECS cluster plutus, kill the current running task, and run a new task to start new image.
