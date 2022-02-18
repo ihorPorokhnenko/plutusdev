@@ -8,15 +8,15 @@ export default function FindRoommatesContent() {
     return (
         <section className="find-roommates-content mt-5">
         <Container>
-        <h3 className="my-4">Find Roommates in Shared Rooms</h3>
+        <h3 className="my-4">The Plutus Solution</h3>
             <Row>
         <Col sm={12} md={4} lg={4}>
           <Card className="find-roommates-content-cards text-dark mt-3">
             <Card.Img variant="top" src={pic1} className="find-roommates-content-cards-pic"/>
             <Card.Body>
-              <Card.Title>Two Pockets are better than one.</Card.Title>
+              <Card.Title>Super-fast Closing</Card.Title>
               <Card.Text>
-              You don't have to spend all your money on accomodation.Find someone and share the cost together.
+              Using the power of blockchain technology, Plutus can get you in your new home quickly.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -25,9 +25,9 @@ export default function FindRoommatesContent() {
           <Card className="find-roommates-content-cards text-dark mt-3">
             <Card.Img variant="top" src={pic2} className="find-roommates-content-cards-pic" />
             <Card.Body>
-              <Card.Title>Make New Friends</Card.Title>
+              <Card.Title>Simplifying Real Estate Transactions </Card.Title>
               <Card.Text>
-              We let you meet with people you will absolutely love since you get to select the personality traits of potential roommates
+              The Plutus solution reduces the inherent complexity of traditional real estate transactions.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -36,9 +36,9 @@ export default function FindRoommatesContent() {
           <Card className="find-roommates-content-cards text-dark mt-3">
             <Card.Img variant="top"  src={pic3} className="find-roommates-content-cards-pic" />
             <Card.Body>
-              <Card.Title>Live the Life You Deserve</Card.Title>
+              <Card.Title>Use Your Crypto to Invest in Liquid Assets</Card.Title>
               <Card.Text>
-              A three bedroom apartment in banana island is a piece of cake. You & your friends can combine your money to rent well built & furnished apartments.
+              Real estate is a tried and tested investment vehicle that's as old as civilization iteslf.
               </Card.Text>
             </Card.Body>
           </Card>          
