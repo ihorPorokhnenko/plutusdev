@@ -19,7 +19,7 @@ export default function CategoriesSection() {
             <Card.Body>
               <Card.Title>Condos</Card.Title>
               <Card.Text>
-                Find Rooms that you won't have to share with anyone
+                Carefree living in beautifully maintained buildings.
               </Card.Text>
             </Card.Body>
           </Card></Link>
@@ -28,9 +28,9 @@ export default function CategoriesSection() {
           <Link to="/family-apartments"><Card className="category-cards text-dark mt-3">
             <Card.Img variant="top" src={familyApartments} className="category-img"/>
             <Card.Body>
-              <Card.Title>Single Family Homes</Card.Title>
+              <Card.Title>Single Family</Card.Title>
               <Card.Text>
-              Find rooms to share and live affordably with the perfect roommates.
+              Stunning propeties to call home.
               </Card.Text>
             </Card.Body>
           </Card></Link>
@@ -41,7 +41,7 @@ export default function CategoriesSection() {
             <Card.Body>
               <Card.Title>Luxurious Residences</Card.Title>
               <Card.Text>
-              Rent an entire house, where the owner has traveled or doesn't live there anymore.
+              Immaculate estates in the most exclusive locales.
               </Card.Text>
             </Card.Body>
           </Card></Link>
