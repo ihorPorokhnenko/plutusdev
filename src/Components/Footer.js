@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <>
         <footer className="mt-5 text-center footer">
-            © Copyright Plutus
+            © Copyright 2022 Plutus
             </footer>
         </>
     )
