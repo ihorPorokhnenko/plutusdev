@@ -345,7 +345,7 @@ export default function BecomeHost() {
   if(authState === "Logged-out"){
     return (
       <>
-         <Redirect to="/" />
+         <Redirect to="/signup" />
       </>
     )
   }

@@ -96,7 +96,7 @@ const Logout = () => {
         ) : (
           <>
         <NavDropdown.Item><Nav.Link as={Link} to="/">Login</Nav.Link></NavDropdown.Item>
-        <NavDropdown.Item><Nav.Link as={Link} to="/">Signup</Nav.Link></NavDropdown.Item>
+        <NavDropdown.Item><Nav.Link as={Link} to="/signup">Signup</Nav.Link></NavDropdown.Item>
         <NavDropdown.Divider />
         </>
         )}
@@ -107,13 +107,13 @@ const Logout = () => {
         ) :""}
       </NavDropdown>
 
-    {authState ? (
+    {/* {authState ? ( */}
     <>
     <Navbar.Text>
       <Link to="/become-host"><Button className="host-btn" variant="outline-primary">List a Property</Button></Link>
     </Navbar.Text>
     </>
-      ):""}
+      {/* ):""} */}
 
   </Navbar.Collapse>
   </Navbar.Collapse>
