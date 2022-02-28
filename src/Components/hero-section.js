@@ -4,13 +4,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import heroPic from '../pictures/hero.svg'
 import Vdo from '../pictures/pexels-kindel-media-7578552.mp4'
-import Thumbnail from '../pictures/cover.jpg'
 
 export default function hero_section() {
     return (
         <div>
 <div className="fullscreen-bg">
-<video autoPlay loop muted poster={Thumbnail} style={{position: "absolute", width:"100%", height:"70vh", objectFit:"cover", zIndex: "-1"}}>
+<video autoPlay loop muted style={{position: "absolute", width:"100%", height:"70vh", objectFit:"cover", zIndex: "-1"}}>
 <source src={Vdo} type="video/mp4"></source>
 </video>
 </div>
