@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase'
 import { Container } from 'react-bootstrap';
+import Web3 from "web3";
 
 export default function NavigationBar({companyName="Plutus"}) {
 
@@ -17,6 +18,9 @@ export default function NavigationBar({companyName="Plutus"}) {
     const [authState, setAuthState ] = useState(null);
     //Transparent scroll navbar state
     const [pos, setPos] = useState("top")
+    //Metamask connect status
+    const [connectStatus, setConnectStatus] = useState(false);
+    const [connectAccount, setConnectAccount] = useState("");
 
     useEffect (()=>{     
       var path = window.location.pathname
@@ -36,6 +40,51 @@ export default function NavigationBar({companyName="Plutus"}) {
     }
   },[])
     
+    const onClickConnect = async () => {
+      try {
+        await window.ethereum.request({
+          method: 'eth_requestAccounts',
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    const checkConnection = async () => {
+      // Check if browser is running Metamask
+      let web3;
+      if (window.ethereum) {
+          web3 = new Web3(window.ethereum);
+      } else if (window.web3) {
+          web3 = new Web3(window.web3.currentProvider);
+      };
+
+      // Check if User is already connected by retrieving the accounts
+      web3.eth.getAccounts()
+          .then(async function(metaMaskAccounts) {
+              let splitedMetaMaskAddress;
+              if (typeof metaMaskAccounts !== 'undefined' && metaMaskAccounts.length > 0) {
+                splitedMetaMaskAddress =
+                  metaMaskAccounts[0].substring(0, 6) +
+                  "......" +
+                  metaMaskAccounts[0].substring(
+                    metaMaskAccounts[0].length - 4,
+                    metaMaskAccounts[0].length
+                  );
+                // Set User account into state
+                setConnectStatus(true);
+                setConnectAccount(splitedMetaMaskAddress);
+              } else {
+                setConnectStatus(false);
+                setConnectAccount('');
+              }
+          })
+          .catch(function(err) {
+            setConnectStatus(false);
+            setConnectAccount('');
+            console.err(err);
+          });
+    };
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(function (user) {
@@ -45,7 +94,17 @@ export default function NavigationBar({companyName="Plutus"}) {
             setAuthState(true)
           }
         });
-      }, [])
+
+        if(window.ethereum) {
+          window.ethereum.on('chainChanged', () => {
+            checkConnection()
+          })
+          window.ethereum.on('accountsChanged', () => {
+            checkConnection()
+          })
+        }
+        checkConnection()
+    }, [])
 
 //signout function
 const Logout = () => {
@@ -82,6 +141,9 @@ const Logout = () => {
       {/* ):""} */}
     </Nav>
     <Navbar.Collapse className="justify-content-end">
+    <Navbar.Text>
+        <Button id="connectButton" variant="outline-dark" disabled={connectStatus} onClick={onClickConnect} >{connectAccount ? connectAccount : 'Connect wallet'}</Button>
+    </Navbar.Text>
     <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg"
     className={pos === "top" ? "text-light dropdown-menu-bar": "text-dark dropdown-menu-bar"}
     spin/>}>
