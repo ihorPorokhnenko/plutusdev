@@ -109,10 +109,10 @@ export default function FamilyApartments() {
      
       <Container>
         <Row>
-          {listings.map((data, id) => (
-           <Col sm={12} md={4} lg={4} key={uuidv4()}>
+          {listings.map((data) => (
+           <Col sm={12} md={4} lg={4} key={data.key}>
 
-           <Link to={{ pathname: '/property', search: `?${data.key}`, state: { fromDashboard: true }}}>
+           <Link to={{ pathname: `/property/${data.key}`, state: { fromDashboard: true }}}>
 
            <Card className="all-properties">
                 <Card.Img
