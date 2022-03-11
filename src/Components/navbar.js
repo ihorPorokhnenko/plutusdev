@@ -132,10 +132,10 @@ const Logout = () => {
       >Home</Nav.Link>
       {/* {authState ? ( */}
        <React.Fragment>
-        <Nav.Link as={Link} to="/personal-rooms"
+        <Nav.Link as={Link} to="/listings"
         className={pos === "top" ? "text-light": "text-dark"}
         >About</Nav.Link>
-        <Nav.Link as={Link} to="/vacation-villas"
+        <Nav.Link as={Link} to="/listings"
         className={pos === "top" ? "text-light": "text-dark"}
         >Listings</Nav.Link>
       </React.Fragment>

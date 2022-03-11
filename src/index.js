@@ -14,6 +14,7 @@ import SingleProperty from './pages/SinglePropertyPage'
 import SuccessfulBooking from './pages/SuccessfulBooking'
 import MyBookings from './pages/MyBookings';
 import MyHomeBookings from './pages/MyHomeBookings';
+import Listings from './pages/Listings';
 import PersonalRooms from './pages/PersonalRooms';
 import FamilyApartments from './pages/FamilyApartments';
 import VacationVillas from './pages/VacationVillas';
@@ -36,6 +37,7 @@ const routing = (
     <Route exact path="/done-booking" component={SuccessfulBooking}/>
     <Route exact path="/my-bookings" component={MyBookings}/>
     <Route exact path="/my-home-bookings" component={MyHomeBookings}/>
+    <Route exact path="/listings" component={Listings}/>
     <Route exact path="/personal-rooms" component={PersonalRooms}/>
     <Route exact path="/family-apartments" component={FamilyApartments}/>
     <Route exact path="/vacation-villas" component={VacationVillas}/>

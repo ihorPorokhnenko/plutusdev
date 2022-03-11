@@ -49,7 +49,7 @@ export default function BecomeHost() {
 
   //form submit status
   const [submit, setSubmit] = useState("")
-  console.log(submit)
+  // console.log(submit)
 
 
     //Authstate
