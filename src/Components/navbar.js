@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase'
@@ -140,6 +141,10 @@ const Logout = () => {
       </React.Fragment>
       {/* ):""} */}
     </Nav>
+    {' '}
+    <Card id="announcement" bg='primary' text='white'>
+      <Card.Header>New update coming soon!</Card.Header>
+    </Card>
     <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
         <Button id="connectButton" variant="outline-dark" disabled={connectStatus} onClick={onClickConnect} >{connectAccount ? connectAccount : 'Connect wallet'}</Button>

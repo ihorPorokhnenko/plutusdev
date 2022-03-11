@@ -10,7 +10,7 @@ export default function CategoriesSection() {
     <div>
       <Container>
       <h2 className="mt-4">Modernizing Real Estate Transactions</h2>
-      <p className="heading-p">PURCHASE A PROPERTY IN ABOUT A WEEK</p>
+      <p className="heading-p">CLOSING FROM 3 MONTHS TO 3 MINUTES</p>
     
         <Row className="mt-5">
         <Col sm={12} md={4} lg={4}>
@@ -39,7 +39,7 @@ export default function CategoriesSection() {
           <Link to="/vacation-villas"><Card className="category-cards text-dark mt-3">
             <Card.Img variant="top" src={villas} className="category-img"/>
             <Card.Body>
-              <Card.Title>Luxurious Residences</Card.Title>
+              <Card.Title>Luxury Residences</Card.Title>
               <Card.Text>
               Immaculate estates in the most exclusive locales.
               </Card.Text>
