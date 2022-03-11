@@ -4,6 +4,7 @@ import "firebase/storage"
 var firebaseConfig = {
   apiKey: "AIzaSyBtlGto-bMMmfGiUPoLQhmozMwLjzCXVOM",
   authDomain: "plutus-9b7f0.firebaseapp.com",
+  databaseURL: "https://plutus-9b7f0-default-rtdb.firebaseio.com",
   projectId: "plutus-9b7f0",
   storageBucket: "plutus-9b7f0.appspot.com",
   messagingSenderId: "1064206888864",

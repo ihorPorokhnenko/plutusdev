@@ -27,7 +27,7 @@ import { v4 as uuidv4 } from "uuid";
 import ReadReviews from '../Components/ReadReviews'
 
 
-export default function SinglePropertyPage() {
+export default function SinglePropertyPage({ match }) {
   //Authstate
   const [authState, setAuthState] = useState(null);
   const [userUid, setUserUid] = useState(null);
@@ -64,8 +64,7 @@ export default function SinglePropertyPage() {
   //get listing data
   useEffect(() => {
     //Retrive key from URL
-    const queryString = window.location.search;
-    const RetrivedchildKey = queryString.substring(1);
+    const RetrivedchildKey = match.params.propertyKey;
     setPropertyKey(RetrivedchildKey);
 
     database
@@ -177,7 +176,7 @@ export default function SinglePropertyPage() {
     <>
       <Navbar />
       {listings.map((data) => (
-        <>
+        <React.Fragment key={data.key}>
           <div className="caraousel-slider mr-top-slider">
             <Container>
               <Carousel>
@@ -219,8 +218,7 @@ export default function SinglePropertyPage() {
                 <Card>
                   <h4 className="pl-2 pt-2">{data.title}</h4>
                   <p className="text-lead pl-2">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city},
-                    {data.address}&nbsp;&nbsp;
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.address}&nbsp;&nbsp;
                     <FontAwesomeIcon icon={faHome} /> {data.category}
                   </p>
 
@@ -454,7 +452,7 @@ export default function SinglePropertyPage() {
           <br />
           <br />
           <br />
-        </>
+        </React.Fragment>
       ))}
     </>
   );

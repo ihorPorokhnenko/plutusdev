@@ -32,7 +32,7 @@ const routing = (
     <Route exact path="/done-posting-home" component={SuccessfulPosting}/>
     <Route exact path="/my-profile" component={MyProfile}/>
     <Route exact path="/create-profile" component={CreateProfile}/>
-    <Route exact path="/property" component={SingleProperty}/>
+    <Route exact path="/property/:propertyKey" component={SingleProperty}/>
     <Route exact path="/done-booking" component={SuccessfulBooking}/>
     <Route exact path="/my-bookings" component={MyBookings}/>
     <Route exact path="/my-home-bookings" component={MyHomeBookings}/>
