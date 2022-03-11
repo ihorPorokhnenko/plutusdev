@@ -180,34 +180,38 @@ export default function SinglePropertyPage({ match }) {
           <div className="caraousel-slider mr-top-slider">
             <Container>
               <Carousel>
+                {data.imageOneURL ?
                 <Carousel.Item>
                   <img
                     className="d-block w-100 img-thumbnail"
                     src={data.imageOneURL}
                     alt="First slide"
                   />
-                </Carousel.Item>
+                </Carousel.Item> : ''}
+                {data.imageTwoURL ?
                 <Carousel.Item>
                   <img
                     className="d-block w-100 img-thumbnail"
                     src={data.imageTwoURL}
                     alt="Second slide"
                   />
-                </Carousel.Item>
+                </Carousel.Item> : ''}
+                {data.imageThreeURL ?
                 <Carousel.Item>
                   <img
                     className="d-block w-100 img-thumbnail"
                     src={data.imageThreeURL}
                     alt="Third slide"
                   />
-                </Carousel.Item>
+                </Carousel.Item> : ''}
+                {data.imageFourURL ?
                 <Carousel.Item>
                   <img
                     className="d-block w-100 img-thumbnail"
                     src={data.imageFourURL}
-                    alt="Third slide"
+                    alt="Fourth slide"
                   />
-                </Carousel.Item>
+                </Carousel.Item> : ''}
               </Carousel>
             </Container>
           </div>
