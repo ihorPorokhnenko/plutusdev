@@ -37,6 +37,10 @@ export default function BecomeHost() {
 
   const [about, setAbout] = useState("");
   const [userUid, setUserUid] = useState("")
+  const [imageOneName, setImageOneName] = useState("");
+  const [imageTwoName, setImageTwoName] = useState("");
+  const [imageThreeName, setImageThreeName] = useState("");
+  const [imageFourName, setImageFourName] = useState("");
   const [imageOneURL, setImageOneURL] = useState("");
   const [imageTwoURL, setImageTwoURL] = useState("");
   const [imageThreeURL, setImageThreeURL] = useState("");
@@ -79,6 +83,7 @@ export default function BecomeHost() {
 
         function uploadToServer(){
           const imageOne = compressedFile1;
+          setImageOneName(imageOne.name);
           const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
           uploadTask.on(
             "STATE_CHANGED",
@@ -127,6 +132,7 @@ export default function BecomeHost() {
 
       function uploadToServer(){
         const imageOne = compressedFile1;
+        setImageTwoName(imageOne.name);
         const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
         uploadTask.on(
           "STATE_CHANGED",
@@ -176,6 +182,7 @@ export default function BecomeHost() {
 
       function uploadToServer(){
         const imageOne = compressedFile1;
+        setImageThreeName(imageOne.name);
         const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
         uploadTask.on(
           "STATE_CHANGED",
@@ -224,6 +231,7 @@ export default function BecomeHost() {
 
     function uploadToServer(){
       const imageOne = compressedFile1;
+      setImageFourName(imageOne.name);
       const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
       uploadTask.on(
         "STATE_CHANGED",
@@ -543,28 +551,28 @@ export default function BecomeHost() {
               <Form.Row>
 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                <Form.Control type="file" onChange={uploadImageFirst} required/>
+                <Form.Control type="file" onChange={uploadImageFirst} />
                   <span className='button'>Upload Property Image</span>
-                  <span className='label' data-js-label>No file selected</span>
+                  <span className='label' data-js-label>{imageOneURL ? imageOneName : 'No file selected'}</span>
                 </Form.Group>
                 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                  <Form.Control type="file" onChange={uploadImageSecond} required/>
+                  <Form.Control type="file" onChange={uploadImageSecond} />
                   <span className='button'>Upload Property Image</span>
-                  <span className='label' data-js-label>No file selected</span>
+                  <span className='label' data-js-label>{imageTwoURL ? imageTwoName : 'No file selected'}</span>
                 </Form.Group>
 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                  <Form.Control type="file" onChange={uploadImageThird} required/>
+                  <Form.Control type="file" onChange={uploadImageThird} />
                   <span className='button'>Upload Property Image</span>
-                  <span className='label' data-js-label>No file selected</span>
+                  <span className='label' data-js-label>{imageThreeURL ? imageThreeName : 'No file selected'}</span>
                 </Form.Group>
 
 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                  <Form.Control type="file" onChange={uploadImageFourth} required/>
+                  <Form.Control type="file" onChange={uploadImageFourth} />
                   <span className='button'>Upload Property Image</span>
-                  <span className='label' data-js-label>No file selected</span>
+                  <span className='label' data-js-label>{imageFourURL ? imageFourName : 'No file selected'}</span>
                 </Form.Group>
               </Form.Row>
 
