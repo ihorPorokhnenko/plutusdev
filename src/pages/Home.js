@@ -38,6 +38,11 @@ export default function Home() {
       return(
       <>
       <Navbar/>
+      <div class="announcement">
+        <div role="alert" class="mt-0 alert alert-success">
+          <div><b>New update coming soon!</b></div>
+        </div>
+      </div>
       <HeroSection/>
       <FeaturedSection/>
       <CategoriesSection/>
