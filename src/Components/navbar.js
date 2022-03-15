@@ -141,12 +141,8 @@ const Logout = () => {
       </React.Fragment>
       {/* ):""} */}
     </Nav>
-    {' '}
-    <Card id="announcement" bg='primary' text='white'>
-      <Card.Header>New update coming soon!</Card.Header>
-    </Card>
     <Navbar.Collapse className="justify-content-end">
-    <Navbar.Text>
+    <Navbar.Text style={{marginRight: "-98px"}}>
         <Button id="connectButton" variant="outline-dark" disabled={connectStatus} onClick={onClickConnect} >{connectAccount ? connectAccount : 'Connect wallet'}</Button>
     </Navbar.Text>
     <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg"
