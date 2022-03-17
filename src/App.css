@@ -404,18 +404,20 @@ a:link {
 
 
 .announcement {
-  display: inline-block;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 70px;
+  z-index: 99;
   height: 100%;
   text-align: center;
   width: 100%;
-  background: black;
-  color: white;
-  font-family: Arial, sans;
-  margin: 0;
-  margin-top: 71px;
-  padding: 0;
+  /* font-family: Arial, sans; */
   vertical-align: middle;
   font-size: 0.8em;
+  border-radius: 0;
 }
 
 .announcement a { 
@@ -427,7 +429,7 @@ a:link {
 }
 
 .alert {
-  margin-bottom: 0;
+  /* margin-bottom: 0; */
   font-size: large;
 }
 

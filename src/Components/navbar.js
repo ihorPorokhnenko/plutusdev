@@ -120,6 +120,7 @@ const Logout = () => {
 
 
   return (
+    <>
   <Navbar expand="lg" className="navbar" 
   style={{backgroundColor: pos === "top" ? "" : "rgb(227, 239, 240)" }}
   >
@@ -183,6 +184,11 @@ const Logout = () => {
   {/* Error toast */}
   <ToastContainer/>
 </Navbar>
-
+  <div className="announcement">
+    <div className="alert alert-success alert-dismissible announcement" role="alert">
+      <div><b>New update coming soon!</b></div>
+    </div>
+  </div>
+</>
     )
 }

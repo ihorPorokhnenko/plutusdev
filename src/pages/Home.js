@@ -37,12 +37,7 @@ export default function Home() {
     // }else{
       return(
       <>
-      <Navbar/>
-      <div class="announcement">
-        <div role="alert" class="mt-0 alert alert-success">
-          <div><b>New update coming soon!</b></div>
-        </div>
-      </div>
+      <Navbar/>      
       <HeroSection/>
       <FeaturedSection/>
       <CategoriesSection/>
