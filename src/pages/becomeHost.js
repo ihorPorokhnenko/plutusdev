@@ -480,10 +480,10 @@ export default function BecomeHost({ match }) {
                     onChange={handleChange}
                   >
                     <option>Select</option>
-                    <option value="Personal Rooms">Personal Rooms</option>
-                    <option value="Family Apartments">Family Apartments</option>
-                    <option value="Villas For Vacation">
-                      Villas For Vacation
+                    <option value="Condos">Condos</option>
+                    <option value="Single Family">Single Family</option>
+                    <option value="Luxury Residences">
+                      Luxury Residences
                     </option>
                   </Form.Control>
                 </Form.Group>
