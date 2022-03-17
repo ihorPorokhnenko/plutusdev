@@ -401,3 +401,166 @@ a:link {
   margin-right: auto;
 }
 /*End of vertical center */
+
+
+.announcement {
+  display: inline-block;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+  background: black;
+  color: white;
+  font-family: Arial, sans;
+  margin: 0;
+  margin-top: 71px;
+  padding: 0;
+  vertical-align: middle;
+  font-size: 0.8em;
+}
+
+.announcement a { 
+  color: #ccc; 
+}
+
+.announcement a:hover {
+  color: red;
+}
+
+.alert {
+  margin-bottom: 0;
+  font-size: large;
+}
+
+/* Or separator style */
+.OrSeparator {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.OrSeparator .divider {
+  width: 100%;
+  height: 1px;
+  background: #e2e2e2;
+}
+
+.OrSeparator .label {
+  font-weight: 600;
+  color: #767676;
+  padding: 0 1rem;
+}
+
+/* Sale and Tax History style */
+.sale-tax-history {
+  margin: 10px 0;
+}
+
+/* Property detail styling */
+
+.super-group-title {
+  color: #767676;
+  padding: 5px 0;
+  font-size: 1.125rem
+}
+
+.super-group-content {
+  column-count: 1;
+  /* padding: 10px 0 5px 0; */
+  line-height: 1
+}
+
+.amenity-group {
+  margin-bottom: 25px
+}
+
+.amenity-group ul {
+  padding-inline-start: 0
+}
+
+.amenity-group .title {
+  margin-bottom: 5px
+}
+
+.amenity-group .title .isDesktop .DefinitionFlyout .definition-icon {
+  position: absolute
+}
+
+.no-break-inside {
+  break-inside: avoid
+}
+
+.entryItem {
+  list-style-type: disc;
+  color: #e2e2e2;
+  margin: 8px 0 0 18px;
+  word-wrap: break-word;
+  line-height: 1.3
+}
+
+.entryItem:not(.agent-only) .entryItemContent {
+  color: #333
+}
+
+.GhostTown {
+  margin-bottom: 10px
+}
+
+.subtitle {
+  margin-bottom: .5rem
+}
+
+.disclaimer {
+  margin-top: .5rem
+}
+
+.listingProvider,.listingProvider>div:not(:last-child) {
+  margin-bottom: .5rem
+}
+
+.propertyDetailsHeader {
+  font-size: 1rem
+}
+
+.navigation-link,.subtext .pd-learn-more,.subtitle .pd-learn-more {
+  cursor: pointer;
+  color: #1080a2
+}
+
+@media (min-width: 600px) {
+  .amenities-container {
+      font-size:.875rem;
+      border-left: 1px solid #e2e2e2;
+      border-right: 1px solid #e2e2e2;
+      border-bottom: 1px solid #e2e2e2
+  }
+
+  .super-group-title {
+      font-size: inherit;
+      font-weight: 600;
+      color: #333;
+      border-top: 1px solid #e2e2e2;
+      border-bottom: 1px solid #e2e2e2;
+      background-color: #f5f5f5;
+      padding: 5px 10px
+  }
+
+  .super-group-content {
+      /* padding: 10px 15px 5px 15px; */
+      column-count: 2
+  }
+
+  .amenity-group {
+      margin-bottom: 10px
+  }
+
+  .entryItem {
+      font-size: .75rem;
+      line-height: 1.5;
+      color: #333;
+      margin-top: 3px
+  }
+
+  .propertyDetailsHeader {
+      font-size: .875rem
+  }
+}

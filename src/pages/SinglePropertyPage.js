@@ -3,6 +3,7 @@ import Navbar from "../Components/navbar";
 import { Link, Redirect } from "react-router-dom";
 import {
   Button,
+  ButtonGroup,
   Carousel,
   Row,
   Col,
@@ -24,6 +25,7 @@ import firebase from "firebase";
 import { auth, database } from "../config";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import MapContainer from '../Components/MapContainer'
 import ReadReviews from '../Components/ReadReviews'
 
 
@@ -86,6 +88,7 @@ export default function SinglePropertyPage({ match }) {
         var ac = snapshot.val().ac;
         var gatedSecurity = snapshot.val().gatedSecurity;
         var waterSupply = snapshot.val().waterSupply;
+        var phoneNumber = snapshot.val().phoneNumber;
         setHostUid(hostUid);
         setImageUrl(img)
         setPrice(amount)
@@ -119,6 +122,7 @@ export default function SinglePropertyPage({ match }) {
           ac: ac,
           gatedSecurity: gatedSecurity,
           waterSupply: waterSupply,
+          phoneNumber: phoneNumber
         });
         setListings(items);
       });
@@ -156,6 +160,15 @@ export default function SinglePropertyPage({ match }) {
     toast("Review has been successfullt posted", {type:"success"})
     document.getElementById("review-form").reset();
   };
+
+  const handleQuestionSubmit = (e) => {
+    e.preventDefault();
+    const body = e.target[0].value;
+    console.log(body);
+    const subject = "Plutus Property Question";
+
+    window.location.href = `mailto:contact@plutusproperties.org?subject=${subject}&body=${body}`;
+  }
 
     //Option values
     function handleChange(event) {
@@ -254,7 +267,7 @@ export default function SinglePropertyPage({ match }) {
                   <Container>
                     <h4 className="mt-4">About this listing</h4>
                     <p className="text-lead">{data.about}</p>
-                    <h4 className="mt-4">Prices</h4>
+                    {/* <h4 className="mt-4">Prices</h4>
                     <Row>
                       <Col sm={12} lg={3} md={3}>
                         <p className="text-lead">
@@ -281,7 +294,7 @@ export default function SinglePropertyPage({ match }) {
                           Year: {data.per_year}
                         </p>
                       </Col>
-                    </Row>
+                    </Row> */}
 
                     <h4 className="mt-4">Amenities</h4>
                     <Row>
@@ -352,8 +365,176 @@ export default function SinglePropertyPage({ match }) {
                     ></iframe> */}
 
                     <hr />
+
+                    <h4 className="mt-4">Home Facts</h4>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Status:&nbsp;
+                          {"Active"}
+                        </p>
+                      </Col>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Time on Plutus:&nbsp;
+                          {"202 days"}
+                        </p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Property Type:&nbsp;
+                          {"Residential, Single Family Residence"}
+                        </p>
+                      </Col>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Baths:&nbsp;
+                          {"9 full, 4 partial"}
+                        </p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Year Built:&nbsp;
+                          {"2004"}
+                        </p>
+                      </Col>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Style:&nbsp;
+                          {"Two Story"}
+                        </p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Community:&nbsp;
+                          {"PALM ISLAND"}
+                        </p>
+                      </Col>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Lot Size:&nbsp;
+                          {"0.69 Acres"}
+                        </p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          MLS#:&nbsp;
+                          {data.mls}
+                        </p>
+                      </Col>
+                    </Row>
+
+                    <hr />
+
+                    <h4 id="priceInsights" className="mt-4">Price Insights</h4>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          List Price:&nbsp;
+                          {data.listPrice}
+                        </p>
+                      </Col>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Est. Mo. Payment:&nbsp;
+                          {data.monthlyPayment}
+                        </p>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          Price/Sq.Ft.:&nbsp;
+                          {data.priceSqFt}
+                        </p>
+                      </Col>
+                    </Row>
+
+                    <hr />
+
+                    {/* <Wrapper apiKey={"AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg"} render={render}>
+                      <div ref={ref} >{ map }</div>
+                    </Wrapper> */}
+
+                    <MapContainer lat="26.003570" lng="-80.353600" />
+
+                    <h4 id="askQuestion" className="mt-4">Ask a Question</h4>
+                    <Row>
+                      <Col>
+                        <form onSubmit={handleQuestionSubmit}>
+                          <div className="form-group">
+                            <textarea className="form-control" id="FormControlTextarea1" rows="3" placeholder="Write a question here"></textarea>
+                          </div>
+                          <Button type="submit" variant="outline-secondary">Ask a Question</Button>
+                        </form>
+                      </Col>
+                    </Row>
                     
-                    <Form onSubmit={submitReview} id="review-form">
+                    <hr />
+
+                    <h4 className="mt-4">Property Details for {data.title}</h4>
+                    <Row>
+                      <Col>
+                        <Card className="virtualTour">
+                          <Card.Header>
+                            Virtual Tour, Taxes / Assessments, Location Details
+                          </Card.Header>
+                          <Card.Body>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Virtual Tour</h3><li className="entryItem "><span className="entryItemContent"><span><a href="https://app.immoviewer.com/landing/unbranded/61811132ef3c894582bb8cea" target="_blank" rel="nofollow noopener">Virtual Tour Unbranded 1 (External Link)</a></span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3><li className="entryItem "><span className="entryItemContent">Annual Amount: <span>$273,297</span></span></li><li className="entryItem "><span className="entryItemContent">Tax Year: <span>2020</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3><li className="entryItem "><span className="entryItemContent">Community Features: <span>Gated, Tennis Courts</span></span></li></div></ul></div></div>
+                          </Card.Body>
+                        </Card>
+                        <Card className="interiorFeatures">
+                          <Card.Header>
+                            Interior Features
+                          </Card.Header>
+                          <Card.Body>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Bathroom Information</h3><li className="entryItem "><span className="entryItemContent"># of Full Bathrooms: <span>9</span></span></li><li className="entryItem "><span className="entryItemContent"># of Half Bathrooms: <span>4</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Equipment</h3><li className="entryItem "><span className="entryItemContent">Appliances: <span>Dryer, Dishwasher, Electric Range, Icemaker, Microwave</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3><li className="entryItem "><span className="entryItemContent">Accessibility Features: <span>Accessible Elevator Installed</span></span></li><li className="entryItem "><span className="entryItemContent"><span>Unfurnished</span></span></li></div><li className="entryItem "><span className="entryItemContent">Flooring: <span>Wood</span></span></li><li className="entryItem "><span className="entryItemContent">Other Features: <span>Breakfast Area, Closet Cabinetry, Dining Area, Separate/Formal Dining Room, Entrance Foyer, Eat-in Kitchen, Elevator, First Floor Entry, High Ceilings, Kitchen Island, Kitchen/Dining Combo, Custom Mirrors, Pantry, Sitting Area in Master, Upper Level Master, Walk-In Closet(s)</span></span></li></ul></div></div>
+                          </Card.Body>
+                        </Card>
+                        <Card className="parking">
+                          <Card.Header>
+                            Parking / Garage
+                          </Card.Header>
+                          <Card.Body>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Garage/Carport Information</h3><li className="entryItem "><span className="entryItemContent"><span>Has Garage</span></span></li><li className="entryItem "><span className="entryItemContent"># of Garage Spaces: <span>4</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Parking</h3><li className="entryItem "><span className="entryItemContent">Features: <span>Covered, Driveway, Detached, Garage</span></span></li><li className="entryItem "><span className="entryItemContent"># of Covered Spaces: <span>4</span></span></li></div></ul></div></div>
+                          </Card.Body>
+                        </Card>
+                        <Card className="exteriorFeatures">
+                          <Card.Header>
+                            Exterior Features
+                          </Card.Header>
+                          <Card.Body>
+                           <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3><li className="entryItem "><span className="entryItemContent">Stories: <span>2</span></span></li><li className="entryItem "><span className="entryItemContent">Year Built Details: <span>Resale</span></span></li></div><li className="entryItem "><span className="entryItemContent">Roof Details: <span>Flat, Tile</span></span></li><li className="entryItem "><span className="entryItemContent">Construction Details: <span>Block</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3><li className="entryItem "><span className="entryItemContent">Exterior Features: <span>Balcony, Security/High Impact Doors, Lighting, Outdoor Grill, Outdoor Shower</span></span></li><li className="entryItem "><span className="entryItemContent">Patio And Porch Features: <span>Balcony, Open</span></span></li></div><li className="entryItem "><span className="entryItemContent">Other Structures: <span>Guest House</span></span></li><li className="entryItem "><span className="entryItemContent">Security Features: <span>Security Gate, Gated Community, Security Guard</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3><li className="entryItem "><span className="entryItemContent">Pool Features: <span>In Ground, Pool</span></span></li></div></ul></div></div>
+                          </Card.Body>
+                        </Card>
+                        <Card className="utilities">
+                          <Card.Header>
+                            Utilities
+                          </Card.Header>
+                          <Card.Body>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Utility Information</h3><li className="entryItem "><span className="entryItemContent">Sewer: <span>Public Sewer</span></span></li><li className="entryItem "><span className="entryItemContent">Water Source: <span>Public</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Heating &amp; Cooling</h3><li className="entryItem "><span className="entryItemContent"><span>Has Cooling</span></span></li><li className="entryItem "><span className="entryItemContent">Cooling: <span>Central Air</span></span></li></div><li className="entryItem "><span className="entryItemContent"><span>Has Heating</span></span></li><li className="entryItem "><span className="entryItemContent">Heating: <span>Central</span></span></li></ul></div></div>
+                          </Card.Body>
+                        </Card>
+                        <Card className="property">
+                          <Card.Header>
+                            Property / Lot Details
+                          </Card.Header>
+                          <Card.Body>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Lot Information</h3><li className="entryItem "><span className="entryItemContent">Lot Size Area: <span>30,000</span></span></li><li className="entryItem "><span className="entryItemContent"><span>Is Waterfront</span></span></li></div><li className="entryItem "><span className="entryItemContent">Waterfront Features: <span>Bay Front, No Fixed Bridges, Ocean Access</span></span></li><li className="entryItem "><span className="entryItemContent">Frontage Length: <span>100</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Property Information</h3><li className="entryItem "><span className="entryItemContent"><span>Has View</span></span></li><li className="entryItem "><span className="entryItemContent">Direction Faces: <span>North</span></span></li></div><li className="entryItem "><span className="entryItemContent">Zoning Description: <span>2200</span></span></li></ul></div></div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    </Row>
+
+                    {/* <Form onSubmit={submitReview} id="review-form">
                     <Form.Row>
                       <Form.Group
                         as={Col}
@@ -395,14 +576,44 @@ export default function SinglePropertyPage({ match }) {
                     </Form>
                    
                     <hr />
-                    <ReadReviews/>
+                    <ReadReviews/> */}
                     <br/>
                   </Container>
                 </Card>
               </Col>
 
               <Col lg={4} md={4} sm={12}>
-                <Card className="text-center booking-form">
+                <Button
+                  variant="danger"
+                  className="btn-block"
+                  href="https://calendly.com/plutusproperties">
+                  Schedule Tour
+                </Button>
+                <Button
+                  variant="light"
+                  className="btn-block"
+                  href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
+                  Start an Offer
+                </Button>
+                <div className="OrSeparator">
+                  <div className="divider"></div>
+                  <div className="label">OR</div>
+                  <div className="divider"></div>
+                </div>
+                <ButtonGroup>
+                  <Button variant="outline-primary" onClick={() => {document.getElementById("askQuestion").scrollIntoView({block: "center", behavior: "smooth"})}}>Ask a Question</Button>{' '}
+                  {data.phoneNumber ?
+                  <Button variant="outline-primary" href={`tel:1${data.phoneNumber}`}>{data.phoneNumber}</Button> : ''}
+                </ButtonGroup>
+                {' '}
+                <Card className="sale-tax-history">
+                  <Card.Header>
+                    Sale & Tax History
+                  </Card.Header>
+                  <Card.Body>Coming Soon</Card.Body>
+                </Card>
+                
+                {/* <Card className="text-center booking-form">
                   <Card.Header className="card-booking-form-header">
                     ₹ {data.per_night}/Night
                   </Card.Header>
@@ -428,10 +639,10 @@ export default function SinglePropertyPage({ match }) {
                           type="number" required
                           onChange={(e) => setGuests(e.target.value)}
                         />
-                      </Form.Group>
+                      </Form.Group> */}
                       {/* TODO Booking button */}
                       {/* {userUid==hostUid? "" : ""} */}
-                      <Button
+                      {/* <Button
                         variant="primary"
                         className="btn-block"
                         type="submit"
@@ -439,17 +650,17 @@ export default function SinglePropertyPage({ match }) {
                         Book Now
                       </Button>
                     </Form>
-                  </Card.Body>
+                  </Card.Body> */}
 
                   {/* TODO: */}
                   
-                  <Card.Footer className="text-muted">
+                  {/* <Card.Footer className="text-muted">
                     <Link to={`/find-roommates?${data.city}Yes`}><Button variant="warning">
                       Find Roommates in {data.city}
                     </Button></Link>
                   </Card.Footer>
 
-                </Card>
+                </Card> */}
               </Col>
             </Row>
           </Container>
