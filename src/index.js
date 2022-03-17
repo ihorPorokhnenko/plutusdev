@@ -15,9 +15,9 @@ import SuccessfulBooking from './pages/SuccessfulBooking'
 import MyBookings from './pages/MyBookings';
 import MyHomeBookings from './pages/MyHomeBookings';
 import Listings from './pages/Listings';
-import PersonalRooms from './pages/PersonalRooms';
-import FamilyApartments from './pages/FamilyApartments';
-import VacationVillas from './pages/VacationVillas';
+import Condos from './pages/Condos';
+import SingleFamily from './pages/SingleFamily';
+import LuxuryResidences from './pages/LuxuryResidences';
 import ScrollToTop from './Components/ScrollToTop';
 import PublicProfilePage from './pages/PublicProfilePage';
 
@@ -39,9 +39,9 @@ const routing = (
     <Route exact path="/my-bookings" component={MyBookings}/>
     <Route exact path="/my-home-bookings" component={MyHomeBookings}/>
     <Route exact path="/listings" component={Listings}/>
-    <Route exact path="/personal-rooms" component={PersonalRooms}/>
-    <Route exact path="/family-apartments" component={FamilyApartments}/>
-    <Route exact path="/vacation-villas" component={VacationVillas}/>
+    <Route exact path="/condos" component={Condos}/>
+    <Route exact path="/single-family" component={SingleFamily}/>
+    <Route exact path="/luxury-residences" component={LuxuryResidences}/>
     <Route exact path="/find-roommates" component={PublicProfilePage}/>
   </Router>
 )
