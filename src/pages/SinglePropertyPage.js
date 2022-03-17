@@ -486,7 +486,7 @@ export default function SinglePropertyPage({ match }) {
                             Virtual Tour, Taxes / Assessments, Location Details
                           </Card.Header>
                           <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Virtual Tour</h3><li className="entryItem "><span className="entryItemContent"><span><a href="https://app.immoviewer.com/landing/unbranded/61811132ef3c894582bb8cea" target="_blank" rel="nofollow noopener">Virtual Tour Unbranded 1 (External Link)</a></span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3><li className="entryItem "><span className="entryItemContent">Annual Amount: <span>$273,297</span></span></li><li className="entryItem "><span className="entryItemContent">Tax Year: <span>2020</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3><li className="entryItem "><span className="entryItemContent">Community Features: <span>Gated, Tennis Courts</span></span></li></div></ul></div></div>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Virtual Tour</h3><li className="entryItem "><span className="entryItemContent"><span>Virtual Tour Unbranded 1</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3><li className="entryItem "><span className="entryItemContent">Annual Amount: <span>$273,297</span></span></li><li className="entryItem "><span className="entryItemContent">Tax Year: <span>2020</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3><li className="entryItem "><span className="entryItemContent">Community Features: <span>Gated, Tennis Courts</span></span></li></div></ul></div></div>
                           </Card.Body>
                         </Card>
                         <Card className="interiorFeatures">
@@ -580,7 +580,8 @@ export default function SinglePropertyPage({ match }) {
                 </Card>
               </Col>
 
-              <Col lg={4} md={4} sm={12}>
+              <Col lg={4} md={4} sm={12} className="sticky-top">
+                <div class="sticky-sidebar">
                 <Button
                   variant="danger"
                   className="btn-block"
@@ -659,6 +660,7 @@ export default function SinglePropertyPage({ match }) {
                   </Card.Footer>
 
                 </Card> */}
+                </div>
               </Col>
             </Row>
           </Container>

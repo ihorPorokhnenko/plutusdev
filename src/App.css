@@ -33,7 +33,7 @@ h2 {
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
-  z-index: 100;
+  z-index: 1021;
 }
 
 .navbar {
@@ -450,6 +450,23 @@ a:link {
   font-weight: 600;
   color: #767676;
   padding: 0 1rem;
+}
+
+/* Sticky sidebar styling */
+/* .sidebar-item {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+} */
+
+.sticky-sidebar {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+	top: 130px;
 }
 
 /* Sale and Tax History style */
