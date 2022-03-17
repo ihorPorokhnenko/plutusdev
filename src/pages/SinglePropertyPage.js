@@ -75,20 +75,20 @@ export default function SinglePropertyPage({ match }) {
       .once("value", function (snapshot) {
         const items = [];
         var val = snapshot.val();
-        var hostUid = snapshot.val().userUid;
-        var img = snapshot.val().imageOneURL;
-        var amount = snapshot.val().per_night;
-        var title_head = snapshot.val().title;
-        var city_vr = snapshot.val().city;
-        var address_vr = snapshot.val().address;
-        var livingRoom = snapshot.val().livingRoom;
-        var internet = snapshot.val().internet;
-        var gym = snapshot.val().gym;
-        var parking = snapshot.val().parking;
-        var ac = snapshot.val().ac;
-        var gatedSecurity = snapshot.val().gatedSecurity;
-        var waterSupply = snapshot.val().waterSupply;
-        var phoneNumber = snapshot.val().phoneNumber;
+        var hostUid = val.userUid;
+        var img = val.imageOneURL;
+        var amount = val.per_night;
+        var title_head = val.title;
+        var city_vr = val.city;
+        var address_vr = val.address;
+        var livingRoom = val.livingRoom;
+        var internet = val.internet;
+        var gym = val.gym;
+        var parking = val.parking;
+        var ac = val.ac;
+        var gatedSecurity = val.gatedSecurity;
+        var waterSupply = val.waterSupply;
+        var phoneNumber = val.phoneNumber;
         setHostUid(hostUid);
         setImageUrl(img)
         setPrice(amount)
@@ -107,6 +107,8 @@ export default function SinglePropertyPage({ match }) {
           bathrooms: val.bathrooms,
           city: val.city,
           address: val.address,
+          lat: val.lat,
+          lng: val.lng,
           per_month: val.per_month,
           per_night: val.per_night,
           per_week: val.per_week,
@@ -460,11 +462,7 @@ export default function SinglePropertyPage({ match }) {
 
                     <hr />
 
-                    {/* <Wrapper apiKey={"AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg"} render={render}>
-                      <div ref={ref} >{ map }</div>
-                    </Wrapper> */}
-
-                    <MapContainer lat="26.003570" lng="-80.353600" />
+                    <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
 
                     <h4 id="askQuestion" className="mt-4">Ask a Question</h4>
                     <Row>
