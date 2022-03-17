@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Row,
   Col,
@@ -32,6 +33,8 @@ export default function MyListings() {
   const [listingsCheck, setListingsCheck] = useState(null);
   //snapshots
   const [listings, setListings] = useState([]);
+
+  let history = useHistory();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -115,9 +118,15 @@ export default function MyListings() {
                     </span>
                   </Card.Text>
 
+                  
+                  <Button variant="primary" onClick={() => history.push(`/become-host/${data.key}`)}>
+                    Edit
+                  </Button>
+                  {' '}
                   <Button variant="danger" onClick={handleShow}>
                     Delete
                   </Button>
+                  
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>Plutus</Modal.Title>

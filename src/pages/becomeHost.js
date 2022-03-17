@@ -11,7 +11,10 @@ import imageCompression from 'browser-image-compression';
 import {imageConfig} from '../utils/imageConfig'
 
 
-export default function BecomeHost() {
+export default function BecomeHost({ match }) {
+
+  //property data
+  const [propertyKey, setPropertyKey] = useState("");
 
   //form submission
   const [name, setName] = useState("");
@@ -45,6 +48,7 @@ export default function BecomeHost() {
   const [imageTwoURL, setImageTwoURL] = useState("");
   const [imageThreeURL, setImageThreeURL] = useState("");
   const [imageFourURL, setImageFourURL] = useState("");
+
   //progress status
 
   //form submit status
@@ -66,6 +70,52 @@ export default function BecomeHost() {
             setName(user.displayName)
           }
         });
+
+        //Retrive key from URL
+        if (match.params.hasOwnProperty('propertyKey')) {
+          const retrivedChildKey = match.params.propertyKey;
+          setPropertyKey(retrivedChildKey);
+
+          database
+            .ref("properties")
+            .child(retrivedChildKey)
+            .once("value", function (snapshot) {
+                let val = snapshot.val();
+                console.log(val);
+
+                setName(val.name);
+                setEmail(val.email);
+                setCategory(val.category);
+                setCity(val.city);
+                setAddress(val.address);
+                setTitle(val.title);
+                setPer_night(val.per_night);
+                setPer_week(val.per_week);
+                setPer_month(val.per_month);
+                setPer_year(val.per_year);
+                setBedrooms(val.bedrooms);
+                setBathrooms(val.bathrooms);
+
+                setLivingRoom(val.livingRoom)
+                setInternet(val.internet);
+                setGym(val.gym);
+                setParking(val.parking);
+                setAc(val.ac);
+                setGatedSecurity(val.gatedSecurity);
+                setWaterSupply(val.waterSupply);
+
+                setAbout(val.about);
+                // setUserUid(val.userUid);
+                setImageOneName(val.imageOneName);
+                setImageTwoName(val.imageTwoName);
+                setImageThreeName(val.imageThreeName);
+                setImageFourName(val.imageFourName);
+                setImageOneURL(val.imageOneURL);
+                setImageTwoURL(val.imageTwoURL);
+                setImageThreeURL(val.imageThreeURL);
+                setImageFourURL(val.imageFourURL);                
+            })
+        }
       }, [])
 
 
@@ -309,7 +359,8 @@ export default function BecomeHost() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    database.ref("properties").push({
+
+    const newProperty = {
       name: name,
       email: email,
       category: category,
@@ -331,13 +382,24 @@ export default function BecomeHost() {
       waterSupply: waterSupply,
       about: about,
       userUid: userUid,
+      imageOneName: imageOneName,
+      imageTwoName: imageTwoName,
+      imageThreeName: imageThreeName,
+      imageFourName: imageFourName,
       imageOneURL: imageOneURL,
       imageTwoURL: imageTwoURL,
       imageThreeURL: imageThreeURL,
       imageFourURL: imageFourURL,
-    });
-    toast("Posted Successfully", { type: "success" });
-    setSubmit("Submitted")
+    }
+
+    if (propertyKey) {
+      database.ref("properties").child(propertyKey).update(newProperty);
+      toast("Updated Successfully", { type: "success" });
+    } else {
+      database.ref("properties").push(newProperty);
+      toast("Posted Successfully", { type: "success" });
+    }
+    setSubmit("Submitted");
   };
 
   //Redirect after form submission
@@ -414,6 +476,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="category"
+                    value={category}
                     onChange={handleChange}
                   >
                     <option>Select</option>
@@ -552,26 +615,30 @@ export default function BecomeHost() {
 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
                 <Form.Control type="file" onChange={uploadImageFirst} />
-                  <span className='button'>Upload Property Image</span>
+                  <span className='button'>Upload Property Image One</span>
+                  <img className="d-block w-100 img-thumbnail" src={imageOneURL} />
                   <span className='label' data-js-label>{imageOneURL ? imageOneName : 'No file selected'}</span>
                 </Form.Group>
                 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
                   <Form.Control type="file" onChange={uploadImageSecond} />
-                  <span className='button'>Upload Property Image</span>
+                  <span className='button'>Upload Property Image Two</span>
+                  <img className="d-block w-100 img-thumbnail" src={imageTwoURL} />
                   <span className='label' data-js-label>{imageTwoURL ? imageTwoName : 'No file selected'}</span>
                 </Form.Group>
 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
                   <Form.Control type="file" onChange={uploadImageThird} />
-                  <span className='button'>Upload Property Image</span>
+                  <span className='button'>Upload Property Image Three</span>
+                  <img className="d-block w-100 img-thumbnail" src={imageThreeURL} />
                   <span className='label' data-js-label>{imageThreeURL ? imageThreeName : 'No file selected'}</span>
                 </Form.Group>
 
 
                 <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
                   <Form.Control type="file" onChange={uploadImageFourth} />
-                  <span className='button'>Upload Property Image</span>
+                  <span className='button'>Upload Property Image Four</span>
+                  <img className="d-block w-100 img-thumbnail" src={imageFourURL} />
                   <span className='label' data-js-label>{imageFourURL ? imageFourName : 'No file selected'}</span>
                 </Form.Group>
               </Form.Row>
@@ -595,6 +662,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="livingRoom"
+                    value={livingRoom}
                     onChange={handleChangeLivingRoom}
                   >
                     <option>Select</option>
@@ -607,6 +675,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="internet"
+                    value={internet}
                     onChange={handleChangeInternet}
                   >
                     <option>Select</option>
@@ -619,6 +688,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="gym"
+                    value={gym}
                     onChange={handleChangeGym}
                   >
                   <option>Select</option>
@@ -631,6 +701,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="parking"
+                    value={parking}
                     onChange={handleChangeParkingSpace}
                   >
                   <option>Select</option>
@@ -645,6 +716,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="ac"
+                    value={ac}
                     onChange={handleChangeAc}
                   >
                   <option>Select</option>
@@ -657,6 +729,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="security"
+                    value={gatedSecurity}
                     onChange={handleChangeSecurity}
                   >
                   <option>Select</option>
@@ -669,6 +742,7 @@ export default function BecomeHost() {
                   <Form.Control
                     as="select"
                     name="waterSupply"
+                    value={waterSupply}
                     onChange={handleChangeWaterSupply}
                   >
                   <option>Select</option>

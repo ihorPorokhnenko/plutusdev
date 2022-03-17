@@ -28,6 +28,7 @@ const routing = (
   <ScrollToTop/>
     <Route exact path="/" component={App}/>
     <Route exact path="/become-host" component={becomeHost}/>
+    <Route exact path="/become-host/:propertyKey" component={becomeHost}/>
     <Route exact path="/signup" component={Signup}/>
     <Route exact path="/home" component={Home}/>
     <Route exact path="/done-posting-home" component={SuccessfulPosting}/>
