@@ -103,6 +103,7 @@ export default function SinglePropertyPage({ match }) {
           imageTwoURL: val.imageTwoURL,
           imageThreeURL: val.imageThreeURL,
           imageFourURL: val.imageFourURL,
+          images: val.images,
           bedrooms: val.bedrooms,
           bathrooms: val.bathrooms,
           city: val.city,
@@ -195,7 +196,20 @@ export default function SinglePropertyPage({ match }) {
           <div className="caraousel-slider mr-top-slider">
             <Container>
               <Carousel>
-                {data.imageOneURL ?
+                {data.images ? Object.entries(data.images).map(([key, value]) => {
+                    if (value.url) {
+                      return (
+                        <Carousel.Item key={key}>
+                          <img
+                            className="d-block w-100 img-thumbnail"
+                            src={value.url}
+                            alt={value.name ? value.name : `Slide ${Number(key) + 1}`}
+                          />
+                        </Carousel.Item>
+                      )
+                    }
+                  }) : ''}
+                {/* {data.imageOneURL ?
                 <Carousel.Item>
                   <img
                     className="d-block w-100 img-thumbnail"
@@ -226,7 +240,7 @@ export default function SinglePropertyPage({ match }) {
                     src={data.imageFourURL}
                     alt="Fourth slide"
                   />
-                </Carousel.Item> : ''}
+                </Carousel.Item> : ''} */}
               </Carousel>
             </Container>
           </div>
@@ -581,7 +595,7 @@ export default function SinglePropertyPage({ match }) {
               </Col>
 
               <Col lg={4} md={4} sm={12} className="sticky-top">
-                <div class="sticky-sidebar">
+                <div className="sticky-sidebar">
                 <Button
                   variant="danger"
                   className="btn-block"

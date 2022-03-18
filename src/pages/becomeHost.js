@@ -13,8 +13,12 @@ import {imageConfig} from '../utils/imageConfig'
 
 export default function BecomeHost({ match }) {
 
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+
   //property data
   const [propertyKey, setPropertyKey] = useState("");
+  // const [property, setProperty] = useState({});
 
   //form submission
   const [name, setName] = useState("");
@@ -23,10 +27,10 @@ export default function BecomeHost({ match }) {
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [title, setTitle] = useState("");
-  const [per_night, setPer_night] = useState("");
-  const [per_week, setPer_week] = useState("");
-  const [per_month, setPer_month] = useState("");
-  const [per_year, setPer_year] = useState("");
+  // const [per_night, setPer_night] = useState("");
+  // const [per_week, setPer_week] = useState("");
+  // const [per_month, setPer_month] = useState("");
+  // const [per_year, setPer_year] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
 
@@ -48,6 +52,11 @@ export default function BecomeHost({ match }) {
   const [imageTwoURL, setImageTwoURL] = useState("");
   const [imageThreeURL, setImageThreeURL] = useState("");
   const [imageFourURL, setImageFourURL] = useState("");
+  const [images, setImages] = useState({});
+
+  const [fileObj, setFileObj] = useState([]);
+  const [fileArray, setFileArray] = useState([]);
+  const [file, setFile] = useState([null]);
 
   //progress status
 
@@ -81,44 +90,138 @@ export default function BecomeHost({ match }) {
             .child(retrivedChildKey)
             .once("value", function (snapshot) {
                 let val = snapshot.val();
-                console.log(val);
+                // console.log(val);
+                // setProperty(val);
 
-                setName(val.name);
-                setEmail(val.email);
-                setCategory(val.category);
-                setCity(val.city);
-                setAddress(val.address);
-                setTitle(val.title);
-                setPer_night(val.per_night);
-                setPer_week(val.per_week);
-                setPer_month(val.per_month);
-                setPer_year(val.per_year);
-                setBedrooms(val.bedrooms);
-                setBathrooms(val.bathrooms);
+                if (val.name) {setName(val.name)};
+                if (val.email) {setEmail(val.email)};
+                if (val.category) {setCategory(val.category)};
+                if (val.city) {setCity(val.city)};
+                if (val.address) {setAddress(val.address)};
+                if (val.title) {setTitle(val.title)};
+                // if (val.name) {setPer_night(val.per_night)};
+                // if (val.name) {setPer_week(val.per_week)};
+                // if (val.name) {setPer_month(val.per_month)};
+                // if (val.name) {setPer_year(val.per_year)};
+                if (val.bedrooms) {setBedrooms(val.bedrooms)};
+                if (val.bathrooms) {setBathrooms(val.bathrooms)};
 
-                setLivingRoom(val.livingRoom)
-                setInternet(val.internet);
-                setGym(val.gym);
-                setParking(val.parking);
-                setAc(val.ac);
-                setGatedSecurity(val.gatedSecurity);
-                setWaterSupply(val.waterSupply);
+                if (val.livingRoom) {setLivingRoom(val.livingRoom)};
+                if (val.internet) {setInternet(val.internet)};
+                if (val.gym) {setGym(val.gym)};
+                if (val.parking) {setParking(val.parking)};
+                if (val.ac) {setAc(val.ac)};
+                if (val.gatedSecurity) {setGatedSecurity(val.gatedSecurity)};
+                if (val.waterSupply) {setWaterSupply(val.waterSupply)};
 
-                setAbout(val.about);
-                // setUserUid(val.userUid);
-                setImageOneName(val.imageOneName);
-                setImageTwoName(val.imageTwoName);
-                setImageThreeName(val.imageThreeName);
-                setImageFourName(val.imageFourName);
-                setImageOneURL(val.imageOneURL);
-                setImageTwoURL(val.imageTwoURL);
-                setImageThreeURL(val.imageThreeURL);
-                setImageFourURL(val.imageFourURL);                
+                if (val.about) {setAbout(val.about)};
+                // if (val.name) {setUserUid(val.userUid)};
+                if (val.imageOneName) {setImageOneName(val.imageOneName)};
+                if (val.imageTwoName) {setImageTwoName(val.imageTwoName)};
+                if (val.imageThreeName) {setImageThreeName(val.imageThreeName)};
+                if (val.imageFourName) {setImageFourName(val.imageFourName)};
+                if (val.imageOneURL) {setImageOneURL(val.imageOneURL)};
+                if (val.imageTwoURL) {setImageTwoURL(val.imageTwoURL)};
+                if (val.imageThreeURL) {setImageThreeURL(val.imageThreeURL)};
+                if (val.imageFourURL) {setImageFourURL(val.imageFourURL)};
+
+                // let tempImages = {
+                //   0: {"name": val.imageOneName, "url": val.imageOneURL},
+                //   1: {"name": val.imageTwoName, "url": val.imageTwoURL},
+                //   2: {"name": val.imageThreeName, "url": val.imageThreeURL},
+                //   3: {"name": val.imageFourName, "url": val.imageFourURL},
+                // };
+                // console.log(tempImages);
+                // setImages(tempImages);
+
+                if (val.images) {setImages(val.images)};
             })
         }
       }, [])
 
+      // const sleep = (milliseconds) => {
+      //   return new Promise(resolve => setTimeout(resolve, milliseconds))
+      // }
 
+      function uploadMultipleFiles(e) {
+        let tempFileObjs = [];
+        setFileObj([]);
+        setFileArray([]);
+        // setFile([null]);
+        // console.log(e.target.files);
+        tempFileObjs.push(e.target.files);
+        // setFileObj(oldArray => [...oldArray, e.target.files]);
+        setFileObj(tempFileObjs);
+        // console.log(fileObj);
+        let tempFileArray = [];
+        for (let i = 0; i < tempFileObjs[0].length; i++) {          
+          let f = tempFileObjs[0][i];
+          uploadImage(f, i);
+          // await sleep(500);
+          let fileURL = URL.createObjectURL(f);
+          // fileArray.push(URL.createObjectURL(fileObj[0][i]));
+          f.fileURL = fileURL;
+          tempFileArray.push(f);          
+          // setFileArray(oldArray => [...oldArray, f]);
+          // setFileArray(fileArray);
+        }
+        setFileArray(tempFileArray);
+        setFile(tempFileArray);   
+      }
+
+      function uploadFiles(e) {
+          e.preventDefault();
+          console.log(file);
+          console.log(images);
+      }
+
+      async function uploadImage(imageFile, i = 0) {
+        try {
+          const compressedFile1 = await imageCompression(imageFile, imageConfig);
+
+          uploadToServer(compressedFile1, i); // write your own logic
+  
+          function uploadToServer(compressedFile, i = 0){
+            const imageOne = compressedFile;
+            setImageOneName(imageOne.name);
+            const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
+            uploadTask.on(
+              "STATE_CHANGED",
+              (snapshot) => {
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                toast(`${imageOne} Image is Uploading: Please Wait`, { type: "warning" , toastId: "1", });
+                if(progress === 100){
+                  toast.update("1", {
+                    render: `${imageOne.name} Image Upload Done`,
+                    type: "success",
+                    autoClose: 5000
+                  });
+                }
+              },
+              (error) => {
+                console.log(error);
+                toast(error, {type: "error"})
+              },
+              () => {
+                storage
+                  .ref("images")
+                  .child(imageOne.name)
+                  .getDownloadURL()
+                  .then((url) => {
+                    let tempImages = images;
+                    tempImages[i] = {"name": imageOne.name, "url": url};
+                    // console.log(tempImages);
+                    setImages(tempImages);
+                    forceUpdate();
+                  });
+              }
+            );
+          }
+
+        } catch (error) {
+          toast(error, {type: "error"})
+        }
+      }
 
   //image 1 function
     async  function uploadImageFirst(e) {
@@ -269,7 +372,7 @@ export default function BecomeHost({ match }) {
 
 };
 
- //image 3 function
+    //image 4 function
  async  function uploadImageFourth(e) {
       
   const imageFile = e.target.files[0];
@@ -318,7 +421,6 @@ export default function BecomeHost({ match }) {
 
 };
 
-
   //Option values
   function handleChange(event) {
     setCategory(event.target.value);
@@ -352,11 +454,6 @@ export default function BecomeHost({ match }) {
     setWaterSupply(event.target.value);
   }
 
-
-  
-
-
-  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -367,10 +464,10 @@ export default function BecomeHost({ match }) {
       city: city,
       address: address,
       title: title,
-      per_night: per_night,
-      per_week: per_week,
-      per_month: per_month,
-      per_year: per_year,
+      // per_night: per_night,
+      // per_week: per_week,
+      // per_month: per_month,
+      // per_year: per_year,
       bedrooms: bedrooms,
       bathrooms: bathrooms,
       livingRoom: livingRoom,
@@ -390,7 +487,9 @@ export default function BecomeHost({ match }) {
       imageTwoURL: imageTwoURL,
       imageThreeURL: imageThreeURL,
       imageFourURL: imageFourURL,
+      images: images
     }
+    // console.log(newProperty);
 
     if (propertyKey) {
       database.ref("properties").child(propertyKey).update(newProperty);
@@ -526,69 +625,6 @@ export default function BecomeHost({ match }) {
               </Form.Group>
 
               <Form.Row>
-                <Form.Group
-                  as={Col}
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  controlId="formGridZip"
-                >
-                  <Form.Label>Price Per Night</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Eg. 1500"
-                    value={per_night}
-                    onChange={(e) => setPer_night(e.target.value)}
-                  required/>
-                </Form.Group>
-                <Form.Group
-                  as={Col}
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  controlId="formGridZip"
-                >
-                  <Form.Label>Price Per Week</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Eg. 7000"
-                    value={per_week}
-                    onChange={(e) => setPer_week(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group
-                  as={Col}
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  controlId="formGridZip"
-                >
-                  <Form.Label>Price Per Month</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Eg. 25000"
-                    value={per_month}
-                    onChange={(e) => setPer_month(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group
-                  as={Col}
-                  lg={3}
-                  md={3}
-                  sm={12}
-                  controlId="formGridZip"
-                >
-                  <Form.Label>Price Per Year</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Eg. 650000"
-                    value={per_year}
-                    onChange={(e) => setPer_year(e.target.value)}
-                  />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
                 <Form.Group as={Col} lg={6} md={6} sm={12}>
                   <Form.Label>Bedrooms</Form.Label>
                   <Form.Control
@@ -609,39 +645,35 @@ export default function BecomeHost({ match }) {
                 </Form.Group>
               </Form.Row>
 
-              <Form.Label>Upload Property Images</Form.Label>
-              <br />
               <Form.Row>
-
-                <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                <Form.Control type="file" onChange={uploadImageFirst} />
-                  <span className='button'>Upload Property Image One</span>
-                  <img className="d-block w-100 img-thumbnail" src={imageOneURL} />
-                  <span className='label' data-js-label>{imageOneURL ? imageOneName : 'No file selected'}</span>
-                </Form.Group>
-                
-                <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                  <Form.Control type="file" onChange={uploadImageSecond} />
-                  <span className='button'>Upload Property Image Two</span>
-                  <img className="d-block w-100 img-thumbnail" src={imageTwoURL} />
-                  <span className='label' data-js-label>{imageTwoURL ? imageTwoName : 'No file selected'}</span>
-                </Form.Group>
-
-                <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                  <Form.Control type="file" onChange={uploadImageThird} />
-                  <span className='button'>Upload Property Image Three</span>
-                  <img className="d-block w-100 img-thumbnail" src={imageThreeURL} />
-                  <span className='label' data-js-label>{imageThreeURL ? imageThreeName : 'No file selected'}</span>
-                </Form.Group>
-
-
-                <Form.Group as={Col} lg={3} md={3} sm={3} className="file-input">
-                  <Form.Control type="file" onChange={uploadImageFourth} />
-                  <span className='button'>Upload Property Image Four</span>
-                  <img className="d-block w-100 img-thumbnail" src={imageFourURL} />
-                  <span className='label' data-js-label>{imageFourURL ? imageFourName : 'No file selected'}</span>
+                {/* <a href="#" onClick={uploadFiles}>test</a> */}
+                <Form.Group as={Col}>
+                    <Form.Label>Multi-Upload Property Images</Form.Label>
+                    <input type="file" className="form-control" onChange={uploadMultipleFiles} multiple />
                 </Form.Group>
               </Form.Row>
+                
+              {Object.keys(images).length > 0 ? (
+                <>
+                  <Form.Label>Upload/Edit Property Images</Form.Label>
+                  <br />
+                  <Form.Row>
+                    {Object.entries(images).map(([key, value]) => {
+                      return (
+                        <Form.Group key={key} as={Col} lg={3} md={3} sm={3} className="file-input">
+                          <Form.Control type="file" onChange={(e) => {
+                              const imageFile = e.target.files[0];
+                              uploadImage(imageFile, key);
+                            }} />
+                          <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
+                          <img className="d-block w-100 img-thumbnail" src={value.url} />
+                          <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
+                </Form.Group>
+                      )
+                    })}
+              </Form.Row>
+                </>
+              ) : ''}
 
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>About this listing</Form.Label>
