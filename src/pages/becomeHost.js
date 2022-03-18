@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from "react";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import { Form, Col, Button, Container, Card} from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import {Redirect} from 'react-router-dom'
@@ -24,9 +24,13 @@ export default function BecomeHost({ match }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [category, setCategory] = useState("");
-  const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [city, setCity] = useState("");
+  const [st, setSt] = useState("");
+  const [zip, setZip] = useState("");
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
   // const [per_night, setPer_night] = useState("");
   // const [per_week, setPer_week] = useState("");
   // const [per_month, setPer_month] = useState("");
@@ -96,9 +100,13 @@ export default function BecomeHost({ match }) {
                 if (val.name) {setName(val.name)};
                 if (val.email) {setEmail(val.email)};
                 if (val.category) {setCategory(val.category)};
-                if (val.city) {setCity(val.city)};
                 if (val.address) {setAddress(val.address)};
+                if (val.address2) {setAddress2(val.address2)};
+                if (val.city) {setCity(val.city)};
+                if (val.state) {setSt(val.state)};
+                if (val.zip) {setZip(val.zip)};
                 if (val.title) {setTitle(val.title)};
+                if (val.price) {setPrice(val.price)};
                 // if (val.name) {setPer_night(val.per_night)};
                 // if (val.name) {setPer_week(val.per_week)};
                 // if (val.name) {setPer_month(val.per_month)};
@@ -223,210 +231,16 @@ export default function BecomeHost({ match }) {
         }
       }
 
-  //image 1 function
-    async  function uploadImageFirst(e) {
-
-      const imageFile = e.target.files[0];
-     
-    
-      try {
-        const compressedFile1 = await imageCompression(imageFile, imageConfig);
-    
-        await uploadToServer(compressedFile1); // write your own logic
-
-        function uploadToServer(){
-          const imageOne = compressedFile1;
-          setImageOneName(imageOne.name);
-          const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
-          uploadTask.on(
-            "STATE_CHANGED",
-            (snapshot) => {
-              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              toast("First Image is Uploading:Please Wait", { type: "warning" , toastId: "1", });
-              if(progress === 100){
-                toast.update("1", {
-                  render: "First Image Upload Done",
-                  type: "success",
-                  autoClose: 5000
-                });
-              }
-            },
-            (error) => {
-              console.log(error);
-              toast(error, {type: "error"})
-            },
-            () => {
-              storage
-                .ref("images")
-                .child(imageOne.name)
-                .getDownloadURL()
-                .then((url) => {
-                setImageOneURL(url);
-                });
-            }
-          );
-        }
-
-      } catch (error) {
-        toast(error, {type: "error"})
-      }
-  };
-
-
-   //image 2 function
-   async  function uploadImageSecond(e) {
-
-    const imageFile = e.target.files[0];
-  
-    try {
-      const compressedFile1 = await imageCompression(imageFile, imageConfig);
-  
-      await uploadToServer(compressedFile1); // write your own logic
-
-      function uploadToServer(){
-        const imageOne = compressedFile1;
-        setImageTwoName(imageOne.name);
-        const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
-        uploadTask.on(
-          "STATE_CHANGED",
-          (snapshot) => {
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            toast("Second Image is Uploading:Please Wait", { type: "warning" , toastId: "1", });
-            if(progress === 100){
-              toast.update("1", {
-                render: "Second Image Upload Done",
-                type: "success",
-                autoClose: 5000
-              });
-            }
-          },
-          (error) => {
-            console.log(error);
-            toast(error, {type: "error"})
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(imageOne.name)
-              .getDownloadURL()
-              .then((url) => {
-              setImageTwoURL(url);
-              });
-          }
-        );
-      }
-
-    } catch (error) {
-      toast(error, {type: "error"})
-    }
-
-};
-
-
-   //image 3 function
-   async  function uploadImageThird(e) {
-      
-    const imageFile = e.target.files[0];
-  
-    try {
-      const compressedFile1 = await imageCompression(imageFile, imageConfig);
-  
-      await uploadToServer(compressedFile1); // write your own logic
-
-      function uploadToServer(){
-        const imageOne = compressedFile1;
-        setImageThreeName(imageOne.name);
-        const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
-        uploadTask.on(
-          "STATE_CHANGED",
-          (snapshot) => {
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            toast("Third Image is Uploading:Please Wait", { type: "warning" , toastId: "1", });
-            if(progress === 100){
-              toast.update("1", {
-                render: "Third Image Upload Done",
-                type: "success",
-                autoClose: 5000
-              });
-            }
-          },
-          (error) => {
-            console.log(error);
-            toast(error, {type: "error"})
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(imageOne.name)
-              .getDownloadURL()
-              .then((url) => {
-              setImageThreeURL(url);
-              });
-          }
-        );
-      }
-
-    } catch (error) {
-      toast(error, {type: "error"})
-    }
-
-};
-
-    //image 4 function
- async  function uploadImageFourth(e) {
-      
-  const imageFile = e.target.files[0];
-
-  try {
-    const compressedFile1 = await imageCompression(imageFile, imageConfig);
-
-    await uploadToServer(compressedFile1); // write your own logic
-
-    function uploadToServer(){
-      const imageOne = compressedFile1;
-      setImageFourName(imageOne.name);
-      const uploadTask = storage.ref(`images/${imageOne.name}`).put(imageOne);
-      uploadTask.on(
-        "STATE_CHANGED",
-        (snapshot) => {
-          var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          toast("Fourth Image is Uploading:Please Wait", { type: "warning" , toastId: "1", });
-          if(progress === 100){
-            toast.update("1", {
-              render: "Fourth Image Upload Done",
-              type: "success",
-              autoClose: 5000
-            });
-          }
-        },
-        (error) => {
-          console.log(error);
-          toast(error, {type: "error"})
-        },
-        () => {
-          storage
-            .ref("images")
-            .child(imageOne.name)
-            .getDownloadURL()
-            .then((url) => {
-            setImageFourURL(url);
-            });
-        }
-      );
-    }
-
-  } catch (error) {
-    toast(error, {type: "error"})
-  }
-
-};
-
   //Option values
-  function handleChange(event) {
+  function handleChangeCategory(event) {
     setCategory(event.target.value);
   }
 
-   function handleChangeLivingRoom(event) {
+  function handleChangeState(event) {
+    setSt(event.target.value);
+  }
+
+  function handleChangeLivingRoom(event) {
     setLivingRoom(event.target.value);
   }
 
@@ -461,9 +275,13 @@ export default function BecomeHost({ match }) {
       name: name,
       email: email,
       category: category,
-      city: city,
       address: address,
+      address2: address2,
+      city: city,
+      state: st,
+      zip: zip,      
       title: title,
+      price: price,
       // per_night: per_night,
       // per_week: per_week,
       // per_month: per_month,
@@ -548,7 +366,7 @@ export default function BecomeHost({ match }) {
 
             <Form onSubmit={handleSubmit}>
               <Form.Row>
-                <Form.Group as={Col} controlId="formGriName">
+                <Form.Group as={Col} controlId="formGridName">
                   <Form.Label>Name </Form.Label>
                   <Form.Control
                     type="text"
@@ -576,7 +394,7 @@ export default function BecomeHost({ match }) {
                     as="select"
                     name="category"
                     value={category}
-                    onChange={handleChange}
+                    onChange={handleChangeCategory}
                   >
                     <option>Select</option>
                     <option value="Condos">Condos</option>
@@ -596,31 +414,142 @@ export default function BecomeHost({ match }) {
                   sm={12}
                   controlId="formGridAddress1"
                 >
-                  <Form.Label>City</Form.Label>
-                  <Form.Control
-                    placeholder="1234 Main St"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                  required/>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridCity">
                   <Form.Label>Address</Form.Label>
                   <Form.Control
+                    placeholder="1234 Main St"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                  required/>
+                    required />
+                </Form.Group>
+
+                <Form.Group 
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridAddress2">
+                  <Form.Label>Address 2</Form.Label>
+                  <Form.Control
+                    placeholder="Apt/Unit #"
+                    value={address2}
+                    onChange={(e) => setAddress2(e.target.value)} />
+                </Form.Group>              
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group 
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridCity">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control
+                    placeholder="Orange"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required />                  
+                </Form.Group>
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridState">
+                  <Form.Label>State</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="state"
+                    value={st}
+                    onChange={handleChangeState}
+                    required >
+                      <option>Select</option>
+                      <option value="AL">Alabama</option>
+                      <option value="AK">Alaska</option>
+                      <option value="AZ">Arizona</option>
+                      <option value="AR">Arkansas</option>
+                      <option value="CA">California</option>
+                      <option value="CO">Colorado</option>
+                      <option value="CT">Connecticut</option>
+                      <option value="DE">Delaware</option>
+                      <option value="DC">District Of Columbia</option>
+                      <option value="FL">Florida</option>
+                      <option value="GA">Georgia</option>
+                      <option value="HI">Hawaii</option>
+                      <option value="ID">Idaho</option>
+                      <option value="IL">Illinois</option>
+                      <option value="IN">Indiana</option>
+                      <option value="IA">Iowa</option>
+                      <option value="KS">Kansas</option>
+                      <option value="KY">Kentucky</option>
+                      <option value="LA">Louisiana</option>
+                      <option value="ME">Maine</option>
+                      <option value="MD">Maryland</option>
+                      <option value="MA">Massachusetts</option>
+                      <option value="MI">Michigan</option>
+                      <option value="MN">Minnesota</option>
+                      <option value="MS">Mississippi</option>
+                      <option value="MO">Missouri</option>
+                      <option value="MT">Montana</option>
+                      <option value="NE">Nebraska</option>
+                      <option value="NV">Nevada</option>
+                      <option value="NH">New Hampshire</option>
+                      <option value="NJ">New Jersey</option>
+                      <option value="NM">New Mexico</option>
+                      <option value="NY">New York</option>
+                      <option value="NC">North Carolina</option>
+                      <option value="ND">North Dakota</option>
+                      <option value="OH">Ohio</option>
+                      <option value="OK">Oklahoma</option>
+                      <option value="OR">Oregon</option>
+                      <option value="PA">Pennsylvania</option>
+                      <option value="RI">Rhode Island</option>
+                      <option value="SC">South Carolina</option>
+                      <option value="SD">South Dakota</option>
+                      <option value="TN">Tennessee</option>
+                      <option value="TX">Texas</option>
+                      <option value="UT">Utah</option>
+                      <option value="VT">Vermont</option>
+                      <option value="VA">Virginia</option>
+                      <option value="WA">Washington</option>
+                      <option value="WV">West Virginia</option>
+                      <option value="WI">Wisconsin</option>
+                      <option value="WY">Wyoming</option>
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridZip">
+                  <Form.Label>Zip Code</Form.Label>
+                  <Form.Control
+                    placeholder="12345"
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                    required />                  
                 </Form.Group>
               </Form.Row>
 
               <h2 className="mt-3">Specific Details</h2>
 
-              <Form.Group controlId="formGridAddress2">
+              <Form.Group controlId="formGridTitle">
                 <Form.Label>Property Title</Form.Label>
                 <Form.Control
                   placeholder="Eg. Amazing Apartment With Sea View"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                required/>
+              </Form.Group>
+
+              <Form.Group controlId="formGridPrice">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  placeholder="1234"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                 required/>
               </Form.Group>
 
@@ -666,7 +595,7 @@ export default function BecomeHost({ match }) {
                               uploadImage(imageFile, key);
                             }} />
                           <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
-                          <img className="d-block w-100 img-thumbnail" src={value.url} />
+                          <img className="d-block w-100 img-thumbnail" src={value.url} alt="" />
                           <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
                 </Form.Group>
                       )
@@ -684,7 +613,6 @@ export default function BecomeHost({ match }) {
                   onChange={(e) => setAbout(e.target.value)}
                   required/>
               </Form.Group>
-
 
               <h2 className="mt-3">Amenities</h2>
 
@@ -783,8 +711,6 @@ export default function BecomeHost({ match }) {
                   </Form.Control>
                 </Form.Group>
                 </Form.Row>
-
-
 
               <Button variant="primary" className="btn btn-block" type="submit">
                 Post My Property
