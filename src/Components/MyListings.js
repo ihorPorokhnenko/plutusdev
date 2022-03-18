@@ -65,7 +65,6 @@ export default function MyListings() {
         console.error(error);
       });
   }, [userUid]);
-  //
 
   //get listing data
   useEffect(() => {
@@ -78,10 +77,16 @@ export default function MyListings() {
         snapshot.forEach((childSnapshot) => {
           var childKey = childSnapshot.key;
           var data = childSnapshot.val();
+          let firstImageURL = "";
+          if (data.images && Object.keys(data.images).length > 0 && data.images[0].url) {
+            firstImageURL = data.images[0].url;
+          } else {
+            firstImageURL = data.imageOneURL;
+          }
           items.push({
             key: childKey,
             title: data.title,
-            imageOneURL: data.imageOneURL,
+            imageOneURL: firstImageURL,
             bedrooms: data.bedrooms,
             bathrooms: data.bathrooms,
             city: data.city,
@@ -91,15 +96,14 @@ export default function MyListings() {
         setListings(items);
       });
   }, [userUid]);
-  //
 
   return (
     <>
-    {listingsCheck== true ?  <h2 className="text-center">My Listings</h2> : ""}
-     
+      {listingsCheck === true ? <h2 className="text-center">My Listings</h2> : ""}
+
       <Container>
         <Row>
-          {listings.map((data, id) => (
+          {listings.map((data) => (
             <Col sm={12} md={4} lg={4} key={uuidv4()}>
               <Card className="mt-4">
                 <Card.Img
@@ -118,7 +122,6 @@ export default function MyListings() {
                     </span>
                   </Card.Text>
 
-                  
                   <Button variant="primary" onClick={() => history.push(`/become-host/${data.key}`)}>
                     Edit
                   </Button>
@@ -126,7 +129,7 @@ export default function MyListings() {
                   <Button variant="danger" onClick={handleShow}>
                     Delete
                   </Button>
-                  
+
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>Plutus</Modal.Title>
