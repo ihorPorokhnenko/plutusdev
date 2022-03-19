@@ -79,6 +79,7 @@ export default function Listings() {
           items.push({
             key: childKey,
             title: data.title,
+            address: data.address,
             imageOneURL: firstImageURL,
             bedrooms: data.bedrooms,
             bathrooms: data.bathrooms,
@@ -119,7 +120,7 @@ export default function Listings() {
                     className="my-listings-thumbnail"
                   />
                   <Card.Body>
-                    <Card.Title className="text-dark">{data.title}</Card.Title>
+                    <Card.Title className="text-dark">{data.address}</Card.Title>
                     <Card.Text className="p-2 text-dark">
                       <FontAwesomeIcon icon={faBed} /> {data.bedrooms}&nbsp;
                       <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;

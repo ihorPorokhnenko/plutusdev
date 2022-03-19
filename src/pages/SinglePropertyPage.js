@@ -80,7 +80,11 @@ export default function SinglePropertyPage({ match }) {
         var amount = val.per_night;
         var title_head = val.title;
         var city_vr = val.city;
-        var address_vr = val.address;
+        var address_vr = typeof val.address !== 'undefined' ? val.address : '';
+        var address2 = typeof val.address2 !== 'undefined' ? val.address2 : '';
+        var city = typeof val.city !== 'undefined' ? val.city : '';
+        var state = typeof val.state !== 'undefined' ? val.state : '';
+        var zip = typeof val.zip !== 'undefined' ? val.zip : '';
         var livingRoom = val.livingRoom;
         var internet = val.internet;
         var gym = val.gym;
@@ -100,21 +104,28 @@ export default function SinglePropertyPage({ match }) {
           userUid: userUid,
           title: val.title,
           imageOneURL: val.imageOneURL,
-          imageTwoURL: val.imageTwoURL,
-          imageThreeURL: val.imageThreeURL,
-          imageFourURL: val.imageFourURL,
+          // imageTwoURL: val.imageTwoURL,
+          // imageThreeURL: val.imageThreeURL,
+          // imageFourURL: val.imageFourURL,
           images: val.images,
           bedrooms: val.bedrooms,
           bathrooms: val.bathrooms,
-          city: val.city,
-          address: val.address,
+          address: address_vr,
+          address2: address2,
+          city: city,
+          state: state,
+          zip: zip,
+          fullAddress: `${address_vr}, ${address2} ${city}, ${state} ${zip}`,
+          price: val.price,
+          // per_night: per_night,
+          // per_week: per_week,
+          // per_month: per_month,
+          // per_year: per_year,
           lat: val.lat,
           lng: val.lng,
-          per_month: val.per_month,
-          per_night: val.per_night,
-          per_week: val.per_week,
-          per_year: val.per_year,
           category: val.category,
+          propertyStatus: val.propertyStatus,
+          propertyType: val.propertyType,
           about: val.about,
           name: val.name,
 
@@ -130,7 +141,6 @@ export default function SinglePropertyPage({ match }) {
         setListings(items);
       });
   }, [userUid]);
-  //
 
   const submitBooking = (e) => {
     e.preventDefault();
@@ -141,7 +151,7 @@ export default function SinglePropertyPage({ match }) {
       guests: guests,
       propertyKey: propertyKey,
       hostUid: hostUid,
-      imageUrl : imageUrl,
+      imageUrl: imageUrl,
       price: price,
       title: heading,
       city: city,
@@ -160,7 +170,7 @@ export default function SinglePropertyPage({ match }) {
       review: review,
       name: name,
     });
-    toast("Review has been successfullt posted", {type:"success"})
+    toast("Review has been successfully posted", { type: "success" })
     document.getElementById("review-form").reset();
   };
 
@@ -173,11 +183,10 @@ export default function SinglePropertyPage({ match }) {
     window.location.href = `mailto:contact@plutusproperties.org?subject=${subject}&body=${body}`;
   }
 
-    //Option values
-    function handleChange(event) {
-      setStars(event.target.value);
-    }
-  
+  //Option values
+  function handleChange(event) {
+    setStars(event.target.value);
+  }
 
   //Redirect after form submission
   if (submit === "Submitted") {
@@ -197,18 +206,19 @@ export default function SinglePropertyPage({ match }) {
             <Container>
               <Carousel>
                 {data.images ? Object.entries(data.images).map(([key, value]) => {
-                    if (value.url) {
-                      return (
-                        <Carousel.Item key={key}>
-                          <img
-                            className="d-block w-100 img-thumbnail"
-                            src={value.url}
-                            alt={value.name ? value.name : `Slide ${Number(key) + 1}`}
-                          />
-                        </Carousel.Item>
-                      )
-                    }
-                  }) : ''}
+                  if (value.url) {
+                    return (
+                      <Carousel.Item key={key}>
+                        <img
+                          className="d-block w-100 img-thumbnail"
+                          src={value.url}
+                          alt={value.name ? value.name : `Slide ${Number(key) + 1}`}
+                        />
+                      </Carousel.Item>
+                    )
+                  }
+                  return '';
+                }) : ''}
                 {/* {data.imageOneURL ?
                 <Carousel.Item>
                   <img
@@ -251,7 +261,7 @@ export default function SinglePropertyPage({ match }) {
                 <Card>
                   <h4 className="pl-2 pt-2">{data.title}</h4>
                   <p className="text-lead pl-2">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.address}&nbsp;&nbsp;
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.fullAddress}&nbsp;&nbsp;
                     <FontAwesomeIcon icon={faHome} /> {data.category}
                   </p>
 
@@ -283,91 +293,7 @@ export default function SinglePropertyPage({ match }) {
                   <Container>
                     <h4 className="mt-4">About this listing</h4>
                     <p className="text-lead">{data.about}</p>
-                    {/* <h4 className="mt-4">Prices</h4>
-                    <Row>
-                      <Col sm={12} lg={3} md={3}>
-                        <p className="text-lead">
-                          <FontAwesomeIcon icon={faArrowCircleRight} /> Per
-                          Night: {data.per_night}
-                        </p>
-                      </Col>
-                      <Col sm={12} lg={3} md={3}>
-                        <p className="text-lead">
-                          <FontAwesomeIcon icon={faArrowCircleRight} /> Per
-                          Week: {data.per_week}
-                        </p>
-                      </Col>
-                      <Col sm={12} lg={3} md={3}>
-                        <p className="text-lead">
-                          {" "}
-                          <FontAwesomeIcon icon={faArrowCircleRight} /> Per
-                          Month: {data.per_month}
-                        </p>
-                      </Col>
-                      <Col sm={12} lg={3} md={3}>
-                        <p className="text-lead">
-                          <FontAwesomeIcon icon={faArrowCircleRight} /> Per
-                          Year: {data.per_year}
-                        </p>
-                      </Col>
-                    </Row> */}
-
-                    <h4 className="mt-4">Amenities</h4>
-                    <Row>
-                      <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                      Living Room:&nbsp;
-                        {data.livingRoom == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                         
-                        </p>
-                      </Col>
-                      <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                     Internet:&nbsp;
-                        {data.internet == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                          
-                        </p>
-                      </Col>
-                      <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                     Gym:&nbsp;
-                        {data.gym == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                          
-                        </p>
-                      </Col>
-                      <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                     Parking Space:&nbsp;
-                        {data.parking == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                          
-                        </p>
-                      </Col>
-                    </Row>
-
-                    <Row>
-
-                    <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                     Air Conditioner:&nbsp;
-                        {data.ac == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                        </p>
-                        </Col>
-                    <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                     Gated Security:&nbsp;
-                        {data.gatedSecurity == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                        </p>
-                        </Col>
-                    <Col sm={12} lg={3} md={3}>
-                      <p className="text-lead">
-                     Water Supply:&nbsp;
-                        {data.waterSupply == "Yes" ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faTimesCircle} />}
-                        </p>
-                        </Col>
-
-                    </Row>
-
-
+                    
                     {/*TODO*/}
                     {/* <iframe
                       className="my-3"
@@ -387,7 +313,7 @@ export default function SinglePropertyPage({ match }) {
                       <Col lg={4} md={4} sm={4}>
                         <p className="text-lead">
                           Status:&nbsp;
-                          {"Active"}
+                          {data.propertyStatus}
                         </p>
                       </Col>
                       <Col lg={4} md={4} sm={4}>
@@ -401,7 +327,7 @@ export default function SinglePropertyPage({ match }) {
                       <Col lg={4} md={4} sm={4}>
                         <p className="text-lead">
                           Property Type:&nbsp;
-                          {"Residential, Single Family Residence"}
+                          {data.propertyType}
                         </p>
                       </Col>
                       <Col lg={4} md={4} sm={4}>
@@ -455,7 +381,7 @@ export default function SinglePropertyPage({ match }) {
                       <Col lg={4} md={4} sm={4}>
                         <p className="text-lead">
                           List Price:&nbsp;
-                          {data.listPrice}
+                          ${data.price}
                         </p>
                       </Col>
                       <Col lg={4} md={4} sm={4}>
@@ -489,7 +415,7 @@ export default function SinglePropertyPage({ match }) {
                         </form>
                       </Col>
                     </Row>
-                    
+
                     <hr />
 
                     <h4 className="mt-4">Property Details for {data.title}</h4>
@@ -524,7 +450,7 @@ export default function SinglePropertyPage({ match }) {
                             Exterior Features
                           </Card.Header>
                           <Card.Body>
-                           <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3><li className="entryItem "><span className="entryItemContent">Stories: <span>2</span></span></li><li className="entryItem "><span className="entryItemContent">Year Built Details: <span>Resale</span></span></li></div><li className="entryItem "><span className="entryItemContent">Roof Details: <span>Flat, Tile</span></span></li><li className="entryItem "><span className="entryItemContent">Construction Details: <span>Block</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3><li className="entryItem "><span className="entryItemContent">Exterior Features: <span>Balcony, Security/High Impact Doors, Lighting, Outdoor Grill, Outdoor Shower</span></span></li><li className="entryItem "><span className="entryItemContent">Patio And Porch Features: <span>Balcony, Open</span></span></li></div><li className="entryItem "><span className="entryItemContent">Other Structures: <span>Guest House</span></span></li><li className="entryItem "><span className="entryItemContent">Security Features: <span>Security Gate, Gated Community, Security Guard</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3><li className="entryItem "><span className="entryItemContent">Pool Features: <span>In Ground, Pool</span></span></li></div></ul></div></div>
+                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3><li className="entryItem "><span className="entryItemContent">Stories: <span>2</span></span></li><li className="entryItem "><span className="entryItemContent">Year Built Details: <span>Resale</span></span></li></div><li className="entryItem "><span className="entryItemContent">Roof Details: <span>Flat, Tile</span></span></li><li className="entryItem "><span className="entryItemContent">Construction Details: <span>Block</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3><li className="entryItem "><span className="entryItemContent">Exterior Features: <span>Balcony, Security/High Impact Doors, Lighting, Outdoor Grill, Outdoor Shower</span></span></li><li className="entryItem "><span className="entryItemContent">Patio And Porch Features: <span>Balcony, Open</span></span></li></div><li className="entryItem "><span className="entryItemContent">Other Structures: <span>Guest House</span></span></li><li className="entryItem "><span className="entryItemContent">Security Features: <span>Security Gate, Gated Community, Security Guard</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3><li className="entryItem "><span className="entryItemContent">Pool Features: <span>In Ground, Pool</span></span></li></div></ul></div></div>
                           </Card.Body>
                         </Card>
                         <Card className="utilities">
@@ -589,44 +515,44 @@ export default function SinglePropertyPage({ match }) {
                    
                     <hr />
                     <ReadReviews/> */}
-                    <br/>
+                    <br />
                   </Container>
                 </Card>
               </Col>
 
               <Col lg={4} md={4} sm={12} className="sticky-top">
                 <div className="sticky-sidebar">
-                <Button
-                  variant="danger"
-                  className="btn-block"
-                  href="https://calendly.com/plutusproperties">
-                  Schedule Tour
-                </Button>
-                <Button
-                  variant="light"
-                  className="btn-block"
-                  href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
-                  Start an Offer
-                </Button>
-                <div className="OrSeparator">
-                  <div className="divider"></div>
-                  <div className="label">OR</div>
-                  <div className="divider"></div>
-                </div>
-                <ButtonGroup>
-                  <Button variant="outline-primary" onClick={() => {document.getElementById("askQuestion").scrollIntoView({block: "center", behavior: "smooth"})}}>Ask a Question</Button>{' '}
-                  {data.phoneNumber ?
-                  <Button variant="outline-primary" href={`tel:1${data.phoneNumber}`}>{data.phoneNumber}</Button> : ''}
-                </ButtonGroup>
-                {' '}
-                <Card className="sale-tax-history">
-                  <Card.Header>
-                    Sale & Tax History
-                  </Card.Header>
-                  <Card.Body>Coming Soon</Card.Body>
-                </Card>
-                
-                {/* <Card className="text-center booking-form">
+                  <Button
+                    variant="danger"
+                    className="btn-block"
+                    href="https://calendly.com/plutusproperties">
+                    Schedule Tour
+                  </Button>
+                  <Button
+                    variant="light"
+                    className="btn-block"
+                    href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
+                    Start an Offer
+                  </Button>
+                  <div className="OrSeparator">
+                    <div className="divider"></div>
+                    <div className="label">OR</div>
+                    <div className="divider"></div>
+                  </div>
+                  <ButtonGroup>
+                    <Button variant="outline-primary" onClick={() => { document.getElementById("askQuestion").scrollIntoView({ block: "center", behavior: "smooth" }) }}>Ask a Question</Button>{' '}
+                    {data.phoneNumber ?
+                      <Button variant="outline-primary" href={`tel:1${data.phoneNumber}`}>{data.phoneNumber}</Button> : ''}
+                  </ButtonGroup>
+                  {' '}
+                  <Card className="sale-tax-history">
+                    <Card.Header>
+                      Sale & Tax History
+                    </Card.Header>
+                    <Card.Body>Coming Soon</Card.Body>
+                  </Card>
+
+                  {/* <Card className="text-center booking-form">
                   <Card.Header className="card-booking-form-header">
                     ₹ {data.per_night}/Night
                   </Card.Header>
@@ -653,9 +579,9 @@ export default function SinglePropertyPage({ match }) {
                           onChange={(e) => setGuests(e.target.value)}
                         />
                       </Form.Group> */}
-                      {/* TODO Booking button */}
-                      {/* {userUid==hostUid? "" : ""} */}
-                      {/* <Button
+                  {/* TODO Booking button */}
+                  {/* {userUid==hostUid? "" : ""} */}
+                  {/* <Button
                         variant="primary"
                         className="btn-block"
                         type="submit"
@@ -666,7 +592,7 @@ export default function SinglePropertyPage({ match }) {
                   </Card.Body> */}
 
                   {/* TODO: */}
-                  
+
                   {/* <Card.Footer className="text-muted">
                     <Link to={`/find-roommates?${data.city}Yes`}><Button variant="warning">
                       Find Roommates in {data.city}

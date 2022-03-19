@@ -60,7 +60,7 @@ export default function LuxuryResidences() {
     database
       .ref("properties")
       .orderByChild("category")
-      .equalTo("Luxury Residences")
+      .equalTo("House")
       .on("value", (snapshot) => {
         const items = [];
         snapshot.forEach((childSnapshot) => {
@@ -75,6 +75,7 @@ export default function LuxuryResidences() {
           items.push({
             key: childKey,
             title: data.title,
+            address: data.address,
             imageOneURL: firstImageURL,
             bedrooms: data.bedrooms,
             bathrooms: data.bathrooms,
@@ -115,7 +116,7 @@ export default function LuxuryResidences() {
                     className="my-listings-thumbnail"
                   />
                   <Card.Body>
-                    <Card.Title className="text-dark">{data.title}</Card.Title>
+                    <Card.Title className="text-dark">{data.address}</Card.Title>
                     <Card.Text className="p-2 text-dark">
                       <FontAwesomeIcon icon={faBed} /> {data.bedrooms}&nbsp;
                       <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
