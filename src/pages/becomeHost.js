@@ -28,8 +28,6 @@ export default function BecomeHost({ match }) {
   const [sellerPhone, setSellerPhone] = useState("");
   const [category, setCategory] = useState("");
   const [propertyStatus, setPropertyStatus] = useState("");
-
-  const [propertyType, setPropertyType] = useState("");
   const [address, setAddress] = useState("");
   const [address2, setAddress2] = useState("");
   const [city, setCity] = useState("");
@@ -43,14 +41,6 @@ export default function BecomeHost({ match }) {
   // const [per_year, setPer_year] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
-
-  const [livingRoom, setLivingRoom] = useState("");
-  const [internet, setInternet] = useState("");
-  const [gym, setGym] = useState("");
-  const [parking, setParking] = useState("");
-  const [ac, setAc] = useState("");
-  const [gatedSecurity, setGatedSecurity] = useState("");
-  const [waterSupply, setWaterSupply] = useState("");
 
   const [about, setAbout] = useState("");
   const [userUid, setUserUid] = useState("")
@@ -108,7 +98,7 @@ export default function BecomeHost({ match }) {
           if (val.sellerEmail) { setSellerEmail(val.sellerEmail) };
           if (val.sellerPhone) { setSellerPhone(val.sellerPhone) };
           if (val.category) { setCategory(val.category) };
-          if (val.propertyType) { setPropertyType(val.propertyType) };
+          if (val.propertyStatus) { setPropertyStatus(val.propertyStatus) };
           if (val.address) { setAddress(val.address) };
           if (val.address2) { setAddress2(val.address2) };
           if (val.city) { setCity(val.city) };
@@ -122,14 +112,6 @@ export default function BecomeHost({ match }) {
           // if (val.name) {setPer_year(val.per_year)};
           if (val.bedrooms) { setBedrooms(val.bedrooms) };
           if (val.bathrooms) { setBathrooms(val.bathrooms) };
-
-          if (val.livingRoom) { setLivingRoom(val.livingRoom) };
-          if (val.internet) { setInternet(val.internet) };
-          if (val.gym) { setGym(val.gym) };
-          if (val.parking) { setParking(val.parking) };
-          if (val.ac) { setAc(val.ac) };
-          if (val.gatedSecurity) { setGatedSecurity(val.gatedSecurity) };
-          if (val.waterSupply) { setWaterSupply(val.waterSupply) };
 
           if (val.about) { setAbout(val.about) };
           // if (val.name) {setUserUid(val.userUid)};
@@ -253,32 +235,17 @@ export default function BecomeHost({ match }) {
     setPropertyStatus(event.target.value);
   }
 
-  function handleChangeLivingRoom(event) {
-    setLivingRoom(event.target.value);
-  }
+  function convertPrice(event) {
+    let fPrice = document.getElementById('formGridPrice');
+    let fBTCPrice = document.getElementById('formGridBitcoinPrice');
+    let fETHPrice = document.getElementById('formGridEthereumPrice');
+    let fUSDCPrice = document.getElementById('formGridUSDCPrice');
 
-  function handleChangeInternet(event) {
-    setInternet(event.target.value);
-  }
+    fBTCPrice.value = Number(fPrice.value) * 0.00002356;
+    fETHPrice.value = Number(fPrice.value) * 0.00033269;
+    fUSDCPrice.value = Number(fPrice.value) * 0.99990054;
 
-  function handleChangeGym(event) {
-    setGym(event.target.value);
-  }
-
-  function handleChangeParkingSpace(event) {
-    setParking(event.target.value);
-  }
-
-  function handleChangeAc(event) {
-    setAc(event.target.value);
-  }
-
-  function handleChangeSecurity(event) {
-    setGatedSecurity(event.target.value);
-  }
-
-  function handleChangeWaterSupply(event) {
-    setWaterSupply(event.target.value);
+    setPrice(event.target.value);
   }
 
   const handleSubmit = (e) => {
@@ -292,7 +259,6 @@ export default function BecomeHost({ match }) {
       sellerPhone: sellerPhone,
       category: category,
       propertyStatus: propertyStatus,
-      propertyType: propertyType,
       address: address,
       address2: address2,
       city: city,
@@ -306,13 +272,6 @@ export default function BecomeHost({ match }) {
       // per_year: per_year,
       bedrooms: bedrooms,
       bathrooms: bathrooms,
-      livingRoom: livingRoom,
-      internet: internet,
-      gym: gym,
-      parking: parking,
-      ac: ac,
-      gatedSecurity: gatedSecurity,
-      waterSupply: waterSupply,
       about: about,
       userUid: userUid,
       imageOneName: imageOneName,
@@ -385,7 +344,7 @@ export default function BecomeHost({ match }) {
           <Form onSubmit={handleSubmit}>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridName">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Contact Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter Your Name"
@@ -395,7 +354,7 @@ export default function BecomeHost({ match }) {
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>E-mail</Form.Label>
+                <Form.Label>Contact E-mail</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter Your E-mail"
@@ -440,7 +399,7 @@ export default function BecomeHost({ match }) {
 
             <Form.Row>
               <Form.Group as={Col} controlId="formGridCategory">
-                <Form.Label>Category</Form.Label>
+                <Form.Label>Property Type</Form.Label>
                 <Form.Control
                   as="select"
                   name="category"
@@ -456,17 +415,6 @@ export default function BecomeHost({ match }) {
                   <option value="Co-op">Co-op</option>
                   <option value="Other">Other</option>
                 </Form.Control>
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridPropertyType">
-                <Form.Label>Property Type</Form.Label>
-                <Form.Control
-                  name="propertyType"
-                  value={propertyType}
-                  onChange={(e) => setPropertyType(e.target.value)}
-                />
               </Form.Group>
             </Form.Row>
 
@@ -599,13 +547,41 @@ export default function BecomeHost({ match }) {
 
             <h2 className="mt-3">Specific Details</h2>
 
+            <h4 className="mt-3">Fiat Price</h4>
             <Form.Group controlId="formGridPrice">
-              <Form.Label>Price</Form.Label>
+              <Form.Label>US Dollar ($)</Form.Label>
               <Form.Control
+                type="number"
                 placeholder="1234"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                min="0"
+                onChange={convertPrice}
                 required />
+            </Form.Group>
+
+            <h4 className="mt-3">Crypto Price</h4>
+            <Form.Group controlId="formGridBitcoinPrice">
+              <Form.Label>Bitcoin</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                readOnly />
+            </Form.Group>
+
+            <Form.Group controlId="formGridEthereumPrice">
+              <Form.Label>Ethereum</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                readOnly />
+            </Form.Group>
+
+            <Form.Group controlId="formGridUSDCPrice">
+              <Form.Label>USD Coin</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                readOnly />
             </Form.Group>
 
             <Form.Group controlId="formGridStatus">
@@ -685,104 +661,6 @@ export default function BecomeHost({ match }) {
                 onChange={(e) => setAbout(e.target.value)}
               />
             </Form.Group>
-
-            <h2 className="mt-3">Amenities</h2>
-
-            <Form.Row>
-              <Form.Group as={Col} lg={3} md={3} sm={12} controlId="livingRoom">
-                <Form.Label>Living Room</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="livingRoom"
-                  value={livingRoom}
-                  onChange={handleChangeLivingRoom}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group as={Col} lg={3} md={3} sm={12} controlId="internet">
-                <Form.Label>Internet</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="internet"
-                  value={internet}
-                  onChange={handleChangeInternet}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group as={Col} lg={3} md={3} sm={12} controlId="gym">
-                <Form.Label>Gym</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="gym"
-                  value={gym}
-                  onChange={handleChangeGym}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group as={Col} lg={3} md={3} sm={12} controlId="parking">
-                <Form.Label>Parking Space</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="parking"
-                  value={parking}
-                  onChange={handleChangeParkingSpace}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} lg={4} md={4} sm={12} controlId="ac">
-                <Form.Label>Air Conditioner</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="ac"
-                  value={ac}
-                  onChange={handleChangeAc}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group as={Col} lg={4} md={4} sm={12} controlId="security">
-                <Form.Label>Gated Security</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="security"
-                  value={gatedSecurity}
-                  onChange={handleChangeSecurity}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group as={Col} lg={4} md={4} sm={12} controlId="waterSupply">
-                <Form.Label>Water Supply</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="waterSupply"
-                  value={waterSupply}
-                  onChange={handleChangeWaterSupply}
-                >
-                  <option>Select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </Form.Control>
-              </Form.Group>
-            </Form.Row>
 
             <Button variant="primary" className="btn btn-block" type="submit">
               Post My Property
