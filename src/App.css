@@ -19,6 +19,7 @@ h2 {
 .brand-name {
   font-family: "Orbitron";
   font-size: 30px;
+  font-weight: bold;
   letter-spacing: 2px;
 }
 
@@ -159,11 +160,17 @@ a:link {
   justify-content: center;
   /* flex-direction: column; */
 }
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
   .dropdown-menu-bar {
     margin-left: 100px;
   }
-}
+} */
+
+/* @media only screen and (max-width: 991px) {  
+  .dropdown-menu-right {
+    right: inherit
+  }
+} */
 
 .spinner {
   position: absolute;
