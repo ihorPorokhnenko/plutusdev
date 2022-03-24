@@ -27,6 +27,7 @@ import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import MapContainer from '../Components/MapContainer'
 import ReadReviews from '../Components/ReadReviews'
+import { formatToCurrency } from "../utils/formatCurrency";
 
 
 export default function SinglePropertyPage({ match }) {
@@ -259,7 +260,7 @@ export default function SinglePropertyPage({ match }) {
             <Row className="mt-5">
               <Col lg={8} md={8} sm={12}>
                 <Card>
-                  <h4 className="pl-2 pt-2">{data.title}</h4>
+                  <h4 className="pl-2 pt-2">{data.address}</h4>
                   <p className="text-lead pl-2">
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.fullAddress}&nbsp;&nbsp;
                     <FontAwesomeIcon icon={faHome} /> {data.category}
@@ -381,7 +382,7 @@ export default function SinglePropertyPage({ match }) {
                       <Col lg={4} md={4} sm={4}>
                         <p className="text-lead">
                           List Price:&nbsp;
-                          ${data.price}
+                          {formatToCurrency(data.price)}
                         </p>
                       </Col>
                       <Col lg={4} md={4} sm={4}>

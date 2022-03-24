@@ -20,6 +20,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import firebase from "firebase";
 import { auth, database } from "../config";
+import { formatToCurrency } from "../utils/formatCurrency";
 
 export default function MyListings() {
   const [show, setShow] = useState(false);
@@ -92,6 +93,7 @@ export default function MyListings() {
             bathrooms: data.bathrooms,
             city: data.city,
             per_month: data.per_month,
+            price: data.price
           });
         });
         setListings(items);
@@ -119,7 +121,7 @@ export default function MyListings() {
                     <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp;
                     <span className="p-2">
-                      <FontAwesomeIcon icon={faRupeeSign} /> {data.per_month}
+                      <FontAwesomeIcon icon={faRupeeSign} /> {formatToCurrency(data.price)}
                     </span>
                   </Card.Text>
 
@@ -133,7 +135,7 @@ export default function MyListings() {
 
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                      <Modal.Title>Plutus</Modal.Title>
+                      <Modal.Title>Plutus Properties</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>Are you sure?</Modal.Body>
                     <Modal.Footer>

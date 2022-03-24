@@ -22,6 +22,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import firebase from "firebase";
 import { auth, database } from "../config";
+import { formatToCurrency } from "../utils/formatCurrency";
 
 export default function Listings() {
   //Authstate
@@ -85,6 +86,7 @@ export default function Listings() {
             bathrooms: data.bathrooms,
             city: data.city,
             per_month: data.per_month,
+            price: data.price
           });
         });
         setListings(items);
@@ -126,7 +128,7 @@ export default function Listings() {
                       <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
                       <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp;
                       <span className="p-2">
-                        <FontAwesomeIcon icon={faRupeeSign} /> {data.per_month}
+                        <FontAwesomeIcon icon={faRupeeSign} /> {formatToCurrency(data.price)}
                       </span>
                     </Card.Text>
                   </Card.Body>

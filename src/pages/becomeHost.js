@@ -34,7 +34,7 @@ export default function BecomeHost({ match }) {
   const [st, setSt] = useState("");
   const [zip, setZip] = useState("");
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   // const [per_night, setPer_night] = useState("");
   // const [per_week, setPer_week] = useState("");
   // const [per_month, setPer_month] = useState("");
@@ -245,7 +245,7 @@ export default function BecomeHost({ match }) {
     fETHPrice.value = Number(fPrice.value) * 0.00033269;
     fUSDCPrice.value = Number(fPrice.value) * 0.99990054;
 
-    setPrice(event.target.value);
+    setPrice(Number(event.target.value));
   }
 
   const handleSubmit = (e) => {
