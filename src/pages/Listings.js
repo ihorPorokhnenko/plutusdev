@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import Protect from 'react-app-protect'
 import {
   Row,
   Col,
@@ -23,6 +24,7 @@ import { v4 as uuidv4 } from "uuid";
 import firebase from "firebase";
 import { auth, database } from "../config";
 import { formatToCurrency } from "../utils/formatCurrency";
+import { hash } from '../utils/hash'
 
 export default function Listings() {
   //Authstate
@@ -94,7 +96,14 @@ export default function Listings() {
   }, [userUid]);
 
   return (
-    <>
+    <Protect
+        sha512={hash}
+        styles={{
+          input: { color: 'blue' },
+          header: { fontSize: '20px' }
+        }}
+      >
+      <>
       <Navbar />
 
       {/* Spinner */}
@@ -140,6 +149,7 @@ export default function Listings() {
       </Container>
       <br />
       <br />
-    </>
+      </>
+    </Protect>
   );
 }

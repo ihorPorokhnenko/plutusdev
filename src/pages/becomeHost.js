@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import Protect from 'react-app-protect'
 import { Form, Col, Button, Container, Card } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { Redirect } from 'react-router-dom'
@@ -9,6 +10,7 @@ import { database, storage } from "../config";
 import firebase from 'firebase'
 import imageCompression from 'browser-image-compression';
 import { imageConfig } from '../utils/imageConfig'
+import { hash } from '../utils/hash';
 
 
 export default function BecomeHost({ match }) {
@@ -315,361 +317,368 @@ export default function BecomeHost({ match }) {
   }
 
   return (
+    <Protect
+      sha512={hash}
+      styles={{
+        input: { color: 'blue' },
+        header: { fontSize: '20px' }
+      }}
+    >
+      <div className="become-host">
 
-    <div className="become-host">
+        <Navbar />
 
-      <Navbar />
+        {/* Post form */}
+        <ToastContainer
+          position="top-right"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+        />
 
-      {/* Post form */}
-      <ToastContainer
-        position="top-right"
-        autoClose={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      />
+        <Card className="become-host-card main">
 
-      <Card className="become-host-card main">
-
-        {/* <Card.Header className="h3">   
+          {/* <Card.Header className="h3">   
         Become a Host
         </Card.Header> */}
 
-        <Card.Body className="container">
+          <Card.Body className="container">
 
-          <h2 className="mt-3">General Details</h2>
+            <h2 className="mt-3">General Details</h2>
 
-          <Form onSubmit={handleSubmit}>
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridName">
-                <Form.Label>Contact Name</Form.Label>
+            <Form onSubmit={handleSubmit}>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridName">
+                  <Form.Label>Contact Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                  <Form.Label>Contact E-mail</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter Your E-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridSellerName">
+                  <Form.Label>Seller Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Seller Name"
+                    value={sellerName}
+                    onChange={(e) => setSellerName(e.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridSellerEmail">
+                  <Form.Label>Seller E-mail</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="example@example.com"
+                    value={sellerEmail}
+                    onChange={(e) => setSellerEmail(e.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridSellerPhone">
+                  <Form.Label>Seller Phone Number</Form.Label>
+                  <Form.Control
+                    type="tel"
+                    placeholder="1234567890"
+                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    value={sellerPhone}
+                    onChange={(e) => setSellerPhone(e.target.value)}
+                  />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridCategory">
+                  <Form.Label>Property Type</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="category"
+                    value={category}
+                    onChange={handleChangeCategory}
+                  >
+                    <option>Select</option>
+                    <option value="Condos">Condo</option>
+                    <option value="House">House</option>
+                    <option value="Townhouse">Townhouse</option>
+                    <option value="Land">Land</option>
+                    <option value="Multi-Family">Muli-Family</option>
+                    <option value="Co-op">Co-op</option>
+                    <option value="Other">Other</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridAddress1"
+                >
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    placeholder="1234 Main St"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required />
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridAddress2">
+                  <Form.Label>Address 2</Form.Label>
+                  <Form.Control
+                    placeholder="Apt/Unit #"
+                    value={address2}
+                    onChange={(e) => setAddress2(e.target.value)} />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridCity">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control
+                    placeholder="Orange"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required />
+                </Form.Group>
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridState">
+                  <Form.Label>State</Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="state"
+                    value={st}
+                    onChange={handleChangeState}
+                    required >
+                    <option>Select</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  controlId="formGridZip">
+                  <Form.Label>Zip Code</Form.Label>
+                  <Form.Control
+                    placeholder="12345"
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                    required />
+                </Form.Group>
+              </Form.Row>
+
+              <h2 className="mt-3">Specific Details</h2>
+
+              <h4 className="mt-3">Fiat Price</h4>
+              <Form.Group controlId="formGridPrice">
+                <Form.Label>US Dollar ($)</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Enter Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  type="number"
+                  placeholder="1234"
+                  value={price}
+                  min="0"
+                  onChange={convertPrice}
                   required />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Contact E-mail</Form.Label>
+              <h4 className="mt-3">Crypto Price</h4>
+              <Form.Group controlId="formGridBitcoinPrice">
+                <Form.Label>Bitcoin</Form.Label>
                 <Form.Control
-                  type="email"
-                  placeholder="Enter Your E-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required />
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridSellerName">
-                <Form.Label>Seller Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Seller Name"
-                  value={sellerName}
-                  onChange={(e) => setSellerName(e.target.value)}
-                />
+                  type="number"
+                  min="0"
+                  readOnly />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridSellerEmail">
-                <Form.Label>Seller E-mail</Form.Label>
+              <Form.Group controlId="formGridEthereumPrice">
+                <Form.Label>Ethereum</Form.Label>
                 <Form.Control
-                  type="email"
-                  placeholder="example@example.com"
-                  value={sellerEmail}
-                  onChange={(e) => setSellerEmail(e.target.value)}
-                />
+                  type="number"
+                  min="0"
+                  readOnly />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridSellerPhone">
-                <Form.Label>Seller Phone Number</Form.Label>
+              <Form.Group controlId="formGridUSDCPrice">
+                <Form.Label>USD Coin</Form.Label>
                 <Form.Control
-                  type="tel"
-                  placeholder="1234567890"
-                  // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                  value={sellerPhone}
-                  onChange={(e) => setSellerPhone(e.target.value)}
-                />
+                  type="number"
+                  min="0"
+                  readOnly />
               </Form.Group>
-            </Form.Row>
 
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridCategory">
-                <Form.Label>Property Type</Form.Label>
+              <Form.Group controlId="formGridStatus">
+                <Form.Label>Property Status</Form.Label>
                 <Form.Control
                   as="select"
-                  name="category"
-                  value={category}
-                  onChange={handleChangeCategory}
+                  name="status"
+                  value={propertyStatus}
+                  onChange={handleChangeStatus}
                 >
                   <option>Select</option>
-                  <option value="Condos">Condo</option>
-                  <option value="House">House</option>
-                  <option value="Townhouse">Townhouse</option>
-                  <option value="Land">Land</option>
-                  <option value="Multi-Family">Muli-Family</option>
-                  <option value="Co-op">Co-op</option>
-                  <option value="Other">Other</option>
-                </Form.Control>
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-              <Form.Group
-                as={Col}
-                lg={6}
-                md={6}
-                sm={12}
-                controlId="formGridAddress1"
-              >
-                <Form.Label>Address</Form.Label>
-                <Form.Control
-                  placeholder="1234 Main St"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                lg={6}
-                md={6}
-                sm={12}
-                controlId="formGridAddress2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control
-                  placeholder="Apt/Unit #"
-                  value={address2}
-                  onChange={(e) => setAddress2(e.target.value)} />
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-              <Form.Group
-                as={Col}
-                lg={6}
-                md={6}
-                sm={12}
-                controlId="formGridCity">
-                <Form.Label>City</Form.Label>
-                <Form.Control
-                  placeholder="Orange"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  required />
-              </Form.Group>
-              <Form.Group
-                as={Col}
-                lg={6}
-                md={6}
-                sm={12}
-                controlId="formGridState">
-                <Form.Label>State</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="state"
-                  value={st}
-                  onChange={handleChangeState}
-                  required >
-                  <option>Select</option>
-                  <option value="AL">Alabama</option>
-                  <option value="AK">Alaska</option>
-                  <option value="AZ">Arizona</option>
-                  <option value="AR">Arkansas</option>
-                  <option value="CA">California</option>
-                  <option value="CO">Colorado</option>
-                  <option value="CT">Connecticut</option>
-                  <option value="DE">Delaware</option>
-                  <option value="DC">District Of Columbia</option>
-                  <option value="FL">Florida</option>
-                  <option value="GA">Georgia</option>
-                  <option value="HI">Hawaii</option>
-                  <option value="ID">Idaho</option>
-                  <option value="IL">Illinois</option>
-                  <option value="IN">Indiana</option>
-                  <option value="IA">Iowa</option>
-                  <option value="KS">Kansas</option>
-                  <option value="KY">Kentucky</option>
-                  <option value="LA">Louisiana</option>
-                  <option value="ME">Maine</option>
-                  <option value="MD">Maryland</option>
-                  <option value="MA">Massachusetts</option>
-                  <option value="MI">Michigan</option>
-                  <option value="MN">Minnesota</option>
-                  <option value="MS">Mississippi</option>
-                  <option value="MO">Missouri</option>
-                  <option value="MT">Montana</option>
-                  <option value="NE">Nebraska</option>
-                  <option value="NV">Nevada</option>
-                  <option value="NH">New Hampshire</option>
-                  <option value="NJ">New Jersey</option>
-                  <option value="NM">New Mexico</option>
-                  <option value="NY">New York</option>
-                  <option value="NC">North Carolina</option>
-                  <option value="ND">North Dakota</option>
-                  <option value="OH">Ohio</option>
-                  <option value="OK">Oklahoma</option>
-                  <option value="OR">Oregon</option>
-                  <option value="PA">Pennsylvania</option>
-                  <option value="RI">Rhode Island</option>
-                  <option value="SC">South Carolina</option>
-                  <option value="SD">South Dakota</option>
-                  <option value="TN">Tennessee</option>
-                  <option value="TX">Texas</option>
-                  <option value="UT">Utah</option>
-                  <option value="VT">Vermont</option>
-                  <option value="VA">Virginia</option>
-                  <option value="WA">Washington</option>
-                  <option value="WV">West Virginia</option>
-                  <option value="WI">Wisconsin</option>
-                  <option value="WY">Wyoming</option>
+                  <option value="Coming Soon">Coming Soon</option>
+                  <option value="Active">Active</option>
+                  <option value="Under Contract / Pending">
+                    Under Contract / Pending
+                  </option>
                 </Form.Control>
               </Form.Group>
 
-              <Form.Group
-                as={Col}
-                lg={6}
-                md={6}
-                sm={12}
-                controlId="formGridZip">
-                <Form.Label>Zip Code</Form.Label>
+              <Form.Row>
+                <Form.Group as={Col} lg={6} md={6} sm={12}>
+                  <Form.Label>Bedrooms</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Eg. 2"
+                    value={bedrooms}
+                    onChange={(e) => setBedrooms(e.target.value)}
+                    required />
+                </Form.Group>
+                <Form.Group as={Col} lg={6} md={6} sm={12}>
+                  <Form.Label>Bathrooms</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Eg. 1"
+                    value={bathrooms}
+                    onChange={(e) => setBathrooms(e.target.value)}
+                    required />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                {/* <a href="#" onClick={uploadFiles}>test</a> */}
+                <Form.Group as={Col}>
+                  <Form.Label>Multi-Upload Property Images</Form.Label>
+                  <input type="file" className="form-control" onChange={uploadMultipleFiles} multiple />
+                </Form.Group>
+              </Form.Row>
+
+              {Object.keys(images).length > 0 ? (
+                <>
+                  <Form.Label>Upload/Edit Property Images</Form.Label>
+                  <br />
+                  <Form.Row>
+                    {Object.entries(images).map(([key, value]) => {
+                      return (
+                        <Form.Group key={key} as={Col} lg={3} md={3} sm={3} className="file-input">
+                          <Form.Control type="file" onChange={(e) => {
+                            const imageFile = e.target.files[0];
+                            uploadImage(imageFile, key);
+                          }} />
+                          <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
+                          <img className="d-block w-100 img-thumbnail" src={value.url} alt="" />
+                          <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
+                        </Form.Group>
+                      )
+                    })}
+                  </Form.Row>
+                </>
+              ) : ''}
+
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                <Form.Label>About this listing</Form.Label>
                 <Form.Control
-                  placeholder="12345"
-                  value={zip}
-                  onChange={(e) => setZip(e.target.value)}
-                  required />
+                  as="textarea"
+                  rows={3}
+                  value={about}
+                  onChange={(e) => setAbout(e.target.value)}
+                />
               </Form.Group>
-            </Form.Row>
 
-            <h2 className="mt-3">Specific Details</h2>
-
-            <h4 className="mt-3">Fiat Price</h4>
-            <Form.Group controlId="formGridPrice">
-              <Form.Label>US Dollar ($)</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="1234"
-                value={price}
-                min="0"
-                onChange={convertPrice}
-                required />
-            </Form.Group>
-
-            <h4 className="mt-3">Crypto Price</h4>
-            <Form.Group controlId="formGridBitcoinPrice">
-              <Form.Label>Bitcoin</Form.Label>
-              <Form.Control
-                type="number"
-                min="0"
-                readOnly />
-            </Form.Group>
-
-            <Form.Group controlId="formGridEthereumPrice">
-              <Form.Label>Ethereum</Form.Label>
-              <Form.Control
-                type="number"
-                min="0"
-                readOnly />
-            </Form.Group>
-
-            <Form.Group controlId="formGridUSDCPrice">
-              <Form.Label>USD Coin</Form.Label>
-              <Form.Control
-                type="number"
-                min="0"
-                readOnly />
-            </Form.Group>
-
-            <Form.Group controlId="formGridStatus">
-              <Form.Label>Property Status</Form.Label>
-              <Form.Control
-                as="select"
-                name="status"
-                value={propertyStatus}
-                onChange={handleChangeStatus}
-              >
-                <option>Select</option>
-                <option value="Coming Soon">Coming Soon</option>
-                <option value="Active">Active</option>
-                <option value="Under Contract / Pending">
-                  Under Contract / Pending
-                </option>
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Row>
-              <Form.Group as={Col} lg={6} md={6} sm={12}>
-                <Form.Label>Bedrooms</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Eg. 2"
-                  value={bedrooms}
-                  onChange={(e) => setBedrooms(e.target.value)}
-                  required />
-              </Form.Group>
-              <Form.Group as={Col} lg={6} md={6} sm={12}>
-                <Form.Label>Bathrooms</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Eg. 1"
-                  value={bathrooms}
-                  onChange={(e) => setBathrooms(e.target.value)}
-                  required />
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-              {/* <a href="#" onClick={uploadFiles}>test</a> */}
-              <Form.Group as={Col}>
-                <Form.Label>Multi-Upload Property Images</Form.Label>
-                <input type="file" className="form-control" onChange={uploadMultipleFiles} multiple />
-              </Form.Group>
-            </Form.Row>
-
-            {Object.keys(images).length > 0 ? (
-              <>
-                <Form.Label>Upload/Edit Property Images</Form.Label>
-                <br />
-                <Form.Row>
-                  {Object.entries(images).map(([key, value]) => {
-                    return (
-                      <Form.Group key={key} as={Col} lg={3} md={3} sm={3} className="file-input">
-                        <Form.Control type="file" onChange={(e) => {
-                          const imageFile = e.target.files[0];
-                          uploadImage(imageFile, key);
-                        }} />
-                        <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
-                        <img className="d-block w-100 img-thumbnail" src={value.url} alt="" />
-                        <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
-                      </Form.Group>
-                    )
-                  })}
-                </Form.Row>
-              </>
-            ) : ''}
-
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>About this listing</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
-              />
-            </Form.Group>
-
-            <Button variant="primary" className="btn btn-block" type="submit">
-              Post My Property
-            </Button>
-            <br />
-            <br />
-          </Form>
-        </Card.Body>
-      </Card>
-    </div>
+              <Button variant="primary" className="btn btn-block" type="submit">
+                Post My Property
+              </Button>
+              <br />
+              <br />
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
+    </Protect>
   );
 }
