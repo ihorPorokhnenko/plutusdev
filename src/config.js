@@ -11,6 +11,9 @@ var firebaseConfig = {
   appId: "1:1064206888864:web:b2627c3a9ffc6bf4a47ec5",
   measurementId: "G-PESMWJR0BT"
 };
+
+const googleApiKey = "AIzaSyCDcytsmCXOAZRpIiWX7jhR5dIQ9Mhzkeo";
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -23,3 +26,5 @@ firebase.initializeApp(firebaseConfig);
   export {auth};
 
   export {database};
+
+  export {googleApiKey};

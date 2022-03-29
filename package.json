@@ -23,6 +23,7 @@
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
     "react-firebaseui": "^5.0.2",
+    "react-geocode": "^0.2.3",
     "react-google-button": "^0.7.2",
     "react-iframe": "^1.8.0",
     "react-router-dom": "^5.2.0",

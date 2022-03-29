@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import { googleApiKey } from "../config";
 
 // InfoWindow component
 const InfoWindow = (props) => {
@@ -61,7 +62,7 @@ export default function SimpleMap(props) {
     // Important! Always set the container height explicitly
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyCDcytsmCXOAZRpIiWX7jhR5dIQ9Mhzkeo" }}
+        bootstrapURLKeys={{ key: googleApiKey }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >

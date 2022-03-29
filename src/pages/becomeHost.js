@@ -6,12 +6,15 @@ import { ToastContainer, toast } from "react-toastify";
 import { Redirect } from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Components/navbar";
-import { database, storage } from "../config";
+import { database, storage, googleApiKey } from "../config";
 import firebase from 'firebase'
 import imageCompression from 'browser-image-compression';
 import { imageConfig } from '../utils/imageConfig'
 import { hash } from '../utils/hash';
+import Geocode from "react-geocode";
 
+
+Geocode.setApiKey(googleApiKey);
 
 export default function BecomeHost({ match }) {
 
@@ -250,7 +253,7 @@ export default function BecomeHost({ match }) {
     setPrice(Number(event.target.value));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newProperty = {
@@ -286,7 +289,22 @@ export default function BecomeHost({ match }) {
       imageFourURL: imageFourURL,
       images: images
     }
-    // console.log(newProperty);
+
+    const fullAddress = `${address}, ${address2} ${city}, ${st} ${zip}`;
+    // console.log(fullAddress);
+    
+    // Get latitude & longitude from address.
+    await Geocode.fromAddress(fullAddress).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        // console.log(lat, lng);
+        newProperty.lat = lat;
+        newProperty.lng = lng;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
 
     if (propertyKey) {
       database.ref("properties").child(propertyKey).update(newProperty);
