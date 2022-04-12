@@ -33,7 +33,7 @@ const routing = (
     <Route exact path="/become-host/:propertyKey" component={becomeHost} />
     <Route exact path="/signup" component={Signup} />
     {/* <Route exact path="/home" component={Home} /> */}
-    <Route exact path="/done-posting-home" component={SuccessfulPosting} />
+    <Route exact path="/done-posting-home" render={(props) => <SuccessfulPosting {...props} />} />
     <Route exact path="/done-waitlisting" component={SuccessfulWaitlisting} />
     <Route exact path="/my-profile" component={MyProfile} />
     <Route exact path="/create-profile" component={CreateProfile} />

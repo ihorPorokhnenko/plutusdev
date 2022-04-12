@@ -308,7 +308,8 @@ export default function BecomeHost({ match }) {
       database.ref("properties").child(propertyKey).update(newProperty);
       toast("Updated Successfully", { type: "success" });
     } else {
-      database.ref("properties").push(newProperty);
+      let newPostKey = database.ref("properties").push(newProperty).key;
+      setPropertyKey(newPostKey);
       toast("Posted Successfully", { type: "success" });
     }
     setSubmit("Submitted");
@@ -318,7 +319,10 @@ export default function BecomeHost({ match }) {
   if (submit === "Submitted") {
     return (
       <>
-        <Redirect to="/done-posting-home" />
+        <Redirect to={{
+          pathname: '/done-posting-home',
+          state: { propertyKey: propertyKey }
+        }} />
       </>
     )
   }
