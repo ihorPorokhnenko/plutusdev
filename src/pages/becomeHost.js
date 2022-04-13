@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Form, Col, Button, Container, Card } from "react-bootstrap";
+import Icon from "react-crypto-icons";
 import { ToastContainer, toast } from "react-toastify";
 import { Redirect } from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +11,7 @@ import firebase from 'firebase'
 import imageCompression from 'browser-image-compression';
 import { imageConfig } from '../utils/imageConfig'
 import Geocode from "react-geocode";
+import { convertToBTC, convertToETH, convertToUSDC } from "../utils/formatCurrency";
 
 
 Geocode.setApiKey(googleApiKey);
@@ -244,9 +246,9 @@ export default function BecomeHost({ match }) {
     let fETHPrice = document.getElementById('formGridEthereumPrice');
     let fUSDCPrice = document.getElementById('formGridUSDCPrice');
 
-    fBTCPrice.value = Number(fPrice.value) * 0.00002356;
-    fETHPrice.value = Number(fPrice.value) * 0.00033269;
-    fUSDCPrice.value = Number(fPrice.value) * 0.99990054;
+    fBTCPrice.value = convertToBTC(fPrice.value);
+    fETHPrice.value = convertToETH(fPrice.value);
+    fUSDCPrice.value = convertToUSDC(fPrice.value);
 
     setPrice(Number(event.target.value));
   }
@@ -582,7 +584,7 @@ export default function BecomeHost({ match }) {
 
             <h4 className="mt-3">Crypto Price</h4>
             <Form.Group controlId="formGridBitcoinPrice">
-              <Form.Label>Bitcoin</Form.Label>
+              <Form.Label>Bitcoin <Icon name="btc" size={18} /></Form.Label>
               <Form.Control
                 type="number"
                 min="0"
@@ -590,7 +592,7 @@ export default function BecomeHost({ match }) {
             </Form.Group>
 
             <Form.Group controlId="formGridEthereumPrice">
-              <Form.Label>Ethereum</Form.Label>
+              <Form.Label>Ethereum <Icon name="eth" size={18} /></Form.Label>
               <Form.Control
                 type="number"
                 min="0"
@@ -598,7 +600,7 @@ export default function BecomeHost({ match }) {
             </Form.Group>
 
             <Form.Group controlId="formGridUSDCPrice">
-              <Form.Label>USD Coin</Form.Label>
+              <Form.Label>USD Coin <Icon name="usdc" size={18} /></Form.Label>
               <Form.Control
                 type="number"
                 min="0"

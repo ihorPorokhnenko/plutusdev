@@ -20,14 +20,16 @@ import {
   faArrowCircleRight,
   faCheckSquare,
   faTimesCircle,
+  faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
+import Icon from "react-crypto-icons";
 import firebase from "firebase";
 import { auth, database } from "../config";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import MapContainer from '../Components/MapContainer'
 import ReadReviews from '../Components/ReadReviews'
-import { formatToCurrency } from "../utils/formatCurrency";
+import { formatToCurrency, convertToBTC, convertToETH, convertToUSDC } from "../utils/formatCurrency";
 
 
 export default function SinglePropertyPage({ match }) {
@@ -311,13 +313,13 @@ export default function SinglePropertyPage({ match }) {
 
                     <h4 className="mt-4">Home Facts</h4>
                     <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Status:&nbsp;
                           {data.propertyStatus}
                         </p>
                       </Col>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Time on Plutus:&nbsp;
                           {"202 days"}
@@ -325,13 +327,13 @@ export default function SinglePropertyPage({ match }) {
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Property Type:&nbsp;
                           {data.propertyType}
                         </p>
                       </Col>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Baths:&nbsp;
                           {"9 full, 4 partial"}
@@ -339,13 +341,13 @@ export default function SinglePropertyPage({ match }) {
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Year Built:&nbsp;
                           {"2004"}
                         </p>
                       </Col>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Style:&nbsp;
                           {"Two Story"}
@@ -353,13 +355,13 @@ export default function SinglePropertyPage({ match }) {
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Community:&nbsp;
                           {"PALM ISLAND"}
                         </p>
                       </Col>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           Lot Size:&nbsp;
                           {"0.69 Acres"}
@@ -367,7 +369,7 @@ export default function SinglePropertyPage({ match }) {
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           MLS#:&nbsp;
                           {data.mls}
@@ -379,21 +381,29 @@ export default function SinglePropertyPage({ match }) {
 
                     <h4 id="priceInsights" className="mt-4">Price Insights</h4>
                     <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
-                          List Price:&nbsp;
+                          <FontAwesomeIcon icon={faMoneyBill} /> List Price:&nbsp;
                           {formatToCurrency(data.price)}
                         </p>
-                      </Col>
-                      <Col lg={4} md={4} sm={4}>
+                        <p className="text-lead">
+                          <Icon name="eth" size={18} /> Ethereum Price:&nbsp;
+                          {convertToETH(data.price).toFixed(6)}
+                        </p>
                         <p className="text-lead">
                           Est. Mo. Payment:&nbsp;
                           {data.monthlyPayment}
                         </p>
                       </Col>
-                    </Row>
-                    <Row>
-                      <Col lg={4} md={4} sm={4}>
+                      <Col lg={6} md={6} sm={6}>
+                        <p className="text-lead">
+                          <Icon name="btc" size={18} /> Bitcoin Price:&nbsp;
+                          {convertToBTC(data.price).toFixed(6)}
+                        </p>
+                        <p className="text-lead">
+                          <Icon name="usdc" size={18} /> USD Coin Price:&nbsp;
+                          {convertToUSDC(data.price).toFixed(6)}
+                        </p>
                         <p className="text-lead">
                           Price/Sq.Ft.:&nbsp;
                           {data.priceSqFt}

@@ -18,11 +18,13 @@ import {
   faShower,
   faMapMarkerAlt,
   faRupeeSign,
+  faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
+import Icon from "react-crypto-icons";
 import { v4 as uuidv4 } from "uuid";
 import firebase from "firebase";
 import { auth, database } from "../config";
-import { formatToCurrency } from "../utils/formatCurrency";
+import { formatToCurrency, convertToBTC, convertToETH, convertToUSDC } from "../utils/formatCurrency";
 
 export default function Listings() {
   //Authstate
@@ -126,10 +128,15 @@ export default function Listings() {
                     <Card.Text className="p-2 text-dark">
                       <FontAwesomeIcon icon={faBed} /> {data.bedrooms}&nbsp;
                       <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
-                      <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp;
-                      <span className="p-2">
-                        <FontAwesomeIcon icon={faRupeeSign} /> {formatToCurrency(data.price)}
-                      </span>
+                      <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp; {data.state}
+                      <br />
+                      <FontAwesomeIcon icon={faMoneyBill} /> {formatToCurrency(data.price)}
+                      <br />
+                      <Icon name="eth" size={16} /> {convertToETH(data.price).toFixed(6)}
+                      <br />
+                      <Icon name="btc" size={16} /> {convertToBTC(data.price).toFixed(6)}
+                      <br />
+                      <Icon name="usdc" size={16} /> {convertToUSDC(data.price).toFixed(6)}
                     </Card.Text>
                   </Card.Body>
                 </Card>
