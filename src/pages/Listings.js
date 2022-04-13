@@ -132,11 +132,11 @@ export default function Listings() {
                       <br />
                       <FontAwesomeIcon icon={faMoneyBill} /> {formatToCurrency(data.price)}
                       <br />
-                      <Icon name="eth" size={16} /> {convertToETH(data.price).toFixed(6)}
+                      <Icon name="eth" size={16} /> {convertToETH(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       <br />
-                      <Icon name="btc" size={16} /> {convertToBTC(data.price).toFixed(6)}
+                      <Icon name="btc" size={16} /> {convertToBTC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       <br />
-                      <Icon name="usdc" size={16} /> {convertToUSDC(data.price).toFixed(6)}
+                      <Icon name="usdc" size={16} /> {convertToUSDC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Card.Text>
                   </Card.Body>
                 </Card>

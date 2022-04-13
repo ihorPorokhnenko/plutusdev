@@ -388,7 +388,7 @@ export default function SinglePropertyPage({ match }) {
                         </p>
                         <p className="text-lead">
                           <Icon name="eth" size={18} /> Ethereum Price:&nbsp;
-                          {convertToETH(data.price).toFixed(6)}
+                          {convertToETH(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </p>
                         <p className="text-lead">
                           Est. Mo. Payment:&nbsp;
@@ -398,11 +398,11 @@ export default function SinglePropertyPage({ match }) {
                       <Col lg={6} md={6} sm={6}>
                         <p className="text-lead">
                           <Icon name="btc" size={18} /> Bitcoin Price:&nbsp;
-                          {convertToBTC(data.price).toFixed(6)}
+                          {convertToBTC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </p>
                         <p className="text-lead">
                           <Icon name="usdc" size={18} /> USD Coin Price:&nbsp;
-                          {convertToUSDC(data.price).toFixed(6)}
+                          {convertToUSDC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </p>
                         <p className="text-lead">
                           Price/Sq.Ft.:&nbsp;
