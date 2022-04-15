@@ -63,7 +63,6 @@ export default function BecomeHost({ match }) {
   const [fileArray, setFileArray] = useState([]);
   const [file, setFile] = useState([null]);
 
-  const [tours, setTours] = useState([]);
   const [taxInfo, setTaxInfo] = useState([]);
   const [commInfo, setCommInfo] = useState([]);
   const [equipment, setEquipment] = useState([]);
@@ -156,7 +155,6 @@ export default function BecomeHost({ match }) {
           if (val.images) { setImages(val.images) };
 
           // Extra Info
-          if (val.tours) { setTours(val.tours) };
           if (val.taxInfo) { setTaxInfo(val.taxInfo) };
           if (val.commInfo) { setCommInfo(val.commInfo) };
           if (val.equipment) { setEquipment(val.equipment) };
@@ -321,7 +319,6 @@ export default function BecomeHost({ match }) {
       imageFourURL: imageFourURL,
       images: images,
 
-      tours: tours,
       taxInfo: taxInfo,
       commInfo: commInfo,
       equipment: equipment,
@@ -732,46 +729,6 @@ export default function BecomeHost({ match }) {
               />
             </Form.Group>
 
-            <Form.Group controlId="formGridTour">
-              <Form.Label>Tour Information</Form.Label>
-              {
-                tours.map((tour, index) => (
-                  (index === 0 || index) ?
-                    <InputGroup className="" key={`tour${index}`}>
-                      <Form.Control
-                        type="text"
-                        value={tour || ""}
-                        onChange={(e) => {
-                          let newFormValues = [...tours];
-                          newFormValues[index] = e.target.value;
-                          setTours(newFormValues);
-                        }}
-                      />
-                      <Button
-                        variant="outline-secondary"
-                        type="button"
-                        className="button remove"
-                        onClick={() => { 
-                          let newFormValues = [...tours];
-                          newFormValues.splice(index, 1);
-                          setTours(newFormValues);
-                        }}>Remove</Button>
-                    </InputGroup>
-                    : null
-                ))
-              }
-              &nbsp;
-              <div className="button-section">
-                <Button
-                  variant="outline-secondary"
-                  className="button add"
-                  type="button"
-                  onClick={() => {
-                    setTours([...tours, ""]);
-                  }}>Add Tour info</Button>
-              </div>
-            </Form.Group>
-            {" "}
             <Form.Group controlId="formGridTaxInfo">
               <Form.Label>Tax Information</Form.Label>
               {

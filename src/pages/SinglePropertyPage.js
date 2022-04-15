@@ -132,7 +132,6 @@ export default function SinglePropertyPage({ match }) {
           about: val.about,
           name: val.name,
 
-          tours: val.tours,
           taxInfo: val.taxInfo,
           commInfo: val.commInfo,
           equipment: val.equipment,
@@ -443,36 +442,19 @@ export default function SinglePropertyPage({ match }) {
                     </Row>
 
                     {
-                      data.tours !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined ||
-                        data.equipment !== undefined || data.interiorFeatures !== undefined ||
-                        data.garageInfo !== undefined || data.parkingInfo !== undefined ||
-                        data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined ||
-                        data.lotInfo !== undefined || data.propInfo !== undefined ?
+                      data.taxInfo !== undefined || data.commInfo !== undefined || data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined ?
                         (<><hr />
                           <h4 className="mt-4">Property Details for {data.title}</h4></>) : null
                     }
                     <Row>
                       <Col>
-                        {data.tours !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined ?
-                          <Card className="virtualTour">
+                        {data.taxInfo !== undefined || data.commInfo !== undefined ?
+                          <Card className="taxes">
                             <Card.Header>
-                              Virtual Tour, Taxes / Assessments, Location Details
+                              Taxes / Assessments, Location Details
                             </Card.Header>
                             <Card.Body>
                               <div className="super-group-content">
-                                {data.tours !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Virtual Tour</h3>
-                                        {
-                                          data.tours.map((tour, index) => (
-                                            <li key={`tour${index}`} className="entryItem "><span className="entryItemContent"><span>{tour}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
                                 {data.taxInfo !== undefined ?
                                   <div className="amenity-group">
                                     <ul>
@@ -762,16 +744,17 @@ export default function SinglePropertyPage({ match }) {
                     href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
                     Start an Offer
                   </Button>
+                  <Button
+                    className="btn-block"
+                    href={`tel:1${data.phoneNumber}`}>
+                    Call Us
+                  </Button>
                   <div className="OrSeparator">
                     <div className="divider"></div>
                     <div className="label">OR</div>
                     <div className="divider"></div>
                   </div>
-                  <ButtonGroup>
-                    <Button variant="outline-primary" onClick={() => { document.getElementById("askQuestion").scrollIntoView({ block: "center", behavior: "smooth" }) }}>Ask a Question</Button>{' '}
-                    {data.phoneNumber ?
-                      <Button variant="outline-primary" href={`tel:1${data.phoneNumber}`}>{data.phoneNumber}</Button> : ''}
-                  </ButtonGroup>
+                  <Button variant="outline-primary" className="btn-block" onClick={() => { document.getElementById("askQuestion").scrollIntoView({ block: "center", behavior: "smooth" }) }}>Ask a Question</Button>
                   {' '}
                   <Card className="sale-tax-history">
                     <Card.Header>
