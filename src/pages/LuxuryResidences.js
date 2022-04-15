@@ -121,7 +121,7 @@ export default function LuxuryResidences() {
                   />
                   <Card.Body>
                     <Card.Title className="text-dark">{data.address}</Card.Title>
-                    <Card.Text className="p-2 text-dark">
+                    <Card.Text as="div" className="p-2 text-dark">
                       <FontAwesomeIcon icon={faBed} /> {data.bedrooms}&nbsp;
                       <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
                       <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp;

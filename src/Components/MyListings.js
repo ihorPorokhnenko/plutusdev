@@ -118,7 +118,7 @@ export default function MyListings() {
                 />
                 <Card.Body>
                   <Card.Title>{data.address}</Card.Title>
-                  <Card.Text className="p-2">
+                  <Card.Text as="div" className="p-2">
                     <FontAwesomeIcon icon={faBed} /> {data.bedrooms}&nbsp;
                     <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp;
