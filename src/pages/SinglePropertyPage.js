@@ -132,6 +132,21 @@ export default function SinglePropertyPage({ match }) {
           about: val.about,
           name: val.name,
 
+          tours: val.tours,
+          taxInfo: val.taxInfo,
+          commInfo: val.commInfo,
+          equipment: val.equipment,
+          interiorFeatures: val.interiorFeatures,
+          garageInfo: val.garageInfo,
+          parkingInfo: val.parkingInfo,
+          buildingInfo: val.buildingInfo,
+          exteriorFeatures: val.exteriorFeatures,
+          poolInfo: val.poolInfo,
+          utilityInfo: val.utilityInfo,
+          heatCool: val.heatCool,
+          lotInfo: val.lotInfo,
+          propInfo: val.propInfo,
+
           livingRoom: livingRoom,
           internet: internet,
           gym: gym,
@@ -263,10 +278,10 @@ export default function SinglePropertyPage({ match }) {
               <Col lg={8} md={8} sm={12}>
                 <Card>
                   <h4 className="pl-2 pt-2">{data.address}</h4>
-                  <p className="text-lead pl-2">
+                  <div className="text-lead pl-2">
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.fullAddress}&nbsp;&nbsp;
                     <FontAwesomeIcon icon={faHome} /> {data.category}
-                  </p>
+                  </div>
 
                   <Row className="p-2">
                     <Col lg={4} md={4} sm={4}>
@@ -296,7 +311,7 @@ export default function SinglePropertyPage({ match }) {
                   <Container>
                     <h4 className="mt-4">About this listing</h4>
                     <p className="text-lead">{data.about}</p>
-                    
+
                     {/*TODO*/}
                     {/* <iframe
                       className="my-3"
@@ -382,28 +397,28 @@ export default function SinglePropertyPage({ match }) {
                     <h4 id="priceInsights" className="mt-4">Price Insights</h4>
                     <Row>
                       <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
+                        <div className="text-lead">
                           <FontAwesomeIcon icon={faMoneyBill} /> List Price:&nbsp;
                           {formatToCurrency(data.price)}
-                        </p>
-                        <p className="text-lead">
+                        </div>
+                        <div className="text-lead">
                           <Icon name="eth" size={18} /> Ethereum Price:&nbsp;
                           {convertToETH(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </p>
+                        </div>
                         <p className="text-lead">
                           Est. Mo. Payment:&nbsp;
                           {data.monthlyPayment}
                         </p>
                       </Col>
                       <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
+                        <div className="text-lead">
                           <Icon name="btc" size={18} /> Bitcoin Price:&nbsp;
                           {convertToBTC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </p>
-                        <p className="text-lead">
+                        </div>
+                        <div className="text-lead">
                           <Icon name="usdc" size={18} /> USD Coin Price:&nbsp;
                           {convertToUSDC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </p>
+                        </div>
                         <p className="text-lead">
                           Price/Sq.Ft.:&nbsp;
                           {data.priceSqFt}
@@ -427,59 +442,261 @@ export default function SinglePropertyPage({ match }) {
                       </Col>
                     </Row>
 
-                    <hr />
-
-                    <h4 className="mt-4">Property Details for {data.title}</h4>
+                    {
+                      data.tours !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined ||
+                        data.equipment !== undefined || data.interiorFeatures !== undefined ||
+                        data.garageInfo !== undefined || data.parkingInfo !== undefined ||
+                        data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined ||
+                        data.lotInfo !== undefined || data.propInfo !== undefined ?
+                        (<><hr />
+                          <h4 className="mt-4">Property Details for {data.title}</h4></>) : null
+                    }
                     <Row>
                       <Col>
-                        <Card className="virtualTour">
-                          <Card.Header>
-                            Virtual Tour, Taxes / Assessments, Location Details
-                          </Card.Header>
-                          <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Virtual Tour</h3><li className="entryItem "><span className="entryItemContent"><span>Virtual Tour Unbranded 1</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3><li className="entryItem "><span className="entryItemContent">Annual Amount: <span>$273,297</span></span></li><li className="entryItem "><span className="entryItemContent">Tax Year: <span>2020</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3><li className="entryItem "><span className="entryItemContent">Community Features: <span>Gated, Tennis Courts</span></span></li></div></ul></div></div>
-                          </Card.Body>
-                        </Card>
-                        <Card className="interiorFeatures">
-                          <Card.Header>
-                            Interior Features
-                          </Card.Header>
-                          <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Bathroom Information</h3><li className="entryItem "><span className="entryItemContent"># of Full Bathrooms: <span>9</span></span></li><li className="entryItem "><span className="entryItemContent"># of Half Bathrooms: <span>4</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Equipment</h3><li className="entryItem "><span className="entryItemContent">Appliances: <span>Dryer, Dishwasher, Electric Range, Icemaker, Microwave</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3><li className="entryItem "><span className="entryItemContent">Accessibility Features: <span>Accessible Elevator Installed</span></span></li><li className="entryItem "><span className="entryItemContent"><span>Unfurnished</span></span></li></div><li className="entryItem "><span className="entryItemContent">Flooring: <span>Wood</span></span></li><li className="entryItem "><span className="entryItemContent">Other Features: <span>Breakfast Area, Closet Cabinetry, Dining Area, Separate/Formal Dining Room, Entrance Foyer, Eat-in Kitchen, Elevator, First Floor Entry, High Ceilings, Kitchen Island, Kitchen/Dining Combo, Custom Mirrors, Pantry, Sitting Area in Master, Upper Level Master, Walk-In Closet(s)</span></span></li></ul></div></div>
-                          </Card.Body>
-                        </Card>
-                        <Card className="parking">
-                          <Card.Header>
-                            Parking / Garage
-                          </Card.Header>
-                          <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Garage/Carport Information</h3><li className="entryItem "><span className="entryItemContent"><span>Has Garage</span></span></li><li className="entryItem "><span className="entryItemContent"># of Garage Spaces: <span>4</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Parking</h3><li className="entryItem "><span className="entryItemContent">Features: <span>Covered, Driveway, Detached, Garage</span></span></li><li className="entryItem "><span className="entryItemContent"># of Covered Spaces: <span>4</span></span></li></div></ul></div></div>
-                          </Card.Body>
-                        </Card>
-                        <Card className="exteriorFeatures">
-                          <Card.Header>
-                            Exterior Features
-                          </Card.Header>
-                          <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3><li className="entryItem "><span className="entryItemContent">Stories: <span>2</span></span></li><li className="entryItem "><span className="entryItemContent">Year Built Details: <span>Resale</span></span></li></div><li className="entryItem "><span className="entryItemContent">Roof Details: <span>Flat, Tile</span></span></li><li className="entryItem "><span className="entryItemContent">Construction Details: <span>Block</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3><li className="entryItem "><span className="entryItemContent">Exterior Features: <span>Balcony, Security/High Impact Doors, Lighting, Outdoor Grill, Outdoor Shower</span></span></li><li className="entryItem "><span className="entryItemContent">Patio And Porch Features: <span>Balcony, Open</span></span></li></div><li className="entryItem "><span className="entryItemContent">Other Structures: <span>Guest House</span></span></li><li className="entryItem "><span className="entryItemContent">Security Features: <span>Security Gate, Gated Community, Security Guard</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3><li className="entryItem "><span className="entryItemContent">Pool Features: <span>In Ground, Pool</span></span></li></div></ul></div></div>
-                          </Card.Body>
-                        </Card>
-                        <Card className="utilities">
-                          <Card.Header>
-                            Utilities
-                          </Card.Header>
-                          <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Utility Information</h3><li className="entryItem "><span className="entryItemContent">Sewer: <span>Public Sewer</span></span></li><li className="entryItem "><span className="entryItemContent">Water Source: <span>Public</span></span></li></div></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Heating &amp; Cooling</h3><li className="entryItem "><span className="entryItemContent"><span>Has Cooling</span></span></li><li className="entryItem "><span className="entryItemContent">Cooling: <span>Central Air</span></span></li></div><li className="entryItem "><span className="entryItemContent"><span>Has Heating</span></span></li><li className="entryItem "><span className="entryItemContent">Heating: <span>Central</span></span></li></ul></div></div>
-                          </Card.Body>
-                        </Card>
-                        <Card className="property">
-                          <Card.Header>
-                            Property / Lot Details
-                          </Card.Header>
-                          <Card.Body>
-                            <div className="super-group-content"><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Lot Information</h3><li className="entryItem "><span className="entryItemContent">Lot Size Area: <span>30,000</span></span></li><li className="entryItem "><span className="entryItemContent"><span>Is Waterfront</span></span></li></div><li className="entryItem "><span className="entryItemContent">Waterfront Features: <span>Bay Front, No Fixed Bridges, Ocean Access</span></span></li><li className="entryItem "><span className="entryItemContent">Frontage Length: <span>100</span></span></li></ul></div><div className="amenity-group"><ul><div className="no-break-inside"><h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Property Information</h3><li className="entryItem "><span className="entryItemContent"><span>Has View</span></span></li><li className="entryItem "><span className="entryItemContent">Direction Faces: <span>North</span></span></li></div><li className="entryItem "><span className="entryItemContent">Zoning Description: <span>2200</span></span></li></ul></div></div>
-                          </Card.Body>
-                        </Card>
+                        {data.tours !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined ?
+                          <Card className="virtualTour">
+                            <Card.Header>
+                              Virtual Tour, Taxes / Assessments, Location Details
+                            </Card.Header>
+                            <Card.Body>
+                              <div className="super-group-content">
+                                {data.tours !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Virtual Tour</h3>
+                                        {
+                                          data.tours.map((tour, index) => (
+                                            <li key={`tour${index}`} className="entryItem "><span className="entryItemContent"><span>{tour}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.taxInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3>
+                                        {
+                                          data.taxInfo.map((info, index) => (
+                                            <li key={`taxInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.commInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3>
+                                        {
+                                          data.commInfo.map((info, index) => (
+                                            <li key={`commInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                              </div>
+                            </Card.Body>
+                          </Card> : null}
+                        {data.equipment !== undefined || data.interiorFeatures !== undefined ?
+                          <Card className="interiorFeatures">
+                            <Card.Header>
+                              Interior Features
+                            </Card.Header>
+                            <Card.Body>
+                              <div className="super-group-content">
+                                {data.equipment !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Equipment</h3>
+                                        {
+                                          data.equipment.map((info, index) => (
+                                            <li key={`equipment${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.interiorFeatures !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3>
+                                        {
+                                          data.interiorFeatures.map((info, index) => (
+                                            <li key={`interiorFeature${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                              </div>
+                            </Card.Body>
+                          </Card> : null}
+                        {data.garageInfo !== undefined || data.parkingInfo !== undefined ?
+                          <Card className="parking">
+                            <Card.Header>
+                              Parking / Garage
+                            </Card.Header>
+                            <Card.Body>
+                              <div className="super-group-content">
+                                {data.garageInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Garage/Carport Information</h3>
+                                        {
+                                          data.garageInfo.map((info, index) => (
+                                            <li key={`garageInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.parkingInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3>
+                                        {
+                                          data.parkingInfo.map((info, index) => (
+                                            <li key={`parkingInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                              </div>
+                            </Card.Body>
+                          </Card> : null}
+                        {data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined ?
+                          <Card className="exteriorFeatures">
+                            <Card.Header>
+                              Exterior Features
+                            </Card.Header>
+                            <Card.Body>
+                              <div className="super-group-content">
+                                {data.buildingInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3>
+                                        {
+                                          data.buildingInfo.map((info, index) => (
+                                            <li key={`buildInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.exteriorFeatures !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3>
+                                        {
+                                          data.exteriorFeatures.map((info, index) => (
+                                            <li key={`exteriorFeature${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.poolInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3>
+                                        {
+                                          data.poolInfo.map((info, index) => (
+                                            <li key={`poolInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                              </div>
+                            </Card.Body>
+                          </Card> : null}
+
+                        {data.utilityInfo !== undefined || data.heatCool !== undefined ?
+                          <Card className="utilities">
+                            <Card.Header>
+                              Utilities
+                            </Card.Header>
+                            <Card.Body>
+                              <div className="super-group-content">
+                                {data.utilityInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Utility Information</h3>
+                                        {
+                                          data.utilityInfo.map((info, index) => (
+                                            <li key={`utilityInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.heatCool !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Heating &amp; Cooling</h3>
+                                        {
+                                          data.heatCool.map((info, index) => (
+                                            <li key={`heatCool${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                              </div>
+                            </Card.Body>
+                          </Card> : null}
+
+                        {data.lotInfo !== undefined || data.propInfo !== undefined ?
+                          <Card className="property">
+                            <Card.Header>
+                              Property / Lot Details
+                            </Card.Header>
+                            <Card.Body>
+                              <div className="super-group-content">
+                                {data.lotInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Lot Information</h3>
+                                        {
+                                          data.lotInfo.map((info, index) => (
+                                            <li key={`lotInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                                {data.propInfo !== undefined ?
+                                  <div className="amenity-group">
+                                    <ul>
+                                      <div className="no-break-inside">
+                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Property Information</h3>
+                                        {
+                                          data.propInfo.map((info, index) => (
+                                            <li key={`propInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                          ))
+                                        }
+                                      </div>
+                                    </ul>
+                                  </div> : null}
+                              </div>
+                            </Card.Body>
+                          </Card> : null}
                       </Col>
                     </Row>
 

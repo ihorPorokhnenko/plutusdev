@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { Form, Col, Button, Container, Card } from "react-bootstrap";
+import { Form, Col, Button, Container, Card, InputGroup } from "react-bootstrap";
 import Icon from "react-crypto-icons";
 import { ToastContainer, toast } from "react-toastify";
 import { Redirect } from 'react-router-dom'
@@ -62,6 +62,21 @@ export default function BecomeHost({ match }) {
   const [fileObj, setFileObj] = useState([]);
   const [fileArray, setFileArray] = useState([]);
   const [file, setFile] = useState([null]);
+
+  const [tours, setTours] = useState([]);
+  const [taxInfo, setTaxInfo] = useState([]);
+  const [commInfo, setCommInfo] = useState([]);
+  const [equipment, setEquipment] = useState([]);
+  const [interiorFeatures, setInteriorFeatures] = useState([]);
+  const [garageInfo, setGarageInfo] = useState([]);
+  const [parkingInfo, setParkingInfo] = useState([]);
+  const [buildingInfo, setBuildingInfo] = useState([]);
+  const [exteriorFeatures, setExteriorFeatures] = useState([]);
+  const [poolInfo, setPoolInfo] = useState([]);
+  const [utilityInfo, setUtilityInfo] = useState([]);
+  const [heatCool, setHeatCool] = useState([]);
+  const [lotInfo, setLotInfo] = useState([]);
+  const [propInfo, setPropInfo] = useState([]);
 
   //progress status
 
@@ -139,6 +154,23 @@ export default function BecomeHost({ match }) {
           // setImages(tempImages);
 
           if (val.images) { setImages(val.images) };
+
+          // Extra Info
+          if (val.tours) { setTours(val.tours) };
+          if (val.taxInfo) { setTaxInfo(val.taxInfo) };
+          if (val.commInfo) { setCommInfo(val.commInfo) };
+          if (val.equipment) { setEquipment(val.equipment) };
+          if (val.interiorFeatures) { setInteriorFeatures(val.interiorFeatures) };
+          if (val.garageInfo) { setGarageInfo(val.garageInfo) };
+          if (val.parkingInfo) { setParkingInfo(val.parkingInfo) };
+          if (val.buildingInfo) { setBuildingInfo(val.buildingInfo) };
+          if (val.exteriorFeatures) { setExteriorFeatures(val.exteriorFeatures) };
+          if (val.poolInfo) { setPoolInfo(val.poolInfo) };
+          if (val.utilityInfo) { setUtilityInfo(val.utilityInfo) };
+          if (val.heatCool) { setHeatCool(val.heatCool) };
+          if (val.lotInfo) { setLotInfo(val.lotInfo) };
+          if (val.propInfo) { setPropInfo(val.propInfo) };
+
         })
     }
   }, [])
@@ -287,7 +319,22 @@ export default function BecomeHost({ match }) {
       imageTwoURL: imageTwoURL,
       imageThreeURL: imageThreeURL,
       imageFourURL: imageFourURL,
-      images: images
+      images: images,
+
+      tours: tours,
+      taxInfo: taxInfo,
+      commInfo: commInfo,
+      equipment: equipment,
+      interiorFeatures: interiorFeatures,
+      garageInfo: garageInfo,
+      parkingInfo: parkingInfo,
+      buildingInfo: buildingInfo,
+      exteriorFeatures: exteriorFeatures,
+      poolInfo: poolInfo,
+      utilityInfo: utilityInfo,
+      heatCool: heatCool,
+      lotInfo: lotInfo,
+      propInfo: propInfo
     }
 
     const fullAddress = `${address}, ${address2} ${city}, ${st} ${zip}`;
@@ -307,6 +354,7 @@ export default function BecomeHost({ match }) {
     );
 
     if (propertyKey) {
+      // console.log(newProperty);
       database.ref("properties").child(propertyKey).update(newProperty);
       toast("Updated Successfully", { type: "success" });
     } else {
@@ -314,7 +362,7 @@ export default function BecomeHost({ match }) {
       setPropertyKey(newPostKey);
       toast("Posted Successfully", { type: "success" });
     }
-    setSubmit("Submitted");
+    // setSubmit("Submitted");
   };
 
   //Redirect after form submission
@@ -675,7 +723,7 @@ export default function BecomeHost({ match }) {
               </>
             ) : ''}
 
-            <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Group controlId="formGridAbout">
               <Form.Label>About this listing</Form.Label>
               <Form.Control
                 as="textarea"
@@ -685,6 +733,566 @@ export default function BecomeHost({ match }) {
               />
             </Form.Group>
 
+            <Form.Group controlId="formGridTour">
+              <Form.Label>Tour Information</Form.Label>
+              {
+                tours.map((tour, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`tour${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={tour || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...tours];
+                          newFormValues[index] = e.target.value;
+                          setTours(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...tours];
+                          newFormValues.splice(index, 1);
+                          setTours(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setTours([...tours, ""]);
+                  }}>Add Tour info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridTaxInfo">
+              <Form.Label>Tax Information</Form.Label>
+              {
+                taxInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`taxInfo${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...taxInfo];
+                          newFormValues[index] = e.target.value;
+                          setTaxInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...taxInfo];
+                          newFormValues.splice(index, 1);
+                          setTaxInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setTaxInfo([...taxInfo, ""]);
+                  }}>Add Tax info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridCommInfo">
+              <Form.Label>Community Information</Form.Label>
+              {
+                commInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`commInfo${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...commInfo];
+                          newFormValues[index] = e.target.value;
+                          setCommInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...commInfo];
+                          newFormValues.splice(index, 1);
+                          setCommInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setCommInfo([...commInfo, ""]);
+                  }}>Add Community info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridEquipment">
+              <Form.Label>Equipment</Form.Label>
+              {
+                equipment.map((equip, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`equipment${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={equip || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...equipment];
+                          newFormValues[index] = e.target.value;
+                          setEquipment(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...equipment];
+                          newFormValues.splice(index, 1);
+                          setEquipment(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setEquipment([...equipment, ""]);
+                  }}>Add Equipment info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridInteriorFeatures">
+              <Form.Label>Interior Features</Form.Label>
+              {
+                interiorFeatures.map((feature, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`Interior${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={feature || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...interiorFeatures];
+                          newFormValues[index] = e.target.value;
+                          setInteriorFeatures(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...interiorFeatures];
+                          newFormValues.splice(index, 1);
+                          setInteriorFeatures(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setInteriorFeatures([...interiorFeatures, ""]);
+                  }}>Add Interior Feature</Button>
+              </div>
+            </Form.Group>
+            {" "}            
+            <Form.Group controlId="formGridGarageInfo">
+              <Form.Label>Garage/Carport Information</Form.Label>
+              {
+                garageInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`garage${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...garageInfo];
+                          newFormValues[index] = e.target.value;
+                          setGarageInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...garageInfo];
+                          newFormValues.splice(index, 1);
+                          setGarageInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setGarageInfo([...garageInfo, ""]);
+                  }}>Add Garage/Carport info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridParkingInfo">
+              <Form.Label>Parking</Form.Label>
+              {
+                parkingInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`Parking${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...parkingInfo];
+                          newFormValues[index] = e.target.value;
+                          setParkingInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...parkingInfo];
+                          newFormValues.splice(index, 1);
+                          setParkingInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setParkingInfo([...parkingInfo, ""]);
+                  }}>Add Parking info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridBuildingInfo">
+              <Form.Label>Building Information</Form.Label>
+              {
+                buildingInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`Building${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...buildingInfo];
+                          newFormValues[index] = e.target.value;
+                          setBuildingInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...buildingInfo];
+                          newFormValues.splice(index, 1);
+                          setBuildingInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setBuildingInfo([...buildingInfo, ""]);
+                  }}>Add Building info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridExteriorFeatures">
+              <Form.Label>Exterior Features</Form.Label>
+              {
+                exteriorFeatures.map((feature, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`Exterior${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={feature || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...exteriorFeatures];
+                          newFormValues[index] = e.target.value;
+                          setExteriorFeatures(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...exteriorFeatures];
+                          newFormValues.splice(index, 1);
+                          setExteriorFeatures(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setExteriorFeatures([...exteriorFeatures, ""]);
+                  }}>Add Exterior Feature</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridGPooleInfo">
+              <Form.Label>Pool Information</Form.Label>
+              {
+                poolInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`pool${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...poolInfo];
+                          newFormValues[index] = e.target.value;
+                          setPoolInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...poolInfo];
+                          newFormValues.splice(index, 1);
+                          setPoolInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setPoolInfo([...poolInfo, ""]);
+                  }}>Add Pool info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridUtilityInfo">
+              <Form.Label>Utility Information</Form.Label>
+              {
+                utilityInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`utility${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...utilityInfo];
+                          newFormValues[index] = e.target.value;
+                          setUtilityInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...utilityInfo];
+                          newFormValues.splice(index, 1);
+                          setUtilityInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setUtilityInfo([...utilityInfo, ""]);
+                  }}>Add Utility info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridHeatCool">
+              <Form.Label>Heating & Cooling Information</Form.Label>
+              {
+                heatCool.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`heatCool${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...heatCool];
+                          newFormValues[index] = e.target.value;
+                          setHeatCool(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...heatCool];
+                          newFormValues.splice(index, 1);
+                          setHeatCool(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setHeatCool([...heatCool, ""]);
+                  }}>Add Heating & Cooling info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridLotInfo">
+              <Form.Label>Lot Information</Form.Label>
+              {
+                lotInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`lotInfo${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...lotInfo];
+                          newFormValues[index] = e.target.value;
+                          setLotInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...lotInfo];
+                          newFormValues.splice(index, 1);
+                          setLotInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setLotInfo([...lotInfo, ""]);
+                  }}>Add Lot info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridPropInfo">
+              <Form.Label>Property Information</Form.Label>
+              {
+                propInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`PropInfo${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...propInfo];
+                          newFormValues[index] = e.target.value;
+                          setPropInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => { 
+                          let newFormValues = [...propInfo];
+                          newFormValues.splice(index, 1);
+                          setPropInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setPropInfo([...propInfo, ""]);
+                  }}>Add Property info</Button>
+              </div>
+            </Form.Group>
+            {" "}
             <Button variant="primary" className="btn btn-block" type="submit">
               Post My Property
             </Button>
