@@ -354,7 +354,6 @@ export default function BecomeHost({ match }) {
     );
 
     if (propertyKey) {
-      // console.log(newProperty);
       database.ref("properties").child(propertyKey).update(newProperty);
       toast("Updated Successfully", { type: "success" });
     } else {
@@ -362,7 +361,7 @@ export default function BecomeHost({ match }) {
       setPropertyKey(newPostKey);
       toast("Posted Successfully", { type: "success" });
     }
-    // setSubmit("Submitted");
+    setSubmit("Submitted");
   };
 
   //Redirect after form submission
