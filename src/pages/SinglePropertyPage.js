@@ -10,6 +10,8 @@ import {
   Container,
   Card,
   Form,
+  Tab,
+  Tabs
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -448,237 +450,250 @@ export default function SinglePropertyPage({ match }) {
                     }
                     <Row>
                       <Col>
-                        {data.taxInfo !== undefined || data.commInfo !== undefined ?
-                          <Card className="taxes">
-                            <Card.Header>
-                              Taxes / Assessments, Location Details
-                            </Card.Header>
-                            <Card.Body>
-                              <div className="super-group-content">
-                                {data.taxInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3>
-                                        {
-                                          data.taxInfo.map((info, index) => (
-                                            <li key={`taxInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.commInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3>
-                                        {
-                                          data.commInfo.map((info, index) => (
-                                            <li key={`commInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                              </div>
-                            </Card.Body>
-                          </Card> : null}
-                        {data.equipment !== undefined || data.interiorFeatures !== undefined ?
-                          <Card className="interiorFeatures">
-                            <Card.Header>
-                              Interior Features
-                            </Card.Header>
-                            <Card.Body>
-                              <div className="super-group-content">
-                                {data.equipment !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Equipment</h3>
-                                        {
-                                          data.equipment.map((info, index) => (
-                                            <li key={`equipment${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.interiorFeatures !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3>
-                                        {
-                                          data.interiorFeatures.map((info, index) => (
-                                            <li key={`interiorFeature${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                              </div>
-                            </Card.Body>
-                          </Card> : null}
-                        {data.garageInfo !== undefined || data.parkingInfo !== undefined ?
-                          <Card className="parking">
-                            <Card.Header>
-                              Parking / Garage
-                            </Card.Header>
-                            <Card.Body>
-                              <div className="super-group-content">
-                                {data.garageInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Garage/Carport Information</h3>
-                                        {
-                                          data.garageInfo.map((info, index) => (
-                                            <li key={`garageInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.parkingInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3>
-                                        {
-                                          data.parkingInfo.map((info, index) => (
-                                            <li key={`parkingInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                              </div>
-                            </Card.Body>
-                          </Card> : null}
-                        {data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined ?
-                          <Card className="exteriorFeatures">
-                            <Card.Header>
-                              Exterior Features
-                            </Card.Header>
-                            <Card.Body>
-                              <div className="super-group-content">
-                                {data.buildingInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3>
-                                        {
-                                          data.buildingInfo.map((info, index) => (
-                                            <li key={`buildInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.exteriorFeatures !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3>
-                                        {
-                                          data.exteriorFeatures.map((info, index) => (
-                                            <li key={`exteriorFeature${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.poolInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3>
-                                        {
-                                          data.poolInfo.map((info, index) => (
-                                            <li key={`poolInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                              </div>
-                            </Card.Body>
-                          </Card> : null}
+                        <Tabs defaultActiveKey="taxes" id="uncontrolled-tab-example" className="mb-3">
+                          {data.taxInfo !== undefined || data.commInfo !== undefined ?
+                            <Tab eventKey="taxes" title="Taxes / Location Details">
+                              <Card className="taxes">
+                                <Card.Header>
+                                  Taxes / Assessments, Location Details
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.taxInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Tax Information</h3>
+                                            {
+                                              data.taxInfo.map((info, index) => (
+                                                <li key={`taxInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.commInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Community Information</h3>
+                                            {
+                                              data.commInfo.map((info, index) => (
+                                                <li key={`commInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
+                          {data.equipment !== undefined || data.interiorFeatures !== undefined ?
+                            <Tab eventKey="interiorFeatures" title="Interior Features">
+                              <Card className="interiorFeatures">
+                                <Card.Header>
+                                  Interior Features
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.equipment !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Equipment</h3>
+                                            {
+                                              data.equipment.map((info, index) => (
+                                                <li key={`equipment${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.interiorFeatures !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3>
+                                            {
+                                              data.interiorFeatures.map((info, index) => (
+                                                <li key={`interiorFeature${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
+                          {data.garageInfo !== undefined || data.parkingInfo !== undefined ?
+                            <Tab eventKey="parking" title="Parking / Garage">
+                              <Card className="parking">
+                                <Card.Header>
+                                  Parking / Garage
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.garageInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Garage/Carport Information</h3>
+                                            {
+                                              data.garageInfo.map((info, index) => (
+                                                <li key={`garageInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.parkingInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Interior Features</h3>
+                                            {
+                                              data.parkingInfo.map((info, index) => (
+                                                <li key={`parkingInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
+                          {data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined ?
+                            <Tab eventKey="exteriorFeatures" title="Exterior Features">
+                              <Card className="exteriorFeatures">
+                                <Card.Header>
+                                  Exterior Features
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.buildingInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Building Information</h3>
+                                            {
+                                              data.buildingInfo.map((info, index) => (
+                                                <li key={`buildInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.exteriorFeatures !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Exterior Features</h3>
+                                            {
+                                              data.exteriorFeatures.map((info, index) => (
+                                                <li key={`exteriorFeature${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.poolInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Pool Information</h3>
+                                            {
+                                              data.poolInfo.map((info, index) => (
+                                                <li key={`poolInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
+                          {data.utilityInfo !== undefined || data.heatCool !== undefined ?
+                            <Tab eventKey="utilities" title="Utilities">
+                              <Card className="utilities">
+                                <Card.Header>
+                                  Utilities
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.utilityInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Utility Information</h3>
+                                            {
+                                              data.utilityInfo.map((info, index) => (
+                                                <li key={`utilityInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.heatCool !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Heating &amp; Cooling</h3>
+                                            {
+                                              data.heatCool.map((info, index) => (
+                                                <li key={`heatCool${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
+                          {data.lotInfo !== undefined || data.propInfo !== undefined ?
+                            <Tab eventKey="property" title="Property / Lot Details">
 
-                        {data.utilityInfo !== undefined || data.heatCool !== undefined ?
-                          <Card className="utilities">
-                            <Card.Header>
-                              Utilities
-                            </Card.Header>
-                            <Card.Body>
-                              <div className="super-group-content">
-                                {data.utilityInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Utility Information</h3>
-                                        {
-                                          data.utilityInfo.map((info, index) => (
-                                            <li key={`utilityInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.heatCool !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Heating &amp; Cooling</h3>
-                                        {
-                                          data.heatCool.map((info, index) => (
-                                            <li key={`heatCool${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                              </div>
-                            </Card.Body>
-                          </Card> : null}
-
-                        {data.lotInfo !== undefined || data.propInfo !== undefined ?
-                          <Card className="property">
-                            <Card.Header>
-                              Property / Lot Details
-                            </Card.Header>
-                            <Card.Body>
-                              <div className="super-group-content">
-                                {data.lotInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Lot Information</h3>
-                                        {
-                                          data.lotInfo.map((info, index) => (
-                                            <li key={`lotInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                                {data.propInfo !== undefined ?
-                                  <div className="amenity-group">
-                                    <ul>
-                                      <div className="no-break-inside">
-                                        <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Property Information</h3>
-                                        {
-                                          data.propInfo.map((info, index) => (
-                                            <li key={`propInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
-                                          ))
-                                        }
-                                      </div>
-                                    </ul>
-                                  </div> : null}
-                              </div>
-                            </Card.Body>
-                          </Card> : null}
+                              <Card className="property">
+                                <Card.Header>
+                                  Property / Lot Details
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.lotInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Lot Information</h3>
+                                            {
+                                              data.lotInfo.map((info, index) => (
+                                                <li key={`lotInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.propInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Property Information</h3>
+                                            {
+                                              data.propInfo.map((info, index) => (
+                                                <li key={`propInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
+                        </Tabs>
                       </Col>
                     </Row>
 
