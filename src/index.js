@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
+import './fonts/Comfortaa/Comfortaa-Regular.ttf';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

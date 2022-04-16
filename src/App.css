@@ -6,18 +6,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
-  font-family: "Orbitron";
+  font-family: "ComfortaaRegular";
 }
 
 h2 {
-  font-family: "Orbitron";
+  font-family: "ComfortaaRegular";
   font-weight: 800;
   color: #163879;
   letter-spacing: 2px;
 }
 
 .brand-name {
-  font-family: "Orbitron";
+  font-family: "ComfortaaRegular";
   font-size: 30px;
   font-weight: bold;
   letter-spacing: 2px;
@@ -28,7 +28,7 @@ h2 {
 } */
 
 .hero-text {
-  font-family: "Orbitron";
+  font-family: "ComfortaaRegular";
 }
 .navbar {
   position: fixed; /* Set the navbar to fixed position */
@@ -38,7 +38,7 @@ h2 {
 }
 
 .navbar {
-  font-family: "Orbitron";
+  font-family: "ComfortaaRegular";
   font-weight: 540;
 }
 /* navbar menu toogle sm */
