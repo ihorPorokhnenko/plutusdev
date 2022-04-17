@@ -190,15 +190,15 @@ export default function BecomeHost({ match }) {
     setFileObj(tempFileObjs);
     // console.log(fileObj);
     let tempFileArray = [];
+    let imgLen = Object.keys(images).length;
+    let vidLen = Object.keys(videos).length;
     for (let i = 0; i < tempFileObjs[0].length; i++) {
       let f = tempFileObjs[0][i];
       if (f.type.match('image.*')) {
-        let imgLen = Object.keys(images).length;
-        uploadImage(f, imgLen);
+        uploadImage(f, imgLen + i);
       }
       if (f.type.match('video.*')) {
-        let vidLen = Object.keys(videos).length;
-        uploadVideo(f, vidLen);
+        uploadVideo(f, vidLen + i);
       }
       // await sleep(500);
       let fileURL = URL.createObjectURL(f);
