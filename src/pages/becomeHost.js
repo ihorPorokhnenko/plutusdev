@@ -58,6 +58,7 @@ export default function BecomeHost({ match }) {
   const [imageThreeURL, setImageThreeURL] = useState("");
   const [imageFourURL, setImageFourURL] = useState("");
   const [images, setImages] = useState({});
+  const [videos, setVideos] = useState({});
 
   const [fileObj, setFileObj] = useState([]);
   const [fileArray, setFileArray] = useState([]);
@@ -153,6 +154,7 @@ export default function BecomeHost({ match }) {
           // setImages(tempImages);
 
           if (val.images) { setImages(val.images) };
+          if (val.videos) { setVideos(val.videos) };
 
           // Extra Info
           if (val.taxInfo) { setTaxInfo(val.taxInfo) };
@@ -190,7 +192,14 @@ export default function BecomeHost({ match }) {
     let tempFileArray = [];
     for (let i = 0; i < tempFileObjs[0].length; i++) {
       let f = tempFileObjs[0][i];
-      uploadImage(f, i);
+      if (f.type.match('image.*')) {
+        let imgLen = Object.keys(images).length;
+        uploadImage(f, imgLen);
+      }
+      if (f.type.match('video.*')) {
+        let vidLen = Object.keys(videos).length;
+        uploadVideo(f, vidLen);
+      }
       // await sleep(500);
       let fileURL = URL.createObjectURL(f);
       // fileArray.push(URL.createObjectURL(fileObj[0][i]));
@@ -207,6 +216,44 @@ export default function BecomeHost({ match }) {
     e.preventDefault();
     console.log(file);
     console.log(images);
+  }
+
+  const uploadVideo = (videoFile, i = 0) => {
+    if (videoFile == null)
+      return;
+    storage.ref(`/videos/${videoFile.name}`).put(videoFile)
+      .on(
+        "STATE_CHANGED",
+        (snapshot) => {
+          var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          toast(`${videoFile} videoFile is Uploading: Please Wait`, { type: "warning", toastId: "1", });
+          if (progress === 100) {
+            toast.update("1", {
+              render: `${videoFile.name} videoFile Upload Done`,
+              type: "success",
+              autoClose: 5000
+            });
+          }
+        },
+        (error) => {
+          console.log(error);
+          toast(error, { type: "error" })
+        },
+        () => {
+          storage
+            .ref("videos")
+            .child(videoFile.name)
+            .getDownloadURL()
+            .then((url) => {
+              // setVideoURL(url);
+              let tempVideos = videos;
+              tempVideos[i] = { "name": videoFile.name, "url": url };
+              // console.log(tempVideos);
+              setVideos(tempVideos);
+              forceUpdate();
+            });
+        }
+      );
   }
 
   async function uploadImage(imageFile, i = 0) {
@@ -318,6 +365,7 @@ export default function BecomeHost({ match }) {
       imageThreeURL: imageThreeURL,
       imageFourURL: imageFourURL,
       images: images,
+      videos: videos,
 
       taxInfo: taxInfo,
       commInfo: commInfo,
@@ -690,34 +738,96 @@ export default function BecomeHost({ match }) {
             </Form.Row>
 
             <Form.Row>
-              {/* <a href="#" onClick={uploadFiles}>test</a> */}
               <Form.Group as={Col}>
-                <Form.Label>Multi-Upload Property Images</Form.Label>
-                <input type="file" className="form-control" onChange={uploadMultipleFiles} multiple />
+                <Form.Label>Multi-Upload Property Videos</Form.Label>
+                <input type="file" className="form-control" accept="video/*" onChange={uploadMultipleFiles} multiple />
               </Form.Group>
             </Form.Row>
 
-            {Object.keys(images).length > 0 ? (
+            {Object.keys(videos).length > 0 && (
+              <>
+                <Form.Label>Upload/Edit Property Videos</Form.Label>
+                <br />
+                <Form.Row>
+                  {Object.entries(videos).map(([key, value]) => {
+                    return (
+                      <Col key={key} lg={3} md={3} sm={3}>
+                        <Form.Group lg={3} md={3} sm={3} className="file-input">
+                          <Form.Control type="file" onChange={(e) => {
+                            const videoFile = e.target.files[0];
+                            uploadVideo(videoFile, key);
+                          }} />
+                          <span className='button'>{`Upload/Edit Property Video ${Number(key) + 1}`}</span>
+                        </Form.Group>
+                        <video className="VideoInput_video d-block w-100 img-thumbnail" controls src={value.url} />
+                        <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
+                      </Col>
+                    )
+                  })}
+                </Form.Row>
+              </>
+            )}
+
+            {Object.keys(videos).length > 0 && (
+              <Form.Row>
+                <Button className='button' onClick={() => {
+                  let videosCopy = { ...videos };
+                  let lastKey = Object.keys(videosCopy).length - 1;
+                  delete videosCopy[lastKey];
+                  setVideos(videosCopy);
+                }}>
+                  Remove Last Property Video
+                </Button>
+              </Form.Row>
+            )}
+            <br />
+
+            <Form.Row>
+              {/* <a href="#" onClick={uploadFiles}>test</a> */}
+              <Form.Group as={Col}>
+                <Form.Label>Multi-Upload Property Images</Form.Label>
+                <input type="file" accept="image/*" className="form-control" onChange={uploadMultipleFiles} multiple />
+              </Form.Group>
+            </Form.Row>
+
+            {Object.keys(images).length > 0 && (
               <>
                 <Form.Label>Upload/Edit Property Images</Form.Label>
                 <br />
                 <Form.Row>
                   {Object.entries(images).map(([key, value]) => {
                     return (
-                      <Form.Group key={key} as={Col} lg={3} md={3} sm={3} className="file-input">
-                        <Form.Control type="file" onChange={(e) => {
-                          const imageFile = e.target.files[0];
-                          uploadImage(imageFile, key);
-                        }} />
-                        <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
+                      <Col key={key} lg={3} md={3} sm={3}>
+                        <Form.Group lg={3} md={3} sm={3} className="file-input">
+                          <Form.Control type="file" onChange={(e) => {
+                            const imageFile = e.target.files[0];
+                            uploadImage(imageFile, key);
+                          }} />
+                          <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
+                        </Form.Group>
                         <img className="d-block w-100 img-thumbnail" src={value.url} alt="" />
                         <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
-                      </Form.Group>
+                      </Col>
                     )
                   })}
                 </Form.Row>
               </>
-            ) : ''}
+            )}
+
+            {Object.keys(images).length > 0 && (
+              <Form.Row>
+                <Button className='button' onClick={() => {
+                  let imagesCopy = { ...images };
+                  let lastKey = Object.keys(imagesCopy).length - 1;
+                  delete imagesCopy[lastKey];
+                  setImages(imagesCopy);
+                }}>
+                  Remove Last Property Image
+                </Button>
+                <br />
+              </Form.Row>
+            )}
+            <br />
 
             <Form.Group controlId="formGridAbout">
               <Form.Label>About this listing</Form.Label>
@@ -748,7 +858,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...taxInfo];
                           newFormValues.splice(index, 1);
                           setTaxInfo(newFormValues);
@@ -788,7 +898,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...commInfo];
                           newFormValues.splice(index, 1);
                           setCommInfo(newFormValues);
@@ -828,7 +938,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...equipment];
                           newFormValues.splice(index, 1);
                           setEquipment(newFormValues);
@@ -868,7 +978,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...interiorFeatures];
                           newFormValues.splice(index, 1);
                           setInteriorFeatures(newFormValues);
@@ -888,7 +998,7 @@ export default function BecomeHost({ match }) {
                   }}>Add Interior Feature</Button>
               </div>
             </Form.Group>
-            {" "}            
+            {" "}
             <Form.Group controlId="formGridGarageInfo">
               <Form.Label>Garage/Carport Information</Form.Label>
               {
@@ -908,7 +1018,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...garageInfo];
                           newFormValues.splice(index, 1);
                           setGarageInfo(newFormValues);
@@ -948,7 +1058,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...parkingInfo];
                           newFormValues.splice(index, 1);
                           setParkingInfo(newFormValues);
@@ -988,7 +1098,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...buildingInfo];
                           newFormValues.splice(index, 1);
                           setBuildingInfo(newFormValues);
@@ -1028,7 +1138,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...exteriorFeatures];
                           newFormValues.splice(index, 1);
                           setExteriorFeatures(newFormValues);
@@ -1068,7 +1178,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...poolInfo];
                           newFormValues.splice(index, 1);
                           setPoolInfo(newFormValues);
@@ -1108,7 +1218,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...utilityInfo];
                           newFormValues.splice(index, 1);
                           setUtilityInfo(newFormValues);
@@ -1148,7 +1258,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...heatCool];
                           newFormValues.splice(index, 1);
                           setHeatCool(newFormValues);
@@ -1188,7 +1298,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...lotInfo];
                           newFormValues.splice(index, 1);
                           setLotInfo(newFormValues);
@@ -1228,7 +1338,7 @@ export default function BecomeHost({ match }) {
                         variant="outline-secondary"
                         type="button"
                         className="button remove"
-                        onClick={() => { 
+                        onClick={() => {
                           let newFormValues = [...propInfo];
                           newFormValues.splice(index, 1);
                           setPropInfo(newFormValues);
@@ -1256,7 +1366,7 @@ export default function BecomeHost({ match }) {
             <br />
           </Form>
         </Card.Body>
-      </Card>
-    </div>
+      </Card >
+    </div >
   );
 }

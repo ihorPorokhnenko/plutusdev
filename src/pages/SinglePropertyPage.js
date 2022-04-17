@@ -113,6 +113,7 @@ export default function SinglePropertyPage({ match }) {
           // imageThreeURL: val.imageThreeURL,
           // imageFourURL: val.imageFourURL,
           images: val.images,
+          videos: val.videos,
           bedrooms: val.bedrooms,
           bathrooms: val.bathrooms,
           address: address_vr,
@@ -224,10 +225,25 @@ export default function SinglePropertyPage({ match }) {
           <div className="caraousel-slider mr-top-slider">
             <Container>
               <Carousel>
-                {data.images ? Object.entries(data.images).map(([key, value]) => {
+                {data.videos && Object.entries(data.videos).map(([key, value]) => {
                   if (value.url) {
                     return (
-                      <Carousel.Item key={key}>
+                      <Carousel.Item key={`video${key}`}>                        
+                        <video 
+                          className="VideoInput_video d-block w-100 img-thumbnail"
+                          controls
+                          src={value.url}
+                          alt={value.name ? value.name : `Slide ${Number(key) + 1}`}
+                        />
+                      </Carousel.Item>
+                    )
+                  }
+                  return '';
+                })}
+                {data.images && Object.entries(data.images).map(([key, value]) => {
+                  if (value.url) {
+                    return (
+                      <Carousel.Item key={`image${key}`}>
                         <img
                           className="d-block w-100 img-thumbnail"
                           src={value.url}
@@ -237,7 +253,7 @@ export default function SinglePropertyPage({ match }) {
                     )
                   }
                   return '';
-                }) : ''}
+                })}
                 {/* {data.imageOneURL ?
                 <Carousel.Item>
                   <img
