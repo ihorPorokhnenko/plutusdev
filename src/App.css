@@ -341,8 +341,9 @@ a:link {
   display: inline-block;
   text-align: left;
   background: #fff;
-  padding: 16px;
-  width: 350px;
+  margin-bottom: 0.5rem;
+  /* padding: 16px; */
+  /* width: 350px; */
   position: relative;
   border-radius: 3px;
 }
