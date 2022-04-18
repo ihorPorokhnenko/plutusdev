@@ -368,7 +368,7 @@ export default function SinglePropertyPage({ match }) {
                           <Tab eventKey="map" title="Location">
                             <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
                           </Tab>
-                          {data.matterportUrl !== undefined &&
+                          {data.matterportUrl !== undefined && data.matterportUrl.trim() !== '' &&
                           <Tab eventKey="tour" title="Virtual Tour">
                             <iframe title="Matterport Virtual Tour" width='100%' height='480' src={data.matterportUrl} frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
                           </Tab>}
