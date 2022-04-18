@@ -20,6 +20,7 @@ import {
   faMapMarkerAlt,
   faHome,
   faArrowCircleRight,
+  faCircle,
   faCheckSquare,
   faTimesCircle,
   faMoneyBill
@@ -136,6 +137,8 @@ export default function SinglePropertyPage({ match }) {
           name: val.name,
 
           taxInfo: val.taxInfo,
+          hoaInfo: val.hoaInfo,
+          otherHoaFeeInfo: val.otherHoaFeeInfo,
           commInfo: val.commInfo,
           equipment: val.equipment,
           interiorFeatures: val.interiorFeatures,
@@ -203,6 +206,23 @@ export default function SinglePropertyPage({ match }) {
     window.location.href = `mailto:contact@plutusproperties.org?subject=${subject}&body=${body}`;
   }
 
+  //Property status class
+  function getPropertyStatusClassName(someInput) {
+    switch (someInput) {
+      case 'Active': {
+        return 'fa-active'
+      }
+      case 'Coming Soon': {
+        return 'fa-soon'
+      }
+      case 'Under Contract / Pending': {
+        return 'fa-pending'
+      }
+      default:
+        return ''
+    }
+  }
+
   //Option values
   function handleChange(event) {
     setStars(event.target.value);
@@ -224,12 +244,12 @@ export default function SinglePropertyPage({ match }) {
         <React.Fragment key={data.key}>
           <div className="caraousel-slider mr-top-slider">
             <Container>
-              <Carousel>
+              <Carousel interval={null}>
                 {data.videos && Object.entries(data.videos).map(([key, value]) => {
                   if (value.url) {
                     return (
-                      <Carousel.Item key={`video${key}`}>                        
-                        <video 
+                      <Carousel.Item key={`video${key}`}>
+                        <video
                           className="VideoInput_video d-block w-100 img-thumbnail"
                           controls
                           src={value.url}
@@ -254,38 +274,6 @@ export default function SinglePropertyPage({ match }) {
                   }
                   return '';
                 })}
-                {/* {data.imageOneURL ?
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100 img-thumbnail"
-                    src={data.imageOneURL}
-                    alt="First slide"
-                  />
-                </Carousel.Item> : ''}
-                {data.imageTwoURL ?
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100 img-thumbnail"
-                    src={data.imageTwoURL}
-                    alt="Second slide"
-                  />
-                </Carousel.Item> : ''}
-                {data.imageThreeURL ?
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100 img-thumbnail"
-                    src={data.imageThreeURL}
-                    alt="Third slide"
-                  />
-                </Carousel.Item> : ''}
-                {data.imageFourURL ?
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100 img-thumbnail"
-                    src={data.imageFourURL}
-                    alt="Fourth slide"
-                  />
-                </Carousel.Item> : ''} */}
               </Carousel>
             </Container>
           </div>
@@ -296,8 +284,9 @@ export default function SinglePropertyPage({ match }) {
                 <Card>
                   <h4 className="pl-2 pt-2">{data.address}</h4>
                   <div className="text-lead pl-2">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.fullAddress}&nbsp;&nbsp;
-                    <FontAwesomeIcon icon={faHome} /> {data.category}
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.fullAddress}
+                    <br />
+                    <FontAwesomeIcon icon={faCircle} className={getPropertyStatusClassName(data.propertyStatus)} /> {data.propertyStatus}
                   </div>
 
                   <Row className="p-2">
@@ -326,9 +315,6 @@ export default function SinglePropertyPage({ match }) {
                     </Col>
                   </Row>
                   <Container>
-                    <h4 className="mt-4">About this listing</h4>
-                    <p className="text-lead">{data.about}</p>
-
                     {/*TODO*/}
                     {/* <iframe
                       className="my-3"
@@ -341,132 +327,87 @@ export default function SinglePropertyPage({ match }) {
                       src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=B&amp;output=embed&amp;q=delhi"
                     ></iframe> */}
 
-                    <hr />
-
-                    <h4 className="mt-4">Home Facts</h4>
-                    <Row>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Status:&nbsp;
-                          {data.propertyStatus}
-                        </p>
-                      </Col>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Time on Plutus:&nbsp;
-                          {"202 days"}
-                        </p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Property Type:&nbsp;
-                          {data.propertyType}
-                        </p>
-                      </Col>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Baths:&nbsp;
-                          {"9 full, 4 partial"}
-                        </p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Year Built:&nbsp;
-                          {"2004"}
-                        </p>
-                      </Col>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Style:&nbsp;
-                          {"Two Story"}
-                        </p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Community:&nbsp;
-                          {"PALM ISLAND"}
-                        </p>
-                      </Col>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          Lot Size:&nbsp;
-                          {"0.69 Acres"}
-                        </p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg={6} md={6} sm={6}>
-                        <p className="text-lead">
-                          MLS#:&nbsp;
-                          {data.mls}
-                        </p>
-                      </Col>
-                    </Row>
-
-                    <hr />
-
-                    <h4 id="priceInsights" className="mt-4">Price Insights</h4>
-                    <Row>
-                      <Col lg={6} md={6} sm={6}>
-                        <div className="text-lead">
-                          <FontAwesomeIcon icon={faMoneyBill} /> List Price:&nbsp;
-                          {formatToCurrency(data.price)}
-                        </div>
-                        <div className="text-lead">
-                          <Icon name="eth" size={18} /> Ethereum Price:&nbsp;
-                          {convertToETH(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </div>
-                        <p className="text-lead">
-                          Est. Mo. Payment:&nbsp;
-                          {data.monthlyPayment}
-                        </p>
-                      </Col>
-                      <Col lg={6} md={6} sm={6}>
-                        <div className="text-lead">
-                          <Icon name="btc" size={18} /> Bitcoin Price:&nbsp;
-                          {convertToBTC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </div>
-                        <div className="text-lead">
-                          <Icon name="usdc" size={18} /> USD Coin Price:&nbsp;
-                          {convertToUSDC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </div>
-                        <p className="text-lead">
-                          Price/Sq.Ft.:&nbsp;
-                          {data.priceSqFt}
-                        </p>
-                      </Col>
-                    </Row>
-
-                    <hr />
-
-                    <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
-
-                    <h4 id="askQuestion" className="mt-4">Ask a Question</h4>
-                    <Row>
-                      <Col>
-                        <form onSubmit={handleQuestionSubmit}>
-                          <div className="form-group">
-                            <textarea className="form-control" id="FormControlTextarea1" rows="3" placeholder="Write a question here"></textarea>
-                          </div>
-                          <Button type="submit" variant="outline-secondary">Ask a Question</Button>
-                        </form>
-                      </Col>
-                    </Row>
-
                     {
-                      data.taxInfo !== undefined || data.commInfo !== undefined || data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined ?
+                      data.about !== undefined || data.price !== undefined || data.lat !== undefined || data.lng !== undefined || data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined || data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined ?
                         (<><hr />
                           <h4 className="mt-4">Property Details for {data.title}</h4></>) : null
                     }
                     <Row>
                       <Col>
-                        <Tabs defaultActiveKey="taxes" id="uncontrolled-tab-example" className="mb-3">
+                        <Tabs defaultActiveKey="overview" id="uncontrolled-tab-example" className="mb-3">
+                          <Tab eventKey="overview" title="Overview">
+                            <h4 className="mt-4">About this listing</h4>
+                            <p className="text-lead">{data.about}</p>
+                          </Tab>
+                          <Tab eventKey="price" title="Price Insights">
+                            <h4 id="priceInsights" className="mt-4">Price Insights</h4>
+                            <Row>
+                              <Col lg={6} md={6} sm={6}>
+                                <div className="text-lead">
+                                  <FontAwesomeIcon icon={faMoneyBill} /> List Price:&nbsp;
+                                  {formatToCurrency(data.price)}
+                                </div>
+                                <div className="text-lead">
+                                  <Icon name="eth" size={18} /> Ethereum Price:&nbsp;
+                                  {convertToETH(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </div>
+                              </Col>
+                              <Col lg={6} md={6} sm={6}>
+                                <div className="text-lead">
+                                  <Icon name="btc" size={18} /> Bitcoin Price:&nbsp;
+                                  {convertToBTC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </div>
+                                <div className="text-lead">
+                                  <Icon name="usdc" size={18} /> USD Coin Price:&nbsp;
+                                  {convertToUSDC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </div>
+                              </Col>
+                            </Row>
+                          </Tab>
+                          <Tab eventKey="map" title="Location">
+                            <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
+                          </Tab>
+                          <Tab eventKey="tour" title="Virtual Tour">
+                            <iframe title="Matterport Virtual Tour" width='100%' height='480' src='https://my.matterport.com/show/?m=ZfiWvRD4CaW' frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
+                          </Tab>
+                          {data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined ?
+                            <Tab eventKey="hoa" title="HOA Info">
+                              <Card className="hoa">
+                                <Card.Header>
+                                  Homeowners Association
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    {data.hoaInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">HOA Information</h3>
+                                            {
+                                              data.hoaInfo.map((info, index) => (
+                                                <li key={`hoaInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                    {data.otherHoaFeeInfo !== undefined ?
+                                      <div className="amenity-group">
+                                        <ul>
+                                          <div className="no-break-inside">
+                                            <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Other Fee Information</h3>
+                                            {
+                                              data.otherHoaFeeInfo.map((info, index) => (
+                                                <li key={`otherHoaFeeInfo${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                              ))
+                                            }
+                                          </div>
+                                        </ul>
+                                      </div> : null}
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab> : null}
                           {data.taxInfo !== undefined || data.commInfo !== undefined ?
                             <Tab eventKey="taxes" title="Taxes / Location Details">
                               <Card className="taxes">
@@ -672,7 +613,6 @@ export default function SinglePropertyPage({ match }) {
                             </Tab> : null}
                           {data.lotInfo !== undefined || data.propInfo !== undefined ?
                             <Tab eventKey="property" title="Property / Lot Details">
-
                               <Card className="property">
                                 <Card.Header>
                                   Property / Lot Details
@@ -713,49 +653,19 @@ export default function SinglePropertyPage({ match }) {
                       </Col>
                     </Row>
 
-                    {/* <Form onSubmit={submitReview} id="review-form">
-                    <Form.Row>
-                      <Form.Group
-                        as={Col}
-                        lg={8}
-                        md={8}
-                        sm={12}
-                        controlId="formBasicText"
-                      >
-                        <Form.Label>Write Your Review</Form.Label>
-                        <Form.Control type="text" placeholder="Write here..." required onChange={(e)=>setReview(e.target.value)}/>
-                      </Form.Group>
-                      <Form.Group
-                        as={Col}
-                        lg={4}
-                        md={4}
-                        sm={12}
-                        controlId="formBasicText"
-                      >
-                        <Form.Label>Rating</Form.Label>
-                        <Form.Control
-                    as="select"
-                    name="category"
-                    onChange={handleChange}
-                  >
-                    <option>Select</option>
-                    <option value="5">5 Star</option>
-                    <option value="4">4 Star</option>
-                    <option value="3">3 Star</option>
-                    <option value="2">2 Star</option>
-                    <option value="1">1 Star</option>
-                  </Form.Control>
-                      </Form.Group>
-                      </Form.Row>
-                     
-                      <Button variant="success" type="submit">
-                        Post Review
-                      </Button>
-                      
-                    </Form>
-                   
                     <hr />
-                    <ReadReviews/> */}
+
+                    <h4 id="askQuestion" className="mt-4">Ask a Question</h4>
+                    <Row>
+                      <Col>
+                        <form onSubmit={handleQuestionSubmit}>
+                          <div className="form-group">
+                            <textarea className="form-control" id="FormControlTextarea1" rows="3" placeholder="Write a question here"></textarea>
+                          </div>
+                          <Button type="submit" variant="outline-secondary">Ask a Question</Button>
+                        </form>
+                      </Col>
+                    </Row>
                     <br />
                   </Container>
                 </Card>
@@ -786,62 +696,6 @@ export default function SinglePropertyPage({ match }) {
                     <div className="divider"></div>
                   </div>
                   <Button variant="outline-primary" className="btn-block" onClick={() => { document.getElementById("askQuestion").scrollIntoView({ block: "center", behavior: "smooth" }) }}>Ask a Question</Button>
-                  {' '}
-                  <Card className="sale-tax-history">
-                    <Card.Header>
-                      Sale & Tax History
-                    </Card.Header>
-                    <Card.Body>Coming Soon</Card.Body>
-                  </Card>
-
-                  {/* <Card className="text-center booking-form">
-                  <Card.Header className="card-booking-form-header">
-                    ₹ {data.per_night}/Night
-                  </Card.Header>
-                  <Card.Body>
-                    <Form onSubmit={submitBooking}>
-                      <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Arrival Date</Form.Label>
-                        <Form.Control
-                          type="date" required
-                          onChange={(e) => setArrivalDate(e.target.value)}
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Depart Date</Form.Label>
-                        <Form.Control
-                          type="date" required
-                          onChange={(e) => setDepartDate(e.target.value)}
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Number of Guestes</Form.Label>
-                        <Form.Control
-                          type="number" required
-                          onChange={(e) => setGuests(e.target.value)}
-                        />
-                      </Form.Group> */}
-                  {/* TODO Booking button */}
-                  {/* {userUid==hostUid? "" : ""} */}
-                  {/* <Button
-                        variant="primary"
-                        className="btn-block"
-                        type="submit"
-                      >
-                        Book Now
-                      </Button>
-                    </Form>
-                  </Card.Body> */}
-
-                  {/* TODO: */}
-
-                  {/* <Card.Footer className="text-muted">
-                    <Link to={`/find-roommates?${data.city}Yes`}><Button variant="warning">
-                      Find Roommates in {data.city}
-                    </Button></Link>
-                  </Card.Footer>
-
-                </Card> */}
                 </div>
               </Col>
             </Row>

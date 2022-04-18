@@ -46,6 +46,8 @@ export default function BecomeHost({ match }) {
   // const [per_year, setPer_year] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
+  const [fullBathrooms, setFullBathrooms] = useState("");
+  const [partialBathrooms, setPartialBathrooms] = useState("");
 
   const [about, setAbout] = useState("");
   const [userUid, setUserUid] = useState("")
@@ -65,6 +67,8 @@ export default function BecomeHost({ match }) {
   const [file, setFile] = useState([null]);
 
   const [taxInfo, setTaxInfo] = useState([]);
+  const [hoaInfo, setHoaInfo] = useState([]);
+  const [otherHoaFeeInfo, setOtherHoaFeeInfo] = useState([]);
   const [commInfo, setCommInfo] = useState([]);
   const [equipment, setEquipment] = useState([]);
   const [interiorFeatures, setInteriorFeatures] = useState([]);
@@ -132,6 +136,8 @@ export default function BecomeHost({ match }) {
           // if (val.name) {setPer_year(val.per_year)};
           if (val.bedrooms) { setBedrooms(val.bedrooms) };
           if (val.bathrooms) { setBathrooms(val.bathrooms) };
+          if (val.fullBathrooms) { setFullBathrooms(val.bathrooms) };
+          if (val.partialBathrooms) { setPartialBathrooms(val.bathrooms) };
 
           if (val.about) { setAbout(val.about) };
           // if (val.name) {setUserUid(val.userUid)};
@@ -158,6 +164,8 @@ export default function BecomeHost({ match }) {
 
           // Extra Info
           if (val.taxInfo) { setTaxInfo(val.taxInfo) };
+          if (val.hoaInfo) { setHoaInfo(val.hoaInfo) };
+          if (val.otherHoaFeeInfo) { setOtherHoaFeeInfo(val.otherHoaFeeInfo) };
           if (val.commInfo) { setCommInfo(val.commInfo) };
           if (val.equipment) { setEquipment(val.equipment) };
           if (val.interiorFeatures) { setInteriorFeatures(val.interiorFeatures) };
@@ -354,6 +362,8 @@ export default function BecomeHost({ match }) {
       // per_year: per_year,
       bedrooms: bedrooms,
       bathrooms: bathrooms,
+      fullBathrooms: fullBathrooms,
+      partialBathrooms: partialBathrooms,
       about: about,
       userUid: userUid,
       imageOneName: imageOneName,
@@ -368,6 +378,8 @@ export default function BecomeHost({ match }) {
       videos: videos,
 
       taxInfo: taxInfo,
+      hoaInfo: hoaInfo,
+      otherHoaFeeInfo: otherHoaFeeInfo,
       commInfo: commInfo,
       equipment: equipment,
       interiorFeatures: interiorFeatures,
@@ -717,7 +729,7 @@ export default function BecomeHost({ match }) {
             </Form.Group>
 
             <Form.Row>
-              <Form.Group as={Col} lg={6} md={6} sm={12}>
+              <Form.Group as={Col} lg={3} md={3} sm={12}>
                 <Form.Label>Bedrooms</Form.Label>
                 <Form.Control
                   type="text"
@@ -726,14 +738,32 @@ export default function BecomeHost({ match }) {
                   onChange={(e) => setBedrooms(e.target.value)}
                   required />
               </Form.Group>
-              <Form.Group as={Col} lg={6} md={6} sm={12}>
-                <Form.Label>Bathrooms</Form.Label>
+              <Form.Group as={Col} lg={3} md={3} sm={12}>
+                <Form.Label>Total Bathrooms</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Eg. 1"
                   value={bathrooms}
                   onChange={(e) => setBathrooms(e.target.value)}
-                  required />
+                />
+              </Form.Group>
+              <Form.Group as={Col} lg={3} md={3} sm={12}>
+                <Form.Label>Full Bathrooms</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Eg. 1"
+                  value={fullBathrooms}
+                  onChange={(e) => setFullBathrooms(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} lg={3} md={3} sm={12}>
+                <Form.Label>Partial Bathrooms</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Eg. 1"
+                  value={partialBathrooms}
+                  onChange={(e) => setPartialBathrooms(e.target.value)}
+                />
               </Form.Group>
             </Form.Row>
 
@@ -839,6 +869,86 @@ export default function BecomeHost({ match }) {
               />
             </Form.Group>
 
+            <Form.Group controlId="formGridHoaInfo">
+              <Form.Label>HOA Information</Form.Label>
+              {
+                hoaInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`hoaInfo${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...hoaInfo];
+                          newFormValues[index] = e.target.value;
+                          setHoaInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => {
+                          let newFormValues = [...hoaInfo];
+                          newFormValues.splice(index, 1);
+                          setHoaInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setHoaInfo([...hoaInfo, ""]);
+                  }}>Add HOA info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridOtherHoaInfo">
+              <Form.Label>Other HOA Fee Information</Form.Label>
+              {
+                otherHoaFeeInfo.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`otherHoaFeeInfo${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...otherHoaFeeInfo];
+                          newFormValues[index] = e.target.value;
+                          setOtherHoaFeeInfo(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => {
+                          let newFormValues = [...otherHoaFeeInfo];
+                          newFormValues.splice(index, 1);
+                          setOtherHoaFeeInfo(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setOtherHoaFeeInfo([...otherHoaFeeInfo, ""]);
+                  }}>Add HOA Fee info</Button>
+              </div>
+            </Form.Group>
+            {" "}
             <Form.Group controlId="formGridTaxInfo">
               <Form.Label>Tax Information</Form.Label>
               {

@@ -28,8 +28,13 @@ h2 {
 } */
 
 .hero-text {
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 12px;
   font-family: "ComfortaaRegular";
+  text-align: center;
+  border-radius: 25px;
 }
+
 .navbar {
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
@@ -86,7 +91,7 @@ a:link {
   bottom: 0;
   left: 0;
   content: "";
-  background-color: rgba(0, 0, 0, 0.25);
+  /* background-color: rgba(0, 0, 0, 0.25); */
   height: 70vh;
 }
 
@@ -383,6 +388,15 @@ a:link {
 .file-input.-chosen > .label {
   opacity: 1;
 }
+.fa-active {
+  color: #44d32a;
+}
+.fa-pending {
+  color: rgb(228, 22, 22);
+}
+.fa-soon {
+  color: yellow;
+}
 .fa-times-circle {
   color: rgb(228, 22, 22);
 }
@@ -439,6 +453,10 @@ a:link {
 .alert {
   /* margin-bottom: 0; */
   font-size: large;
+}
+
+.text-lead {
+  white-space: pre-wrap;
 }
 
 /* Or separator style */
