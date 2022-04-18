@@ -136,6 +136,7 @@ export default function SinglePropertyPage({ match }) {
           about: val.about,
           name: val.name,
 
+          matterportUrl: val.matterportUrl,
           taxInfo: val.taxInfo,
           hoaInfo: val.hoaInfo,
           otherHoaFeeInfo: val.otherHoaFeeInfo,
@@ -328,7 +329,7 @@ export default function SinglePropertyPage({ match }) {
                     ></iframe> */}
 
                     {
-                      data.about !== undefined || data.price !== undefined || data.lat !== undefined || data.lng !== undefined || data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined || data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined ?
+                      data.about !== undefined || data.price !== undefined || data.lat !== undefined || data.lng !== undefined || data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined || data.matterportUrl !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined || data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined ?
                         (<><hr />
                           <h4 className="mt-4">Property Details for {data.title}</h4></>) : null
                     }
@@ -367,9 +368,10 @@ export default function SinglePropertyPage({ match }) {
                           <Tab eventKey="map" title="Location">
                             <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
                           </Tab>
+                          {data.matterportUrl !== undefined &&
                           <Tab eventKey="tour" title="Virtual Tour">
-                            <iframe title="Matterport Virtual Tour" width='100%' height='480' src='https://my.matterport.com/show/?m=ZfiWvRD4CaW' frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
-                          </Tab>
+                            <iframe title="Matterport Virtual Tour" width='100%' height='480' src={data.matterportUrl} frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
+                          </Tab>}
                           {data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined ?
                             <Tab eventKey="hoa" title="HOA Info">
                               <Card className="hoa">

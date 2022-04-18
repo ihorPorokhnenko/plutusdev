@@ -66,6 +66,7 @@ export default function BecomeHost({ match }) {
   const [fileArray, setFileArray] = useState([]);
   const [file, setFile] = useState([null]);
 
+  const [matterportUrl, setMatterportUrl] = useState('');
   const [taxInfo, setTaxInfo] = useState([]);
   const [hoaInfo, setHoaInfo] = useState([]);
   const [otherHoaFeeInfo, setOtherHoaFeeInfo] = useState([]);
@@ -163,6 +164,7 @@ export default function BecomeHost({ match }) {
           if (val.videos) { setVideos(val.videos) };
 
           // Extra Info
+          if (val.matterportUrl) { setMatterportUrl(val.matterportUrl) };
           if (val.taxInfo) { setTaxInfo(val.taxInfo) };
           if (val.hoaInfo) { setHoaInfo(val.hoaInfo) };
           if (val.otherHoaFeeInfo) { setOtherHoaFeeInfo(val.otherHoaFeeInfo) };
@@ -377,6 +379,7 @@ export default function BecomeHost({ match }) {
       images: images,
       videos: videos,
 
+      matterportUrl: matterportUrl,
       taxInfo: taxInfo,
       hoaInfo: hoaInfo,
       otherHoaFeeInfo: otherHoaFeeInfo,
@@ -866,6 +869,16 @@ export default function BecomeHost({ match }) {
                 rows={3}
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formGridMatterportUrl">
+              <Form.Label>Matterport URL</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Eg. https://my.matterport.com/show/?m=ZfiWvRD4CaW"
+                value={matterportUrl}
+                onChange={(e) => setMatterportUrl(e.target.value)}
               />
             </Form.Group>
 
