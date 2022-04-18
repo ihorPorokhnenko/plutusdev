@@ -287,7 +287,9 @@ export default function SinglePropertyPage({ match }) {
                   <div className="text-lead pl-2">
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.fullAddress}
                     <br />
-                    <FontAwesomeIcon icon={faCircle} className={getPropertyStatusClassName(data.propertyStatus)} /> {data.propertyStatus}
+                    {data.propertyStatus &&
+                      <><FontAwesomeIcon icon={faCircle} className={getPropertyStatusClassName(data.propertyStatus)} /> {data.propertyStatus}</>
+                    }
                   </div>
 
                   <Row className="p-2">
@@ -301,16 +303,14 @@ export default function SinglePropertyPage({ match }) {
                     <Col lg={4} md={4} sm={4} className="mt-2">
                       <Card>
                         <Card.Body>
-                          <FontAwesomeIcon icon={faBed} /> Bedrooms:
-                          {data.bedrooms}
+                          <FontAwesomeIcon icon={faBed} /> Bedrooms: {data.bedrooms}
                         </Card.Body>
                       </Card>
                     </Col>
                     <Col lg={4} md={4} sm={4} className="mt-2">
                       <Card>
                         <Card.Body>
-                          <FontAwesomeIcon icon={faShower} /> Bathrooms:
-                          {data.bathrooms}
+                          <FontAwesomeIcon icon={faShower} /> Bathrooms: {data.bathrooms}
                         </Card.Body>
                       </Card>
                     </Col>
@@ -369,9 +369,9 @@ export default function SinglePropertyPage({ match }) {
                             <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
                           </Tab>
                           {data.matterportUrl !== undefined && data.matterportUrl.trim() !== '' &&
-                          <Tab eventKey="tour" title="Virtual Tour">
-                            <iframe title="Matterport Virtual Tour" width='100%' height='480' src={data.matterportUrl} frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
-                          </Tab>}
+                            <Tab eventKey="tour" title="Virtual Tour">
+                              <iframe title="Matterport Virtual Tour" width='100%' height='480' src={data.matterportUrl} frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
+                            </Tab>}
                           {data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined ?
                             <Tab eventKey="hoa" title="HOA Info">
                               <Card className="hoa">

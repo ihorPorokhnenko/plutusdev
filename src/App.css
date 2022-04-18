@@ -48,10 +48,13 @@ h2 {
 }
 /* navbar menu toogle sm */
 @media only screen and (max-width: 600px) {
-  .show {
+  /* .show {
     background-color: rgb(172, 183, 187);
     color: #fff;
     padding: 20px;
+  } */
+  .menu-container {
+    padding: 10px;
   }
 }
 a:link {

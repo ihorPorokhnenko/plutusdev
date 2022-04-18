@@ -50,19 +50,22 @@ export default function NavigationBar({ companyName = "Plutus" }) {
     await new Promise(r => setTimeout(r, 0.01));
     let nav = document.querySelector("#basic-navbar-nav");
     let elem = document.querySelector('.align-toggle');
-    let elemMenu = elem.childNodes[1].classList;
+    let elemMenu;
+    if (elem && elem.childNodes && elem.childNodes.length > 1) {
+      elemMenu = elem.childNodes[1].classList;
 
-    if (nav.classList.contains('show')) {
-      if (window.innerWidth > 991) {
+      if (nav.classList.contains('show')) {
+        if (window.innerWidth > 991) {
+          elemMenu.remove('dropdown-menu-left');
+          elemMenu.add('dropdown-menu-right');
+        } else {
+          elemMenu.remove('dropdown-menu-right');
+          elemMenu.add('dropdown-menu-left');
+        }
+      } else {
         elemMenu.remove('dropdown-menu-left');
         elemMenu.add('dropdown-menu-right');
-      } else {
-        elemMenu.remove('dropdown-menu-right');
-        elemMenu.add('dropdown-menu-left');
       }
-    } else {
-      elemMenu.remove('dropdown-menu-left');
-      elemMenu.add('dropdown-menu-right');
     }
   }
 
@@ -190,7 +193,7 @@ export default function NavigationBar({ companyName = "Plutus" }) {
             className={pos === "top" ? "text-light dropdown-menu-bar" : "text-dark dropdown-menu-bar"} />} className=" align-toggle" onClick={alignMenu} >
             {authState ? (
               <>
-                <Container>
+                <Container className="menu-container">
                   <Nav.Link as={Link} to="/my-profile" className="text-dark">My Profile</Nav.Link>
                   <Nav.Link as={Link} to="/my-bookings" className="text-dark">Bookings</Nav.Link>
                   <Nav.Link as={Link} to="/my-home-bookings" className="text-dark">Host Bookings</Nav.Link>
@@ -212,7 +215,7 @@ export default function NavigationBar({ companyName = "Plutus" }) {
         </Navbar.Collapse>
         {/* Error toast */}
         <ToastContainer />
-        
+
       </Navbar>
       <div className="announcement">
         <div className="alert alert-success alert-dismissible announcement" role="alert">
