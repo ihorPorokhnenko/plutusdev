@@ -678,23 +678,24 @@ export default function SinglePropertyPage({ match }) {
 
               <Col lg={4} md={4} sm={12} className="sticky-top">
                 <div className="sticky-sidebar">
-                  <Button
+                  {/* <Button
                     variant="danger"
                     className="btn-block"
                     href="https://calendly.com/plutusproperties">
                     Schedule Tour
-                  </Button>
+                  </Button> */}
                   <Button
-                    variant="light"
+                    variant="success"
                     className="btn-block"
                     href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
                     Start an Offer
                   </Button>
                   {data.sellerPhone &&
                     <Button
+                      variant="primary"
                       className="btn-block"
                       href={`tel:1${data.sellerPhone}`}>
-                      Call Us
+                      Call To Schedule A Tour
                     </Button>}
                   <div className="OrSeparator">
                     <div className="divider"></div>
