@@ -790,10 +790,28 @@ export default function BecomeHost({ match }) {
                             const videoFile = e.target.files[0];
                             uploadVideo(videoFile, key);
                           }} />
-                          <span className='button'>{`Upload/Edit Property Video ${Number(key) + 1}`}</span>
+                          <span className='button'>{`Reupload Video ${Number(key) + 1}`}</span>
                         </Form.Group>
                         <video className="VideoInput_video d-block w-100 img-thumbnail" controls src={value.url} />
                         <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
+                        <br />
+                        <Button
+                          variant="danger"
+                          onClick={() => {
+                            let videosCopy = { ...images };
+                            let lastIndex = Object.keys(videosCopy).length - 1;
+                            delete videosCopy[key];
+                            if (Number(key) !== lastIndex) {
+                              for (let i = Number(key); i < Object.keys(videosCopy).length; i++) {
+                                if (videosCopy[i+1]) {
+                                  videosCopy[i] = videosCopy[i+1];
+                                }
+                              }
+                              delete videosCopy[Object.keys(videosCopy).length - 1];
+                            }
+                            setVideos(videosCopy);
+                          }}
+                        >{`Delete Video ${Number(key) + 1}`}</Button>
                       </Col>
                     )
                   })}
@@ -801,18 +819,6 @@ export default function BecomeHost({ match }) {
               </>
             )}
 
-            {Object.keys(videos).length > 0 && (
-              <Form.Row>
-                <Button className='button' onClick={() => {
-                  let videosCopy = { ...videos };
-                  let lastKey = Object.keys(videosCopy).length - 1;
-                  delete videosCopy[lastKey];
-                  setVideos(videosCopy);
-                }}>
-                  Remove Last Property Video
-                </Button>
-              </Form.Row>
-            )}
             <br />
 
             <Form.Row>
@@ -830,16 +836,34 @@ export default function BecomeHost({ match }) {
                 <Form.Row>
                   {Object.entries(images).map(([key, value]) => {
                     return (
-                      <Col key={key} lg={3} md={3} sm={3}>
+                      <Col key={key} lg={3} md={3} sm={3} className="py-1">
                         <Form.Group lg={3} md={3} sm={3} className="file-input">
                           <Form.Control type="file" onChange={(e) => {
                             const imageFile = e.target.files[0];
                             uploadImage(imageFile, key);
                           }} />
-                          <span className='button'>{`Upload/Edit Property Image ${Number(key) + 1}`}</span>
+                          <span className='button'>{`Reupload Image ${Number(key) + 1}`}</span>
                         </Form.Group>
                         <img className="d-block w-100 img-thumbnail" src={value.url} alt="" />
                         <span className='label' data-js-label>{value.name ? value.name.slice(0, 17) : 'No file selected'}</span>
+                        <br />
+                        <Button
+                          variant="danger"
+                          onClick={() => {
+                            let imagesCopy = { ...images };
+                            let lastIndex = Object.keys(imagesCopy).length - 1;
+                            delete imagesCopy[key];
+                            if (Number(key) !== lastIndex) {
+                              for (let i = Number(key); i < Object.keys(imagesCopy).length; i++) {
+                                if (imagesCopy[i+1]) {
+                                  imagesCopy[i] = imagesCopy[i+1];
+                                }
+                              }
+                              delete imagesCopy[Object.keys(imagesCopy).length - 1];
+                            }
+                            setImages(imagesCopy);
+                          }}
+                        >{`Delete Image ${Number(key) + 1}`}</Button>
                       </Col>
                     )
                   })}
@@ -847,19 +871,6 @@ export default function BecomeHost({ match }) {
               </>
             )}
 
-            {Object.keys(images).length > 0 && (
-              <Form.Row>
-                <Button className='button' onClick={() => {
-                  let imagesCopy = { ...images };
-                  let lastKey = Object.keys(imagesCopy).length - 1;
-                  delete imagesCopy[lastKey];
-                  setImages(imagesCopy);
-                }}>
-                  Remove Last Property Image
-                </Button>
-                <br />
-              </Form.Row>
-            )}
             <br />
 
             <Form.Group controlId="formGridAbout">
