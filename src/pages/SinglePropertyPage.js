@@ -135,6 +135,9 @@ export default function SinglePropertyPage({ match }) {
           propertyType: val.propertyType,
           about: val.about,
           name: val.name,
+          sellerName: val.sellerName,
+          sellerEmail: val.sellerEmail,
+          sellerPhone: val.sellerPhone,
 
           matterportUrl: val.matterportUrl,
           taxInfo: val.taxInfo,
@@ -687,11 +690,12 @@ export default function SinglePropertyPage({ match }) {
                     href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
                     Start an Offer
                   </Button>
-                  <Button
-                    className="btn-block"
-                    href={`tel:1${data.phoneNumber}`}>
-                    Call Us
-                  </Button>
+                  {data.sellerPhone &&
+                    <Button
+                      className="btn-block"
+                      href={`tel:1${data.sellerPhone}`}>
+                      Call Us
+                    </Button>}
                   <div className="OrSeparator">
                     <div className="divider"></div>
                     <div className="label">OR</div>
