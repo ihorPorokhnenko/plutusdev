@@ -367,6 +367,8 @@ export default function SinglePropertyPage({ match }) {
                                 </div>
                               </Col>
                             </Row>
+                            <br />
+                            <p className="text-lead">For crypto-collateralized financing reach out to <a href="mailto:financing@plutusproperties.org">financing@plutusproperties.org</a></p>
                           </Tab>
                           <Tab eventKey="map" title="Location">
                             <MapContainer lat={data.lat ? data.lat : 26.003570} lng={data.lng ? data.lng : -80.353600} address={data.address ? data.address : "602 E Enclave Cir E, Pembroke Pines, FL 33027"} />
