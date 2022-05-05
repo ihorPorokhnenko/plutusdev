@@ -155,6 +155,7 @@ export default function SinglePropertyPage({ match }) {
           heatCool: val.heatCool,
           lotInfo: val.lotInfo,
           propInfo: val.propInfo,
+          disclosures: val.disclosures,
 
           livingRoom: livingRoom,
           internet: internet,
@@ -332,7 +333,11 @@ export default function SinglePropertyPage({ match }) {
                     ></iframe> */}
 
                     {
-                      data.about !== undefined || data.price !== undefined || data.lat !== undefined || data.lng !== undefined || data.hoaInfo !== undefined || data.otherHoaFeeInfo !== undefined || data.matterportUrl !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined || data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined ?
+                      data.about !== undefined || data.price !== undefined || data.lat !== undefined || data.lng !== undefined || data.hoaInfo !== undefined || 
+                      data.otherHoaFeeInfo !== undefined || data.matterportUrl !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined || 
+                      data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || 
+                      data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || 
+                      data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined || data.disclosures !== undefined ?
                         (<><hr />
                           <h4 className="mt-4">Property Details for {data.title}</h4></>) : null
                     }
@@ -656,6 +661,30 @@ export default function SinglePropertyPage({ match }) {
                                 </Card.Body>
                               </Card>
                             </Tab> : null}
+                          {data.disclosures !== undefined &&
+                            <Tab eventKey="disclosures" title="Disclosures">
+                              <Card className="disclosures">
+                                <Card.Header>
+                                  Disclosures
+                                </Card.Header>
+                                <Card.Body>
+                                  <div className="super-group-content">
+                                    <div className="amenity-group">
+                                      <ul>
+                                        <div className="no-break-inside">
+                                          <h3 className="title font-color-gray-dark font-weight-bold propertyDetailsHeader">Disclosure Information</h3>
+                                          {
+                                            data.disclosures.map((info, index) => (
+                                              <li key={`disclosures${index}`} className="entryItem "><span className="entryItemContent"><span>{info}</span></span></li>
+                                            ))
+                                          }
+                                        </div>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            </Tab>}
                         </Tabs>
                       </Col>
                     </Row>

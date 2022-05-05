@@ -82,6 +82,7 @@ export default function BecomeHost({ match }) {
   const [heatCool, setHeatCool] = useState([]);
   const [lotInfo, setLotInfo] = useState([]);
   const [propInfo, setPropInfo] = useState([]);
+  const [disclosures, setDisclosures] = useState([]);
 
   //progress status
 
@@ -180,6 +181,7 @@ export default function BecomeHost({ match }) {
           if (val.heatCool) { setHeatCool(val.heatCool) };
           if (val.lotInfo) { setLotInfo(val.lotInfo) };
           if (val.propInfo) { setPropInfo(val.propInfo) };
+          if (val.disclosures) { setDisclosures(val.disclosures) };
 
         })
     }
@@ -394,7 +396,8 @@ export default function BecomeHost({ match }) {
       utilityInfo: utilityInfo,
       heatCool: heatCool,
       lotInfo: lotInfo,
-      propInfo: propInfo
+      propInfo: propInfo,
+      disclosures: disclosures
     }
 
     const fullAddress = `${address}, ${address2} ${city}, ${st} ${zip}`;
@@ -1490,6 +1493,46 @@ export default function BecomeHost({ match }) {
                   onClick={() => {
                     setPropInfo([...propInfo, ""]);
                   }}>Add Property info</Button>
+              </div>
+            </Form.Group>
+            {" "}
+            <Form.Group controlId="formGridDisclosures">
+              <Form.Label>Disclosure Information</Form.Label>
+              {
+                disclosures.map((info, index) => (
+                  (index === 0 || index) ?
+                    <InputGroup className="" key={`disclosures${index}`}>
+                      <Form.Control
+                        type="text"
+                        value={info || ""}
+                        onChange={(e) => {
+                          let newFormValues = [...disclosures];
+                          newFormValues[index] = e.target.value;
+                          setDisclosures(newFormValues);
+                        }}
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        className="button remove"
+                        onClick={() => {
+                          let newFormValues = [...disclosures];
+                          newFormValues.splice(index, 1);
+                          setDisclosures(newFormValues);
+                        }}>Remove</Button>
+                    </InputGroup>
+                    : null
+                ))
+              }
+              &nbsp;
+              <div className="button-section">
+                <Button
+                  variant="outline-secondary"
+                  className="button add"
+                  type="button"
+                  onClick={() => {
+                    setDisclosures([...disclosures, ""]);
+                  }}>Add Disclosure info</Button>
               </div>
             </Form.Group>
             {" "}
