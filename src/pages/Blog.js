@@ -61,7 +61,9 @@ export default function Blog() {
           items.push({
             key: childKey,
             title: data.title,
-            content: data.content
+            content: data.content,
+            datePublished: data.datePublished,
+            dateModified: data.dateModified
           });
         });
         setBlogArticles(items);
@@ -71,6 +73,15 @@ export default function Blog() {
   const sanitizedData = (data) => ({
     __html: DOMPurify.sanitize(data)
   })
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = date.getFullYear();
+
+    return mm + '/' + dd + '/' + yyyy;
+  }
 
   return (
     <>
@@ -100,7 +111,7 @@ export default function Blog() {
                   {/* <Card.Title className="text-dark">{data.title}</Card.Title> */}
                   <Card.Text as="div" className="p-2 text-dark" dangerouslySetInnerHTML={sanitizedData(data.content)} />
                 </Card.Body>
-                <Card.Footer className="text-muted">2 days ago</Card.Footer>
+                <Card.Footer className="text-muted">Published on: {formatDate(data.datePublished)}</Card.Footer>
               </Card>
               {/* </Link> */}
             </Col>
