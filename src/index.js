@@ -23,12 +23,14 @@ import SingleFamily from './pages/SingleFamily';
 import LuxuryResidences from './pages/LuxuryResidences';
 import ScrollToTop from './Components/ScrollToTop';
 import PublicProfilePage from './pages/PublicProfilePage';
+import Blog from './pages/Blog';
 
 
 const routing = (
   <Router>
     <ScrollToTop />
     <Route exact path="/" component={App} />
+    <Route exact path="/blog" component={Blog} />
     <Route exact path="/coming-soon" component={ComingSoon} />
     <Route exact path="/become-host" component={becomeHost} />
     <Route exact path="/become-host/:propertyKey" component={becomeHost} />
