@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -70,9 +70,15 @@ export default function Blog() {
       });
   }, [userUid]);
 
-  const sanitizedData = (data) => ({
-    __html: DOMPurify.sanitize(data)
-  })
+  const sanitizedData = (data) => {
+    const cleanData = DOMPurify.sanitize(data);
+    // Grab up to first p tag
+    const truncData = cleanData.split("</p>")[0]+"</p>";
+
+    return {
+      __html: truncData
+    }
+  }
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -104,16 +110,17 @@ export default function Blog() {
         <Row>
           {blogArticles.map((data) => (
             <Col key={data.key}>
-              {/* <Link to={{ pathname: `/property/${data.key}`, state: { fromDashboard: true } }}> */}
-              <Card className="all-properties">
-                <Card.Header as="h1">{data.title}</Card.Header>
-                <Card.Body>
-                  {/* <Card.Title className="text-dark">{data.title}</Card.Title> */}
-                  <Card.Text as="div" className="p-2 text-dark" dangerouslySetInnerHTML={sanitizedData(data.content)} />
-                </Card.Body>
-                <Card.Footer className="text-muted">Published on: {formatDate(data.datePublished)}</Card.Footer>
-              </Card>
-              {/* </Link> */}
+              <Link to={{ pathname: `/article/${data.key}`, state: { fromDashboard: true } }}>
+                <Card className="all-properties">
+                  <Card.Header as="h1">{data.title}</Card.Header>
+                  <Card.Body>
+                    {/* <Card.Title className="text-dark">{data.title}</Card.Title> */}
+                    <Card.Text as="div" className="p-2 text-dark" dangerouslySetInnerHTML={sanitizedData(data.content)} />
+                    <Card.Text>Read more ...</Card.Text>
+                  </Card.Body>
+                  <Card.Footer className="text-muted">Published on: {formatDate(data.datePublished)}</Card.Footer>
+                </Card>
+              </Link>
             </Col>
           ))}
         </Row>
