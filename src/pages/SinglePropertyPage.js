@@ -25,6 +25,7 @@ import {
   faTimesCircle,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
+import opensea from '../pictures/opensea.svg';
 import Icon from "react-crypto-icons";
 import firebase from "firebase";
 import { auth, database } from "../config";
@@ -155,6 +156,8 @@ export default function SinglePropertyPage({ match }) {
           heatCool: val.heatCool,
           lotInfo: val.lotInfo,
           propInfo: val.propInfo,
+          nftAddress: val.nftAddress,
+          nftTokenId: val.nftTokenId,
           disclosures: val.disclosures,
 
           livingRoom: livingRoom,
@@ -337,7 +340,8 @@ export default function SinglePropertyPage({ match }) {
                       data.otherHoaFeeInfo !== undefined || data.matterportUrl !== undefined || data.taxInfo !== undefined || data.commInfo !== undefined || 
                       data.equipment !== undefined || data.interiorFeatures !== undefined || data.garageInfo !== undefined || data.parkingInfo !== undefined || 
                       data.buildingInfo !== undefined || data.exteriorFeatures !== undefined || data.poolInfo !== undefined || data.utilityInfo !== undefined || 
-                      data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined || data.disclosures !== undefined ?
+                      data.heatCool !== undefined || data.lotInfo !== undefined || data.propInfo !== undefined || data.nftAddress !== undefined || 
+                      data.nftTokenId !== undefined || data.disclosures !== undefined ?
                         (<><hr />
                           <h4 className="mt-4">Property Details for {data.title}</h4></>) : null
                     }
@@ -661,6 +665,19 @@ export default function SinglePropertyPage({ match }) {
                                 </Card.Body>
                               </Card>
                             </Tab> : null}
+                          {data.nftAddress !== undefined && data.nftTokenId !== undefined &&
+                            <Tab eventKey="nft" title="NFT">
+                              <Card className="nft">
+                                <Card.Header>
+                                  NFT
+                                </Card.Header>
+                                <Card.Body style={{ 'textAlign': 'center' }}>
+                                  <a href={`https://opensea.io/assets/matic/${data.nftAddress}/${data.nftTokenId}`} target="_blank" rel="noreferrer"><img src={opensea} fluid="true" alt="" /></a>
+                                    <div style={{ 'padding': '5px' }} />
+                                    <a href={`https://opensea.io/assets/matic/${data.nftAddress}/${data.nftTokenId}`} target="_blank" rel="noreferrer" className="btn btn-primary">View NFT</a>
+                                </Card.Body>
+                              </Card>
+                            </Tab>}
                           {data.disclosures !== undefined &&
                             <Tab eventKey="disclosures" title="Disclosures">
                               <Card className="disclosures">

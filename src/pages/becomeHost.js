@@ -82,6 +82,8 @@ export default function BecomeHost({ match }) {
   const [heatCool, setHeatCool] = useState([]);
   const [lotInfo, setLotInfo] = useState([]);
   const [propInfo, setPropInfo] = useState([]);
+  const [nftAddress, setNftAddress] = useState([]);
+  const [nftTokenId, setNftTokenId] = useState([]);
   const [disclosures, setDisclosures] = useState([]);
 
   //progress status
@@ -181,6 +183,8 @@ export default function BecomeHost({ match }) {
           if (val.heatCool) { setHeatCool(val.heatCool) };
           if (val.lotInfo) { setLotInfo(val.lotInfo) };
           if (val.propInfo) { setPropInfo(val.propInfo) };
+          if (val.nftAddress) { setNftAddress(val.nftAddress) };
+          if (val.nftTokenId) { setNftTokenId(val.nftTokenId) };
           if (val.disclosures) { setDisclosures(val.disclosures) };
 
         })
@@ -397,6 +401,8 @@ export default function BecomeHost({ match }) {
       heatCool: heatCool,
       lotInfo: lotInfo,
       propInfo: propInfo,
+      nftAddress: nftAddress,
+      nftTokenId: nftTokenId,
       disclosures: disclosures
     }
 
@@ -1496,6 +1502,22 @@ export default function BecomeHost({ match }) {
               </div>
             </Form.Group>
             {" "}
+            <Form.Group controlId="formGridNftAddress">
+              <Form.Label>NFT Contract Address</Form.Label>
+              <Form.Control
+                type="text"
+                value={nftAddress}
+                onChange={(e) => setNftAddress(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formGridNftTokenId">
+              <Form.Label>NFT Token Id</Form.Label>
+              <Form.Control
+                type="text"
+                value={nftTokenId}
+                onChange={(e) => setNftTokenId(e.target.value)}
+              />
+            </Form.Group>
             <Form.Group controlId="formGridDisclosures">
               <Form.Label>Disclosure Information</Form.Label>
               {
