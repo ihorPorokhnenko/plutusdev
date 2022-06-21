@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { Form, Col, Button, Container, Card, InputGroup } from "react-bootstrap";
+import { Form, Col, Button, Container, Card, InputGroup, ToggleButton } from "react-bootstrap";
 import Icon from "react-crypto-icons";
 import { ToastContainer, toast } from "react-toastify";
 import { Redirect } from 'react-router-dom'
@@ -85,6 +85,7 @@ export default function BecomeHost({ match }) {
   const [nftAddress, setNftAddress] = useState([]);
   const [nftTokenId, setNftTokenId] = useState([]);
   const [disclosures, setDisclosures] = useState([]);
+  const [stakeable, setStakeable] = useState(false);
 
   //progress status
 
@@ -186,6 +187,7 @@ export default function BecomeHost({ match }) {
           if (val.nftAddress) { setNftAddress(val.nftAddress) };
           if (val.nftTokenId) { setNftTokenId(val.nftTokenId) };
           if (val.disclosures) { setDisclosures(val.disclosures) };
+          if (val.stakeable) { setStakeable(val.stakeable) };
 
         })
     }
@@ -403,7 +405,8 @@ export default function BecomeHost({ match }) {
       propInfo: propInfo,
       nftAddress: nftAddress,
       nftTokenId: nftTokenId,
-      disclosures: disclosures
+      disclosures: disclosures,
+      stakeable: stakeable
     }
 
     const fullAddress = `${address}, ${address2} ${city}, ${st} ${zip}`;
@@ -812,8 +815,8 @@ export default function BecomeHost({ match }) {
                             delete videosCopy[key];
                             if (Number(key) !== lastIndex) {
                               for (let i = Number(key); i < Object.keys(videosCopy).length; i++) {
-                                if (videosCopy[i+1]) {
-                                  videosCopy[i] = videosCopy[i+1];
+                                if (videosCopy[i + 1]) {
+                                  videosCopy[i] = videosCopy[i + 1];
                                 }
                               }
                               delete videosCopy[Object.keys(videosCopy).length - 1];
@@ -864,8 +867,8 @@ export default function BecomeHost({ match }) {
                             delete imagesCopy[key];
                             if (Number(key) !== lastIndex) {
                               for (let i = Number(key); i < Object.keys(imagesCopy).length; i++) {
-                                if (imagesCopy[i+1]) {
-                                  imagesCopy[i] = imagesCopy[i+1];
+                                if (imagesCopy[i + 1]) {
+                                  imagesCopy[i] = imagesCopy[i + 1];
                                 }
                               }
                               delete imagesCopy[Object.keys(imagesCopy).length - 1];
@@ -1556,6 +1559,17 @@ export default function BecomeHost({ match }) {
                     setDisclosures([...disclosures, ""]);
                   }}>Add Disclosure info</Button>
               </div>
+            </Form.Group>
+            <Form.Group controlId="formGridStakeable">
+              <Form.Label>Stakeable</Form.Label>
+              <ToggleButton
+                className="mb-2"
+                id="toggle-check"
+                type="checkbox"
+                variant="outline-primary"
+                checked={stakeable}
+                onChange={(e) => setStakeable(e.currentTarget.checked)}
+              ></ToggleButton>
             </Form.Group>
             {" "}
             <Button variant="primary" className="btn btn-block" type="submit">

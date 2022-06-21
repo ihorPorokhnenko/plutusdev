@@ -165,14 +165,12 @@ export default function NavigationBar({ companyName = "Plutus" }) {
               className={pos === "top" ? "text-light" : "text-dark"}
             >Home</Nav.Link>
             {/* {authState ? ( */}
-            <React.Fragment>
-              <Nav.Link as={Link} to="/listings"
-                className={pos === "top" ? "text-light" : "text-dark"}
-              >About</Nav.Link>
               <Nav.Link as={Link} to="/listings"
                 className={pos === "top" ? "text-light" : "text-dark"}
               >Listings</Nav.Link>
-            </React.Fragment>
+              <Nav.Link as={Link} to="/managed-listings"
+                className={pos === "top" ? "text-light" : "text-dark"}
+              >Stakeable Properties</Nav.Link>
             {/* ):""} */}
           </Nav>
           <Navbar.Collapse className="justify-content-end">

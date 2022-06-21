@@ -14,10 +14,12 @@ import SuccessfulWaitlisting from './pages/SuccessfulWaitlisting'
 import MyProfile from './pages/MyProfile'
 import CreateProfile from './pages/CreateProfile'
 import SingleProperty from './pages/SinglePropertyPage'
+import ManagedProperty from './pages/ManagedProperty'
 import SuccessfulBooking from './pages/SuccessfulBooking'
 import MyBookings from './pages/MyBookings';
 import MyHomeBookings from './pages/MyHomeBookings';
 import Listings from './pages/Listings';
+import ManagedListings from './pages/ManagedListings';
 import Condos from './pages/Condos';
 import SingleFamily from './pages/SingleFamily';
 import LuxuryResidences from './pages/LuxuryResidences';
@@ -43,10 +45,12 @@ const routing = (
     <Route exact path="/my-profile" component={MyProfile} />
     <Route exact path="/create-profile" component={CreateProfile} />
     <Route exact path="/property/:propertyKey" component={SingleProperty} />
+    <Route exact path="/managed-property/:propertyKey" component={ManagedProperty} />
     <Route exact path="/done-booking" component={SuccessfulBooking} />
     <Route exact path="/my-bookings" component={MyBookings} />
     <Route exact path="/my-home-bookings" component={MyHomeBookings} />
     <Route exact path="/listings" component={Listings} />
+    <Route exact path="/managed-listings" component={ManagedListings} />
     <Route exact path="/condos" component={Condos} />
     <Route exact path="/single-family" component={SingleFamily} />
     <Route exact path="/luxury-residences" component={LuxuryResidences} />

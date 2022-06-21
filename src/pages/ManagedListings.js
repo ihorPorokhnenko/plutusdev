@@ -26,7 +26,7 @@ import firebase from "firebase";
 import { auth, database } from "../config";
 import { formatToCurrency, convertToBTC, convertToETH, convertToUSDC } from "../utils/formatCurrency";
 
-export default function Listings() {
+export default function ManagedListings() {
   //Authstate
   const [authState, setAuthState] = useState(null);
   const [userUid, setUserUid] = useState(null);
@@ -69,7 +69,7 @@ export default function Listings() {
     database
       .ref("properties")
       .orderByChild("stakeable")
-      .equalTo(false)
+      .equalTo(true)
       .on("value", (snapshot) => {
         const items = [];
         snapshot.forEach((childSnapshot) => {
@@ -98,7 +98,7 @@ export default function Listings() {
   }, [userUid]);
 
   return (
-      <>
+    <div className="managed">
       <Navbar />
 
       {/* Spinner */}
@@ -118,7 +118,7 @@ export default function Listings() {
         <Row>
           {listings.map((data) => (
             <Col sm={12} md={4} lg={4} key={data.key}>
-              <Link to={{ pathname: `/property/${data.key}`, state: { fromDashboard: true } }}>
+              <Link to={{ pathname: `/managed-property/${data.key}`, state: { fromDashboard: true } }}>
                 <Card className="all-properties">
                   <Card.Img
                     variant="top"
@@ -132,13 +132,22 @@ export default function Listings() {
                       <FontAwesomeIcon icon={faShower} /> {data.bathrooms}&nbsp;
                       <FontAwesomeIcon icon={faMapMarkerAlt} /> {data.city}&nbsp; {data.state}
                       <br />
-                      <FontAwesomeIcon icon={faMoneyBill} /> {formatToCurrency(data.price)}
-                      <br />
-                      <Icon name="eth" size={16} /> {convertToETH(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                      <br />
-                      <Icon name="btc" size={16} /> {convertToBTC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                      <br />
-                      <Icon name="usdc" size={16} /> {convertToUSDC(data.price).toFixed(3).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+
+                      <div className="dark:bg-lofty-600">
+                        <div className="flex items-start justify-between">
+                          <div className="flex flex-col flex-1 w-3/5">
+                            <span className="font-abc-favorit-trial text-16 text-lofty-dark dark:text-lofty-white font-medium whitespace-nowrap overflow-hidden overflow-ellipsis break-all">1248 S Keeler Ave</span>
+                            <span className="font-abc-favorit-trial text-12 text-lofty-dark/50 dark:text-lofty-white font-medium whitespace-nowrap overflow-hidden overflow-ellipsis break-all">Chicago, IL 60623</span>
+                          </div>
+                          <div className="flex flex-col flex-1 items-end">
+                            <span className="font-abc-favorit-trial text-22 leading-7 text-lofty-purple dark:text-lofty-light font-medium">18.4<span className="text-sm">%</span> IRR</span>
+                            <span className="font-abc-favorit-trial text-16 leading-5 text-lofty-dark dark:text-lofty-white font-medium">7.4% CoC</span>
+                          </div></div><div className="flex flex-col"><div className="shadow w-full bg-lofty-dark/10 dark:bg-lofty-10 mt-2 rounded-2xl">
+                            {/* <div className="leading-none py-1 text-center bg-lofty-purple dark:bg-lofty-light rounded-2xl" style={{ width: '74.5103%' }}></div> */}
+                          </div><div className="flex items-start justify-between mt-2"><span className="font-abc-favorit-trial text-13 sm:text-sm text-lofty-purple dark:text-lofty-light font-bold">74.5%</span><span className="font-abc-favorit-trial text-13 sm:text-sm text-lofty-dark/50 dark:text-lofty-gray/50 font-bold">2238 tokens left</span>
+                          </div>
+                        </div>
+                      </div>
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -149,6 +158,6 @@ export default function Listings() {
       </Container>
       <br />
       <br />
-      </>
+    </div >
   );
 }
