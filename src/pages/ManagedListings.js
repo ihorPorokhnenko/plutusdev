@@ -10,6 +10,7 @@ import {
   handleClose,
   show,
   Nav,
+  ProgressBar
 } from "react-bootstrap";
 import Navbar from '../Components/navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -144,8 +145,12 @@ export default function ManagedListings() {
                             <span className="font-abc-favorit-trial text-16 leading-5 text-lofty-dark dark:text-lofty-white font-medium">7.4% CoC</span>
                           </div></div><div className="flex flex-col"><div className="shadow w-full bg-lofty-dark/10 dark:bg-lofty-10 mt-2 rounded-2xl">
                             {/* <div className="leading-none py-1 text-center bg-lofty-purple dark:bg-lofty-light rounded-2xl" style={{ width: '74.5103%' }}></div> */}
-                          </div><div className="flex items-start justify-between mt-2"><span className="font-abc-favorit-trial text-13 sm:text-sm text-lofty-purple dark:text-lofty-light font-bold">74.5%</span><span className="font-abc-favorit-trial text-13 sm:text-sm text-lofty-dark/50 dark:text-lofty-gray/50 font-bold">2238 tokens left</span>
                           </div>
+                          <ProgressBar animated now={74.5} label={'74.5%'} />
+                          <div className="flex items-start justify-between mt-2">
+                            <span className="font-abc-favorit-trial text-13 sm:text-sm text-lofty-purple dark:text-lofty-light font-bold">
+                            </span><span className="font-abc-favorit-trial text-13 sm:text-sm text-lofty-dark/50 dark:text-lofty-gray/50 font-bold">2238 tokens left</span>
+                          </div>                          
                         </div>
                       </div>
                     </Card.Text>

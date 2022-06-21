@@ -11,7 +11,8 @@ import {
   Card,
   Form,
   Tab,
-  Tabs
+  Tabs,
+  ProgressBar
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -155,6 +156,7 @@ export default function ManagedProperty({ match }) {
           nftAddress: val.nftAddress,
           nftTokenId: val.nftTokenId,
           disclosures: val.disclosures,
+          stakeable: val.stakeable,
 
           livingRoom: livingRoom,
           internet: internet,
@@ -655,12 +657,14 @@ export default function ManagedProperty({ match }) {
                   <div id="invest-form" className="font-abc-favorit-trial font-bold text-center mr-0.5 mb-2.5 rounded-xl bg-white border-0 border-black border-opacity-5 shadow-deep w-full ">
                     <div className="w-full">
                       <div className="w-full">
-                        <div className="bg-lofty-light bg-opacity-20 px-6 py-2 rounded-t-xl">
-                          <div className="flex justify-between p-2">
+                        <div className="bg-lofty-light bg-opacity-20 px-2 pt-3 rounded-t-xl">
+                        <ProgressBar className="" animated now={74.5} label={'74.5%'} />
+                          <div className="flex justify-between py-2">
                             <div>
-                              <span className="text-lofty">83%</span></div>
+                              <span className="text-lofty"></span></div>
                             <div>
-                              <span className="text-lofty-dark opacity-60">339 tokens left</span></div></div>
+                              <span className="text-lofty-dark opacity-60">2238 tokens left</span></div>
+                            </div>
                         </div></div>
                       <div className="flex flex-col px-2 py-3 space-y-4">
                         <div className="w-full flex justify-between items-center">
@@ -670,9 +674,9 @@ export default function ManagedProperty({ match }) {
                                 <span className="text-lofty-dark text-lg">Projected IRR</span>
                                 <i className="fas fa-info text-12 p-1 rounded-full w-5 h-5 ml-2 text-lofty-purple bg-lofty-light bg-opacity-10"></i>
                               </div></div>
-                            <div className="transition-opacity rounded z-50 bg-gray-600 text-white text-sm font-normal p-1.5 pointer-events-none invisible opacity-0" style={{ position: "absolute", inset: "0px auto auto 0px", transform: "translate3d(187.5px, 796.5px, 0px)" }} data-popper-reference-hidden="false" data-popper-escaped="false" data-popper-placement="right"><div className="block max-w-350-px p-2 text-left"><span>This is the estimated IRR if you were to invest in this property based on current estimated fair market value, property appreciation, and Cash on Cash Return. Internal Rate of Return (IRR) is an annualized return for equity investments that includes cash distributions and appreciation. The IRR percentage here is a combination of the Cash on Cash return and the projected appreciation over a one year time period.</span></div><div className="tt-pp-arrow block w-2 h-2 bg-transparent -left-1" style={{ position: "absolute", top: "0px", transform: "translate3d(0px, 100px, 0px)" }}></div></div></div><p className="text-lofty-purple text-4xl">17.91%</p></div>
+                            <div className="transition-opacity rounded z-50 bg-gray-600 text-white text-sm font-normal p-1.5 pointer-events-none invisible opacity-0" style={{ position: "absolute", inset: "0px auto auto 0px", transform: "translate3d(187.5px, 796.5px, 0px)" }} data-popper-reference-hidden="false" data-popper-escaped="false" data-popper-placement="right"><div className="block max-w-350-px p-2 text-left"><span>This is the estimated IRR if you were to invest in this property based on current estimated fair market value, property appreciation, and Cash on Cash Return. Internal Rate of Return (IRR) is an annualized return for equity investments that includes cash distributions and appreciation. The IRR percentage here is a combination of the Cash on Cash return and the projected appreciation over a one year time period.</span></div><div className="tt-pp-arrow block w-2 h-2 bg-transparent -left-1" style={{ position: "absolute", top: "0px", transform: "translate3d(0px, 100px, 0px)" }}></div></div></div><p className="text-lofty-purple text-4xl">18.4%</p></div>
                         <div className="w-full flex justify-between items-center"><div className="text-gray-400 dark:text-themeBlue-dark max-w"><div className="flex items-start justify-center mr-px p-0 cursor-pointer"><div className="flex items-center"><span className="text-lofty-dark opacity-70 text-md">CoC Return</span><i className="fas fa-info text-12 p-1 rounded-full w-5 h-5 ml-2 text-lofty-purple bg-lofty-light bg-opacity-10"></i></div></div><div className="transition-opacity rounded z-50 bg-gray-600 text-white text-sm font-normal p-1.5 pointer-events-none invisible opacity-0" style={{ position: "absolute", inset: "0px auto auto 0px", transform: "translate3d(158.5px, 832.5px, 0px)" }} data-popper-reference-hidden="false" data-popper-escaped="false" data-popper-placement="right">
-                          <div className="block max-w-350-px p-2 text-left"><span>This is the Cash on Cash (CoC) return if you were to invest in this property at the current property fair market value and net operating income. CoC Return is another term for Cash Payout. CoC Return is the cash return on an investment compared to the amount of cash invested. For example, an investment with cash distributions of $50 on a $1,000 investment has a 5% CoC return. The percentage here is dependent on the property being rented out for the exact numbers listed in the Financials section.</span></div><div className="tt-pp-arrow block w-2 h-2 bg-transparent -left-1" style={{ position: "absolute", top: "0px", transform: "translate3d(0px, 120px, 0px)" }}></div></div></div><p className="text-lofty-light text-4xl">7.58%</p>
+                          <div className="block max-w-350-px p-2 text-left"><span>This is the Cash on Cash (CoC) return if you were to invest in this property at the current property fair market value and net operating income. CoC Return is another term for Cash Payout. CoC Return is the cash return on an investment compared to the amount of cash invested. For example, an investment with cash distributions of $50 on a $1,000 investment has a 5% CoC return. The percentage here is dependent on the property being rented out for the exact numbers listed in the Financials section.</span></div><div className="tt-pp-arrow block w-2 h-2 bg-transparent -left-1" style={{ position: "absolute", top: "0px", transform: "translate3d(0px, 120px, 0px)" }}></div></div></div><p className="text-lofty-light text-4xl">7.4%</p>
                         </div>
                       </div>
                     </div>

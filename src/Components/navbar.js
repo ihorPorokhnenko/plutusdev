@@ -217,7 +217,7 @@ export default function NavigationBar({ companyName = "Plutus" }) {
       </Navbar>
       <div className="announcement">
         <div className="alert alert-success alert-dismissible announcement" role="alert">
-          <div><b>New update coming soon!</b></div>
+          <div><b>Demo mode enabled, site features may not work as intended</b></div>
         </div>
       </div>
     </>
