@@ -171,6 +171,9 @@ export default function NavigationBar({ companyName = "Plutus" }) {
               <Nav.Link as={Link} to="/managed-listings"
                 className={pos === "top" ? "text-light" : "text-dark"}
               >Stakeable Properties</Nav.Link>
+              <Nav.Link as={Link} to="/blog"
+                className={pos === "top" ? "text-light" : "text-dark"}
+              >Blog</Nav.Link>
             {/* ):""} */}
           </Nav>
           <Navbar.Collapse className="justify-content-end">
