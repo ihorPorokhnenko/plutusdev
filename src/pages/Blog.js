@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import {
   Row,
@@ -7,6 +7,7 @@ import {
   Container,
 } from "react-bootstrap";
 import Navbar from '../Components/navbar';
+import Footer from '../Components/Footer';
 import firebase from "firebase";
 import { auth, database } from "../config";
 import DOMPurify from 'dompurify';
@@ -20,6 +21,8 @@ export default function Blog() {
   const [blogArticles, setBlogArticles] = useState([]);
   //spinner
   const [loading, setLoading] = useState(true)
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -91,7 +94,7 @@ export default function Blog() {
 
   return (
     <>
-      <Navbar />
+      <Navbar footerRef={footerRef} />
 
       {/* Spinner */}
       {loading === true ? <div className="sk-cube-grid">
@@ -125,6 +128,7 @@ export default function Blog() {
           ))}
         </Row>
       </Container>
+      <Footer ref={footerRef} />
     </>
   );
 }

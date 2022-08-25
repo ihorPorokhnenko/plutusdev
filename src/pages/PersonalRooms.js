@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {Link} from 'react-router-dom'
 import {
   Row,
@@ -12,6 +12,7 @@ import {
   Nav,
 } from "react-bootstrap";
 import Navbar from '../Components/navbar'
+import Footer from '../Components/Footer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -33,6 +34,8 @@ export default function PersonalRooms() {
   const [listings, setListings] = useState([]);
    //spinner
    const [loading, setLoading] = useState(true)
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -93,7 +96,7 @@ export default function PersonalRooms() {
 
   return (
     <>
-    <Navbar/>
+    <Navbar footerRef={footerRef} />
 
     {/* Spinner */}  
     {loading==true ? <div className="sk-cube-grid">
@@ -142,6 +145,7 @@ export default function PersonalRooms() {
       </Container>
       <br />
       <br />
+      <Footer ref={footerRef} />
     </>
   );
 }

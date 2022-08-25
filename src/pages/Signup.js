@@ -1,4 +1,4 @@
-import React,{useEffect, useContext} from 'react'
+import React,{useEffect, useContext, useRef} from 'react'
 import {Redirect} from 'react-router-dom'
 import firebase from 'firebase'
 import {UserContext} from '../context/UserContext'
@@ -6,10 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GoogleButton from 'react-google-button'
 import Navbar from '../Components/navbar'
+import Footer from '../Components/Footer'
 
 export default function Signup() {
 
 const context = useContext(UserContext);
+
+const footerRef = useRef(null)
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -48,8 +51,9 @@ useEffect(() => {
       <div>
       <ToastContainer/>
       <ToastContainer/>
-      <Navbar/>
+      <Navbar footerRef={footerRef} />
       <GoogleButton className="align-self-center mx-auto auth-btn" onClick={googleAuth}/>
+      <Footer ref={footerRef} />
       </div>
   )
   } else {

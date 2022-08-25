@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {Row, Col, Form, Button, Container, Card } from "react-bootstrap";
 import choosePic from '../pictures/choose-pic.svg'
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +9,7 @@ import {imageConfig} from '../utils/profileImageConfig'
 import { database, storage } from "../config";
 import firebase from "firebase";
 import Navbar from "../Components/navbar";
+import Footer from '../Components/Footer';
 
 export default function CreateProfile() {
 
@@ -26,6 +27,8 @@ export default function CreateProfile() {
 
      //Authstate
      const [authState, setAuthState ] = useState("");
+
+     const footerRef = useRef(null)
 
      useEffect(()=>{
        setFilter(city + homeSearch)
@@ -149,7 +152,7 @@ if(profileCheck === true){
     
   return (
     <>
-      <Navbar />
+      <Navbar footerRef={footerRef} />
       
       <ToastContainer 
         position="top-right"
@@ -235,6 +238,7 @@ if(profileCheck === true){
           </Card.Body>
         </Card>
       </Container>
+      <Footer ref={footerRef} />
     </>
   );
 }

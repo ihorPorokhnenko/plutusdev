@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../Components/navbar";
+import Footer from '../Components/Footer';
 import { Link, Redirect } from "react-router-dom";
 import {
   Button,
@@ -53,6 +54,8 @@ export default function ManagedProperty({ match }) {
   const [address, setAddress] = useState("");
   //Review form states
   const [name, setName] = useState("")
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -199,7 +202,7 @@ export default function ManagedProperty({ match }) {
 
   return (
     <div className="managed">
-      <Navbar />
+      <Navbar footerRef={footerRef} />
       {listings.map((data) => (
         <React.Fragment key={data.key}>
           <div className="caraousel-slider mr-top-slider">
@@ -696,6 +699,7 @@ export default function ManagedProperty({ match }) {
           <br />
         </React.Fragment>
       ))}
+      <Footer ref={footerRef} />
     </div>
   )
 }

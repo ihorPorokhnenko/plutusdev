@@ -11,9 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase'
 import { Container } from 'react-bootstrap';
+import logo from '../pictures/handover_67751335/PLUTUS-PROPERTIES-BLACK-VERSION.png'
 import Web3 from "web3";
 
-export default function NavigationBar({ companyName = "Plutus" }) {
+export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
 
   //Authstate
   const [authState, setAuthState] = useState(null);
@@ -22,6 +23,10 @@ export default function NavigationBar({ companyName = "Plutus" }) {
   //Metamask connect status
   const [connectStatus, setConnectStatus] = useState(false);
   const [connectAccount, setConnectAccount] = useState("");
+
+  const scrollToBottom = () => {
+    footerRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   useEffect(() => {
     var path = window.location.pathname
@@ -157,8 +162,16 @@ export default function NavigationBar({ companyName = "Plutus" }) {
       <Navbar expand="lg" className="navbar"
         style={{ backgroundColor: pos === "top" ? "" : "rgb(227, 239, 240)" }}
       >
-        <Link to="/"><Navbar.Brand className={pos === "top" ? "text-light brand-name" : "text-dark brand-name"}>{companyName}</Navbar.Brand></Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Brand href="/" className={pos === "top" ? "text-light brand-name" : "text-dark brand-name"}>
+            <img
+              src={logo}
+              width="180"
+              height="60"
+              // className="d-inline-block align-top"
+              alt={companyName}
+            />
+          </Navbar.Brand>
+        <Navbar.Toggle className="ml-auto" aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/"
@@ -168,12 +181,18 @@ export default function NavigationBar({ companyName = "Plutus" }) {
               <Nav.Link as={Link} to="/listings"
                 className={pos === "top" ? "text-light" : "text-dark"}
               >Listings</Nav.Link>
-              <Nav.Link as={Link} to="/managed-listings"
+              {/* <Nav.Link as={Link} to="/managed-listings"
                 className={pos === "top" ? "text-light" : "text-dark"}
-              >Stakeable Properties</Nav.Link>
+              >Stakeable Properties</Nav.Link> */}
               <Nav.Link as={Link} to="/blog"
                 className={pos === "top" ? "text-light" : "text-dark"}
               >Blog</Nav.Link>
+              <Nav.Link as={Link} to="/about"
+                className={pos === "top" ? "text-light" : "text-dark"}
+              >About Us</Nav.Link>
+              <Nav.Link as={Link} to="#footer"
+                className={pos === "top" ? "text-light" : "text-dark"} onClick={scrollToBottom}
+              >Contact Us</Nav.Link>
             {/* ):""} */}
           </Nav>
           <Navbar.Collapse className="justify-content-end">
@@ -218,11 +237,11 @@ export default function NavigationBar({ companyName = "Plutus" }) {
         <ToastContainer />
 
       </Navbar>
-      <div className="announcement">
+      {/* <div className="announcement">
         <div className="alert alert-success alert-dismissible announcement" role="alert">
           <div><b>Demo mode enabled, site features may not work as intended</b></div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

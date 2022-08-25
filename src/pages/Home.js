@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Redirect } from 'react-router-dom'
 import Navbar from '../Components/navbar'
 import FeaturedSection from '../Components/featuredSection'
@@ -12,6 +12,8 @@ export default function Home() {
 
   const [authState, setAuthState] = useState("");
   console.log(authState)
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -36,12 +38,12 @@ export default function Home() {
   // } else {
   return (
     <>
-      <Navbar />
+      <Navbar footerRef={footerRef} />
       <HeroSection />
       <FeaturedSection />
       <CategoriesSection />
       <FindRoommatesContent />
-      <Footer />
+      <Footer ref={footerRef} />
     </>
   )
 }

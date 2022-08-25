@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Row,
   Col,
@@ -6,6 +6,7 @@ import {
   Container,
 } from "react-bootstrap";
 import Navbar from '../Components/navbar'
+import Footer from '../Components/Footer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
@@ -27,6 +28,8 @@ export default function PublicProfiles() {
 
    const [filterQuery, setFilterQuery] = useState("")
    console.log(filterQuery)
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -90,7 +93,7 @@ export default function PublicProfiles() {
 
   return (
     <>
-    <Navbar/>
+    <Navbar footerRef={footerRef} />
 
     {/* Spinner */}  
     {loading==true ? <div className="sk-cube-grid">
@@ -136,6 +139,7 @@ export default function PublicProfiles() {
       </Container>
       <br />
       <br />
+      <Footer ref={footerRef} />
     </>
   );
 }

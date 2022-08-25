@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import { Form, Col, Button, Container, Card, InputGroup, ToggleButton } from "react-bootstrap";
 import Icon from "react-crypto-icons";
@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Redirect } from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Components/navbar";
+import Footer from '../Components/Footer';
 import { database, storage, googleApiKey } from "../config";
 import firebase from 'firebase'
 import imageCompression from 'browser-image-compression';
@@ -95,6 +96,8 @@ export default function BecomeHost({ match }) {
 
   //Authstate
   const [authState, setAuthState] = useState("");
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -460,7 +463,7 @@ export default function BecomeHost({ match }) {
   return (
     <div className="become-host">
 
-      <Navbar />
+      <Navbar footerRef={footerRef} />
 
       {/* Post form */}
       <ToastContainer
@@ -1580,6 +1583,7 @@ export default function BecomeHost({ match }) {
           </Form>
         </Card.Body>
       </Card >
+      <Footer ref={footerRef} />
     </div >
   );
 }

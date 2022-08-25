@@ -27,6 +27,7 @@ import ScrollToTop from './Components/ScrollToTop';
 import PublicProfilePage from './pages/PublicProfilePage';
 import Blog from './pages/Blog';
 import Article from './pages/Article';
+import AboutPage from './pages/AboutPage';
 
 
 const routing = (
@@ -55,6 +56,7 @@ const routing = (
     <Route exact path="/single-family" component={SingleFamily} />
     <Route exact path="/luxury-residences" component={LuxuryResidences} />
     <Route exact path="/find-roommates" component={PublicProfilePage} />
+    <Route exact path="/about" component={AboutPage} />
   </Router>
 )
 

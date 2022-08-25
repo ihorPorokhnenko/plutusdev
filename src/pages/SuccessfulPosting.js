@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../Components/navbar'
+import Footer from '../Components/Footer'
 import { Button, Container, Card, Row, Col } from "react-bootstrap";
 import successPic from '../pictures/done.svg'
 
 export default function SuccessfulPosting(props) {
   const propertyKey = props.location.state.propertyKey;
 
+  const footerRef = useRef(null)
+
   return (
     <>
-      <Navbar />
+      <Navbar footerRef={footerRef} />
 
       <Container className="mr-top-2">
         <Row>
@@ -26,6 +29,7 @@ export default function SuccessfulPosting(props) {
           <Link to={`/property/${propertyKey}`}><button className="btn btn-primary text-center mt-5">Go to Property View</button></Link>
         </center>
       </Container>
+      <Footer ref={footerRef} />
     </>
   )
 }

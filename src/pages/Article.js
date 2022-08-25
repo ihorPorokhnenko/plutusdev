@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Row,
   Col,
@@ -6,6 +6,7 @@ import {
   Container,
 } from "react-bootstrap";
 import Navbar from '../Components/navbar';
+import Footer from '../Components/Footer';
 import firebase from "firebase";
 import { auth, database } from "../config";
 import DOMPurify from 'dompurify';
@@ -19,6 +20,8 @@ export default function Article({ match }) {
   const [userUid, setUserUid] = useState(null);
   //snapshots
   const [article, setArticle] = useState({});
+
+  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -62,8 +65,7 @@ export default function Article({ match }) {
 
   return (
     <>
-      <Navbar />
-
+      <Navbar footerRef={footerRef}/>
       <Container>
         <Row>
           <Col>
@@ -78,6 +80,7 @@ export default function Article({ match }) {
           </Col>
         </Row>
       </Container>
+      <Footer ref={footerRef}/>
     </>
   );
 }

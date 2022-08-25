@@ -1,9 +1,12 @@
 import React from "react";
 import { Card, Container, Col, Row } from "react-bootstrap";
 import {Link} from "react-router-dom";
-import personalRoomsPic from '../pictures/personal-rooms.jpg'
-import familyApartments from '../pictures/family-apartments.jpg'
-import villas from '../pictures/villas.jpg'
+// import personalRoomsPic from '../pictures/personal-rooms.jpg'
+// import familyApartments from '../pictures/family-apartments.jpg'
+// import villas from '../pictures/villas.jpg'
+import condos from '../pictures/Condos.jpeg'
+import homes from '../pictures/single family homes.jpeg'
+import luxury from '../pictures/luxury residences.jpeg'
 
 export default function CategoriesSection() {
   return (
@@ -15,7 +18,7 @@ export default function CategoriesSection() {
         <Row className="mt-5">
         <Col sm={12} md={4} lg={4}>
           <Link to="/condos"><Card className="category-cards text-dark mt-3">
-            <Card.Img variant="top" src={personalRoomsPic} className="category-img"/>
+            <Card.Img variant="top" src={condos} className="category-img"/>
             <Card.Body>
               <Card.Title>Condos</Card.Title>
               <Card.Text>
@@ -26,7 +29,7 @@ export default function CategoriesSection() {
           </Col>
           <Col sm={12} md={4} lg={4}>
           <Link to="/single-family"><Card className="category-cards text-dark mt-3">
-            <Card.Img variant="top" src={familyApartments} className="category-img"/>
+            <Card.Img variant="top" src={homes} className="category-img"/>
             <Card.Body>
               <Card.Title>Single Family</Card.Title>
               <Card.Text>
@@ -37,7 +40,7 @@ export default function CategoriesSection() {
           </Col>
           <Col sm={12} md={4} lg={4}>
           <Link to="/luxury-residences"><Card className="category-cards text-dark mt-3">
-            <Card.Img variant="top" src={villas} className="category-img"/>
+            <Card.Img variant="top" src={luxury} className="category-img"/>
             <Card.Body>
               <Card.Title>Luxury Residences</Card.Title>
               <Card.Text>
