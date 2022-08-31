@@ -28,6 +28,7 @@ import PublicProfilePage from './pages/PublicProfilePage';
 import Blog from './pages/Blog';
 import Article from './pages/Article';
 import AboutPage from './pages/AboutPage';
+import ArticleEdit from './pages/ArticleEdit';
 
 
 const routing = (
@@ -35,6 +36,8 @@ const routing = (
     <ScrollToTop />
     <Route exact path="/" component={App} />
     <Route exact path="/blog" component={Blog} />
+    <Route exact path="/article/edit" component={ArticleEdit} />
+    <Route exact path="/article/edit/:articleKey" component={ArticleEdit} />
     <Route exact path="/article/:articleKey" component={Article} />
     <Route exact path="/coming-soon" component={ComingSoon} />
     <Route exact path="/become-host" component={becomeHost} />

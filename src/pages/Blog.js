@@ -112,7 +112,7 @@ export default function Blog() {
       <Container>
         <Row>
           {blogArticles.map((data) => (
-            <Col key={data.key}>
+            <Col sm={12} md={6} lg={6} key={data.key}>
               <Link to={{ pathname: `/article/${data.key}`, state: { fromDashboard: true } }}>
                 <Card className="all-properties">
                   <Card.Header as="h1">{data.title}</Card.Header>
