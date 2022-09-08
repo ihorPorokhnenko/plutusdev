@@ -165,7 +165,7 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
           <Navbar.Brand href="/" className={pos === "top" ? "text-light brand-name" : "text-dark brand-name"}>
             <img
               src={logo}
-              width="180"
+              width="175"
               height="60"
               // className="d-inline-block align-top"
               alt={companyName}
