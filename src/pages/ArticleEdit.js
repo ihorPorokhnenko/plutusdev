@@ -8,6 +8,7 @@ import Footer from '../Components/Footer';
 import { database, storage } from "../config";
 import firebase from 'firebase'
 import DOMPurify from 'dompurify';
+import { DefaultEditor } from 'react-simple-wysiwyg';
 
 
 export default function ArticleEdit({ match }) {
@@ -174,12 +175,13 @@ export default function ArticleEdit({ match }) {
 
             <Form.Group controlId="formGridContent">
               <Form.Label>Content</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 as="textarea"
                 rows={3}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-              />
+              /> */}
+              <DefaultEditor rows={20} value={content} onChange={(e) => setContent(e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="formGridContentPreview">

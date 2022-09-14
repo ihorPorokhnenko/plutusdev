@@ -31,20 +31,24 @@
     "react-iframe": "^1.8.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-simple-wysiwyg": "^2.1.1",
     "react-toastify": "^7.0.4",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1",
     "web3": "^1.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-app-rewired start",
     "start-legacy": "react-scripts --openssl-legacy-provider start",
     "start-prod": "node server.js",
     "start-staging": "node server.js -- --staging",
-    "build": "react-scripts build",
+    "build": "react-app-rewired build",
     "build-legacy": "react-scripts --openssl-legacy-provider build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "start-default": "react-scripts start",
+    "build-default": "react-scripts build",
+    "test-default": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
@@ -63,5 +67,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }
