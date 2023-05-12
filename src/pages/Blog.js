@@ -9,7 +9,7 @@ import {
 import Navbar from '../Components/navbar';
 import Footer from '../Components/Footer';
 import firebase from "firebase";
-import { auth, database } from "../config";
+import { auth, database, blogRef } from "../config";
 import DOMPurify from 'dompurify';
 
 export default function Blog() {
