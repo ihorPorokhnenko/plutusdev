@@ -180,7 +180,7 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
             {/* {authState ? ( */}
               <Nav.Link as={Link} to="/listings"
                 className={pos === "top" ? "text-light" : "text-dark"}
-              >Listings</Nav.Link>
+              >Properties</Nav.Link>
               {/* <Nav.Link as={Link} to="/managed-listings"
                 className={pos === "top" ? "text-light" : "text-dark"}
               >Stakeable Properties</Nav.Link> */}
@@ -196,17 +196,18 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
             {/* ):""} */}
           </Nav>
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
+            {/* <Navbar.Text>
               <Button id="connectButton" variant="outline-dark" disabled={connectStatus} onClick={onClickConnect} >{connectAccount ? connectAccount : 'Connect wallet'}</Button>
             </Navbar.Text>
-            {" "}
+            {" "} */}
             &nbsp;
             {/* {authState ? ( */}
-            <>
               <Navbar.Text>
                 <Link to="/become-host"><Button className="host-btn" variant="outline-primary">List a Property</Button></Link>
               </Navbar.Text>
-            </>
+              {" "}
+              &nbsp;
+              <Nav.Link as={Link} to="/signup" className='login'>Login/Signup</Nav.Link>
             {/* ):""} */}
           </Navbar.Collapse>
           <NavDropdown alignRight title={<FontAwesomeIcon icon={faUserCircle} size="lg"
@@ -215,8 +216,8 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
               <>
                 <Container className="menu-container">
                   <Nav.Link as={Link} to="/my-profile" className="text-dark">My Profile</Nav.Link>
-                  <Nav.Link as={Link} to="/my-bookings" className="text-dark">Bookings</Nav.Link>
-                  <Nav.Link as={Link} to="/my-home-bookings" className="text-dark">Host Bookings</Nav.Link>
+                  {/* <Nav.Link as={Link} to="/my-bookings" className="text-dark">Bookings</Nav.Link>
+                  <Nav.Link as={Link} to="/my-home-bookings" className="text-dark">Host Bookings</Nav.Link> */}
                 </Container>
               </>
             ) : (

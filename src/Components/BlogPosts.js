@@ -6,13 +6,11 @@ import {
   Card,
   Container,
 } from "react-bootstrap";
-import Navbar from '../Components/navbar';
-import Footer from '../Components/Footer';
 import firebase from "firebase";
-import { auth, database } from "../config";
+import { auth, database, blogRef } from "../config";
 import DOMPurify from 'dompurify';
 
-export default function Blog() {
+export default function BlogPosts() {
   //Authstate
   const [authState, setAuthState] = useState(null);
   const [userUid, setUserUid] = useState(null);
@@ -21,8 +19,6 @@ export default function Blog() {
   const [blogArticles, setBlogArticles] = useState([]);
   //spinner
   const [loading, setLoading] = useState(true)
-
-  const footerRef = useRef(null)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -37,7 +33,7 @@ export default function Blog() {
 
   useEffect(() => {
     database
-      .ref("blog")
+      .ref(blogRef)
       .once("value", (snapshot) => {
         if (snapshot.exists()) {
           setListingsCheck(true);
@@ -57,6 +53,7 @@ export default function Blog() {
     database
       .ref(blogRef)
       .orderByChild("datePublished")
+      .limitToLast(4)
       .on("value", (snapshot) => {
         const items = [];
         snapshot.forEach((childSnapshot) => {
@@ -75,10 +72,25 @@ export default function Blog() {
       });
   }, [userUid]);
 
+  const truncateString = (str, num) => {
+    if (str.length <= num) {
+      return str
+    }
+    return str.slice(0, num) + '...'
+  }
+
   const sanitizedData = (data) => {
     const cleanData = DOMPurify.sanitize(data);
     // Grab up to first p tag
-    const truncData = cleanData.split("</p>")[0]+"</p>";
+    let truncData = cleanData.split("</p>")[0] + "</p>";
+
+    const parsedExcerpt = new DOMParser().parseFromString(data, 'text/html');
+    console.log(parsedExcerpt);
+    if (parsedExcerpt) {
+      const body = parsedExcerpt.querySelector('body').textContent;
+      truncData = truncateString(body, 500);
+      console.log(truncData);
+    }
 
     return {
       __html: truncData
@@ -96,8 +108,6 @@ export default function Blog() {
 
   return (
     <>
-      <Navbar footerRef={footerRef} />
-
       {/* Spinner */}
       {loading === true ? <div className="sk-cube-grid">
         <div className="sk-cube sk-cube1"></div>
@@ -111,12 +121,15 @@ export default function Blog() {
         <div className="sk-cube sk-cube9"></div>
       </div> : ""}
 
+      <h2 className="text-center p-2 mt-4">Latest Blog Posts</h2>
+
       <Container>
         <Row>
           {blogArticles.map((data) => (
             <Col sm={12} md={6} lg={6} key={data.key}>
               <Link to={{ pathname: `/article/${data.key}`, state: { fromDashboard: true } }}>
                 <Card className="all-properties">
+                  {/* <Card.Img variant="top" src={closing} className="find-roommates-content-cards-pic"/> */}
                   <Card.Header as="h1">{data.title}</Card.Header>
                   <Card.Body>
                     {/* <Card.Title className="text-dark">{data.title}</Card.Title> */}
@@ -130,7 +143,7 @@ export default function Blog() {
           ))}
         </Row>
       </Container>
-      <Footer ref={footerRef} />
+      <br />
     </>
   );
 }

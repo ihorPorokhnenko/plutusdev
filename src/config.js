@@ -28,3 +28,6 @@ firebase.initializeApp(firebaseConfig);
   export {database};
 
   export {googleApiKey};
+
+export const blogRef = "blog";
+// export const blogRef = "blogtest";

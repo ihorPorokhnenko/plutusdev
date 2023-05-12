@@ -110,7 +110,7 @@ export default function MyListings() {
       </div> : ""}
 
       <div className="featured-section">
-        {listingsCheck === true ? <h2 className="text-center p-2 mt-4">Featured Homes</h2> : ""}
+        {listingsCheck === true ? <h2 className="text-center p-2 mt-4">Featured Properties</h2> : ""}
 
         <Container>
           <Row>

@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Redirect } from 'react-router-dom'
 import Navbar from '../Components/navbar'
+import BlogPosts from '../Components/BlogPosts'
 import FeaturedSection from '../Components/featuredSection'
 import HeroSection from '../Components/hero-section'
 import firebase from 'firebase'
 import CategoriesSection from '../Components/CategoriesSection'
 import FindRoommatesContent from '../Components/FindRoommatesContent'
 import Footer from '../Components/Footer'
+import PlutusProcess from '../Components/PlutusProcess'
+import AsFeaturedIn from '../Components/AsFeaturedIn'
+import EmailSignup from '../Components/EmailSignup'
 
 export default function Home() {
 
@@ -40,9 +44,14 @@ export default function Home() {
     <>
       <Navbar footerRef={footerRef} />
       <HeroSection />
-      <FeaturedSection />
+      <br />
       <CategoriesSection />
-      <FindRoommatesContent />
+      <FeaturedSection />
+      <PlutusProcess />
+      {/* <AsFeaturedIn /> */}
+      {/* <FindRoommatesContent /> */}
+      <BlogPosts />
+      <EmailSignup />
       <Footer ref={footerRef} />
     </>
   )
