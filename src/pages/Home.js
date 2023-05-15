@@ -17,6 +17,7 @@ export default function Home() {
   const [authState, setAuthState] = useState("");
   console.log(authState)
 
+  const plutusProcessRef = useRef(null)
   const footerRef = useRef(null)
 
   useEffect(() => {
@@ -43,11 +44,11 @@ export default function Home() {
   return (
     <>
       <Navbar footerRef={footerRef} />
-      <HeroSection />
+      <HeroSection plutusProcessRef={plutusProcessRef}/>
       <br />
       <CategoriesSection />
       <FeaturedSection />
-      <PlutusProcess />
+      <PlutusProcess ref={plutusProcessRef} />
       {/* <AsFeaturedIn /> */}
       {/* <FindRoommatesContent /> */}
       <BlogPosts />

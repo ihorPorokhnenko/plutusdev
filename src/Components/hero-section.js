@@ -5,11 +5,16 @@ import {
   Col,
   Button,
 } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import heroPic from '../pictures/hero.svg'
 import hero2Pic from '../pictures/hero2.svg'
 import Vdo from '../pictures/pexels-kindel-media-7578552.mp4'
 
-export default function hero_section() {
+export default function hero_section({ plutusProcessRef }) {
+  const scrollToBottom = () => {
+    plutusProcessRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <div className="fullscreen-bg">
       <video autoPlay loop muted style={{ position: "absolute", width: "100%", height: "70%", objectFit: "cover", zIndex: "-1" }}>
@@ -24,8 +29,12 @@ export default function hero_section() {
             </h1>
             <p className="text-light hero-text3">Invest in rental properties without getting locked in or out. Buy just a fraction of a property & collect your first rent payment later today.</p>
             <div className='call-to-action'>
-              <Button className='view-properties'>View Properties</Button>
-              <div className='how-it-works text-light hero-text3'>How it works</div>
+              <Link to="/listings">
+                <Button className='view-properties'>View Properties</Button>
+              </Link>
+              <Link to="#plutus-process" onClick={scrollToBottom}>
+                <div className='how-it-works text-light hero-text3'>How it works</div>
+              </Link>
             </div>
           </Col>
           <Col lg={6} md={12} sm={12} className="d-flex justify-content-center">
