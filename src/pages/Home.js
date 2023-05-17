@@ -49,7 +49,7 @@ export default function Home() {
       <CategoriesSection />
       <FeaturedSection />
       <PlutusProcess ref={plutusProcessRef} />
-      {/* <AsFeaturedIn /> */}
+      <AsFeaturedIn />
       {/* <FindRoommatesContent /> */}
       <BlogPosts />
       <EmailSignup />
