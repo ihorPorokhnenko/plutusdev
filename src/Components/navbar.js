@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase'
@@ -15,7 +15,6 @@ import logo from '../pictures/handover_67751335/PLUTUS-PROPERTIES-BLACK-VERSION.
 import Web3 from "web3";
 
 export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
-
   //Authstate
   const [authState, setAuthState] = useState(null);
   //Transparent scroll navbar state

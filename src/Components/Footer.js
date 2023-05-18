@@ -1,11 +1,11 @@
 import React from 'react'
 import { Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { 
+import {
   faFacebook,
   faTiktok,
   faLinkedin,
-  faTwitter, 
+  faTwitter,
   faYoutube,
   faInstagram,
   faDiscord,

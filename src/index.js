@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import './fonts/Comfortaa/Comfortaa-Regular.ttf';
-import './index.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
+import './assets/scss/app.css';
+
 import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 import becomeHost from './pages/becomeHost';
 import Signup from './pages/Signup'
@@ -30,44 +32,58 @@ import Article from './pages/Article';
 import AboutPage from './pages/AboutPage';
 import ArticleEdit from './pages/ArticleEdit';
 
+/**
+ * New
+ */
+import NewHome from './pages/new/Home';
+import NewBlog from './pages/new/Blog';
+import NewPropertyDetail from './pages/new/PropertyDetail'
+import NewCatalog from './pages/new/Catalog'
 
+/**
+ * @type {JSX.Element}
+ */
 const routing = (
-  <Router>
-    <ScrollToTop />
-    <Route exact path="/" component={App} />
-    <Route exact path="/blog" component={Blog} />
-    <Route exact path="/article/edit" component={ArticleEdit} />
-    <Route exact path="/article/edit/:articleKey" component={ArticleEdit} />
-    <Route exact path="/article/:articleKey" component={Article} />
-    <Route exact path="/coming-soon" component={ComingSoon} />
-    <Route exact path="/become-host" component={becomeHost} />
-    <Route exact path="/become-host/:propertyKey" component={becomeHost} />
-    <Route exact path="/signup" component={Signup} />
-    {/* <Route exact path="/home" component={Home} /> */}
-    <Route exact path="/done-posting-home" render={(props) => <SuccessfulPosting {...props} />} />
-    <Route exact path="/done-waitlisting" component={SuccessfulWaitlisting} />
-    <Route exact path="/my-profile" component={MyProfile} />
-    <Route exact path="/create-profile" component={CreateProfile} />
-    <Route exact path="/property/:propertyKey" component={SingleProperty} />
-    <Route exact path="/managed-property/:propertyKey" component={ManagedProperty} />
-    <Route exact path="/done-booking" component={SuccessfulBooking} />
-    <Route exact path="/my-bookings" component={MyBookings} />
-    <Route exact path="/my-home-bookings" component={MyHomeBookings} />
-    <Route exact path="/listings" component={Listings} />
-    <Route exact path="/managed-listings" component={ManagedListings} />
-    <Route exact path="/condos" component={Condos} />
-    <Route exact path="/single-family" component={SingleFamily} />
-    <Route exact path="/luxury-residences" component={LuxuryResidences} />
-    <Route exact path="/find-roommates" component={PublicProfilePage} />
-    <Route exact path="/about" component={AboutPage} />
-  </Router>
+    <Router>
+        <ScrollToTop />
+        <Route exact path="/" component={App} />
+
+        {/*New pages*/}
+        <Route exact path="/new/" component={NewHome} />
+        <Route exact path="/new/blog" component={NewBlog} />
+        <Route exact path="/new/listings" component={NewCatalog} />
+        <Route exact path="/new/property/:propertyKey" component={NewPropertyDetail} />
+
+        <Route exact path="/blog" component={Blog} />
+        <Route exact path="/article/edit" component={ArticleEdit} />
+        <Route exact path="/article/edit/:articleKey" component={ArticleEdit} />
+        <Route exact path="/article/:articleKey" component={Article} />
+        <Route exact path="/coming-soon" component={ComingSoon} />
+        <Route exact path="/become-host" component={becomeHost} />
+        <Route exact path="/become-host/:propertyKey" component={becomeHost} />
+        <Route exact path="/signup" component={Signup} />
+        {/* <Route exact path="/home" component={Home} /> */}
+        <Route exact path="/done-posting-home" render={(props) => <SuccessfulPosting {...props} />} />
+        <Route exact path="/done-waitlisting" component={SuccessfulWaitlisting} />
+        <Route exact path="/my-profile" component={MyProfile} />
+        <Route exact path="/create-profile" component={CreateProfile} />
+        <Route exact path="/property/:propertyKey" component={SingleProperty} />
+        <Route exact path="/managed-property/:propertyKey" component={ManagedProperty} />
+        <Route exact path="/done-booking" component={SuccessfulBooking} />
+        <Route exact path="/my-bookings" component={MyBookings} />
+        <Route exact path="/my-home-bookings" component={MyHomeBookings} />
+        <Route exact path="/listings" component={Listings} />
+        <Route exact path="/managed-listings" component={ManagedListings} />
+        <Route exact path="/condos" component={Condos} />
+        <Route exact path="/single-family" component={SingleFamily} />
+        <Route exact path="/luxury-residences" component={LuxuryResidences} />
+        <Route exact path="/find-roommates" component={PublicProfilePage} />
+        <Route exact path="/about" component={AboutPage} />
+    </Router>
 )
 
 ReactDOM.render(routing,
-  document.getElementById('root')
+    document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -1,26 +1,21 @@
 import React,{useState, useEffect} from 'react'
 import {
-    Button,
-    Carousel,
     Row,
     Col,
     Container,
-    Card,
-    Form,
+    Card
   } from "react-bootstrap";
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   import {
    faStar
   } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
-import firebase from "firebase";
+
 import { auth, database } from "../config";
 
 export default function ReadReviews() {
-
 //snapshots
   const [reviews, setReviews] = useState([]);
-
 
     //get listing data
     useEffect(() => {
@@ -41,11 +36,10 @@ export default function ReadReviews() {
             setReviews(items);
           });
       }, []);
-      //
 
-     
-
-
+    /**
+     * Render HTML
+     */
       return (
         <>
           <Container>
@@ -73,5 +67,5 @@ export default function ReadReviews() {
           <br />
         </>
       );
-    }
+}
     

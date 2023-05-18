@@ -1,17 +1,15 @@
 import React,{useState, useEffect} from 'react'
 import {Row, Col, Card, Container} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import Navbar from '../Components/navbar'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBed,
-  faShower,
   faMapMarkerAlt,
   faRupeeSign,
   faCalendarAlt,
   faCalendar
 } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
+
 import firebase from 'firebase'
 import { auth, database } from "../config";
 
@@ -83,7 +81,6 @@ export default function HoneBookings() {
             title: data.title,
             city: data.city,
             address: data.address,
-            price: data.price,
           });
         });
         setListings(items);

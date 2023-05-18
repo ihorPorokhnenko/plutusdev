@@ -4,18 +4,13 @@ import {
   Row,
   Col,
   Card,
-  Button,
   Container,
-  Modal,
-  handleClose,
-  show,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
   faShower,
   faMapMarkerAlt,
-  faRupeeSign,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "react-crypto-icons";

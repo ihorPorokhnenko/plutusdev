@@ -139,7 +139,6 @@ export default function FamilyApartments() {
               </Card>
               </Link>
             </Col>
-           
           ))}
         </Row>
       </Container>

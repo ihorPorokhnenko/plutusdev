@@ -13,7 +13,6 @@ import {
   faBed,
   faShower,
   faMapMarkerAlt,
-  faRupeeSign,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "react-crypto-icons";

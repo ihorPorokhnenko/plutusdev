@@ -8,7 +8,6 @@ import firebase from 'firebase'
 import { auth, database} from "../config";
 
 export default function ProfileCard() {
-
     //Authstate
     const [authState, setAuthState] = useState(null);
     const [userUid, setUserUid] = useState(null);

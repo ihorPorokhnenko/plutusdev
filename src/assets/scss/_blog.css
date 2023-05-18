@@ -1,0 +1,45 @@
+/* BLOG PAGE */
+.blog-header {
+    height: 328px;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .blog-header {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+}
+
+.blog-header .container {
+    max-width: 40rem;
+}
+
+.blog-header h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 60px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #272D37;
+}
+
+.blog-header p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.1px;
+    color: #0B6EFA;
+}
+
+.articles-list .article .card-img-top {
+    border-radius: 10px;
+}

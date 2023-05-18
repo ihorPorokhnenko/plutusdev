@@ -1,14 +1,14 @@
 import React from 'react'
-import { Card, Container, Col, Row, Button} from "react-bootstrap";
-// import pic1 from '../pictures/undraw_people_tax5.svg'
-// import pic2 from '../pictures/undraw_celebration_0jvk.svg'
-// import pic3 from '../pictures/undraw_fans_gr54.svg'
+import { Card, Container, Col, Row} from "react-bootstrap";
+
 import closing from '../pictures/super fast closing2.png'
 import transactions from '../pictures/simplifying real estate transactions.jpg'
 import crypto from '../pictures/use your crypto to invest in liquid assets.jpg'
 
-
-
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function FindRoommatesContent() {
     return (
         <section className="find-roommates-content mt-5">

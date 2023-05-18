@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../Components/navbar";
 import Footer from '../Components/Footer';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import {
   Button,
-  ButtonGroup,
   Carousel,
   Row,
   Col,
   Container,
   Card,
-  Form,
   Tab,
   Tabs
 } from "react-bootstrap";
@@ -20,20 +18,15 @@ import {
   faShower,
   faMapMarkerAlt,
   faHome,
-  faArrowCircleRight,
   faCircle,
-  faCheckSquare,
-  faTimesCircle,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
 import opensea from '../pictures/opensea.svg';
 import Icon from "react-crypto-icons";
 import firebase from "firebase";
-import { auth, database } from "../config";
+import { database } from "../config";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
 import MapContainer from '../Components/MapContainer'
-import ReadReviews from '../Components/ReadReviews'
 import { formatToCurrency, convertToBTC, convertToETH, convertToUSDC } from "../utils/formatCurrency";
 
 

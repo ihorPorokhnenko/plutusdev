@@ -1,0 +1,140 @@
+/** PROPERTY SINGLE */
+.page-header {
+    background-image: url("../../assetsDemo/property-sea.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 560px;
+}
+
+.page-body a {
+    color: #0B6EFA;
+}
+
+.page-body h3 {
+    display: inline-block;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    color: #000000;
+    padding: 0 0 8px;
+    gap: 8px;
+    border-bottom: 2px solid #E6E6E6;
+}
+
+.page-body .nav-tabs {
+    border: none;
+    margin-bottom: 20px;
+}
+
+.page-body .nav-tabs .nav-link {
+    padding: 8px 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    color: #5F6D7E;
+}
+
+.page-body .nav-tabs .nav-link.active {
+    background: #F5FAFF;
+    border-bottom: 2px solid #0B6EFA;
+    font-weight: 600;
+    color: #0B6EFA;
+}
+
+.page-body .service-tabs .nav-tabs .nav-link {
+    padding: 8px 18px;
+    font-size: 10px;
+}
+
+.page-body .details-tabs .options-cards {
+    padding: 0;
+    gap: 20px;
+}
+
+.page-body .details-tabs .options-cards .list-inline-item {
+    padding: 0;
+}
+
+.page-body .details-tabs .options-cards .square-block {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    width: 95px;
+    height: 75px;
+    border: 1px solid #DFF2E3;
+    border-radius: 5px;
+}
+
+.page-body .details-tabs .options-cards .square-block p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 10px;
+    color: #28A745;
+}
+
+.page-body .details-tabs .options-cards img {
+    width: 35px;
+    max-height: 35px;
+    margin-bottom: 10px;
+}
+
+.page-body .details-tabs .list-group {
+    margin-bottom: 20px;
+}
+
+.page-body .details-tabs .list-group .list-group-item {
+    border: none;
+    padding: 0 0 10px 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.page-body .details-tabs .list-group .custom-icon {
+    display: inline-block;
+    min-width: 16px;
+    height: 16px;
+    background: url('../images/icon-check-green.svg') no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 5px
+}
+
+.service-tabs .card {
+    border: 1px solid #C7ECF7;
+    border-radius: 30px;
+}
+
+.service-tabs .card-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    color: #000000;
+    padding: 0 0 8px;
+    gap: 8px;
+    display: inline-block;
+    border-bottom: 2px solid #E6E6E6;
+}
+
+.service-tabs .card-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(0, 0, 0, 0.35);
+}
