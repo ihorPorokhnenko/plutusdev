@@ -28,6 +28,29 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
     footerRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  const googleAuth = () => {
+    firebase.auth()
+   .signInWithPopup(provider)
+   .then((result) => {
+     /** @type {firebase.auth.OAuthCredential} */
+     // var credential = result.credential;
+     // var token = credential.accessToken;
+     // The signed-in user info.
+     // var Signeduser = result.user;
+     toast(`Welcome ${result.user.displayName}`,{type: "success"})
+   }).catch((error) => {
+     // Handle Errors here.
+     // var errorCode = error.code;
+     var errorMessage = error.message;
+     // var email = error.email;
+     // var credential = error.credential;
+     toast(errorMessage, { type: "error"});
+     // ...
+   });
+ }
+
   useEffect(() => {
     var path = window.location.pathname
 
@@ -207,8 +230,10 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
               </Navbar.Text>
               {" "}
               &nbsp;
-              <Nav.Link as={Link} to="/signup" className='login'>Login/Signup</Nav.Link>
-            {/* ):""} */}
+              {/* <Nav.Link as={Link} to="/signup" className='login'>Login/Signup</Nav.Link> */}
+              {!authState ? (
+                <Button className='login' onClick={googleAuth}>Login/Signup</Button>
+              ):""}
           </Navbar.Collapse>
           <NavDropdown alignRight title={<FontAwesomeIcon icon={faUserCircle} size="lg"
             className={pos === "top" ? "text-light dropdown-menu-bar" : "text-dark dropdown-menu-bar"} />} className=" align-toggle" onClick={alignMenu} >

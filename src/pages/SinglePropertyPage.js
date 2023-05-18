@@ -739,7 +739,7 @@ export default function SinglePropertyPage({ match }) {
                     variant="success"
                     className="btn-block"
                     href="mailto:offers@plutusproperties.org?subject=Plutus Offer">
-                    Start an Offer
+                    Make an Offer
                   </Button>
                   {data.sellerPhone &&
                     <Button
