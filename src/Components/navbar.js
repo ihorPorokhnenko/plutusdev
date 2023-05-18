@@ -224,16 +224,13 @@ export default function NavigationBar({ footerRef, companyName = "Plutus" }) {
             </Navbar.Text>
             {" "} */}
             &nbsp;
-            {/* {authState ? ( */}
+            {authState ? (
               <Navbar.Text>
                 <Link to="/become-host"><Button className="host-btn" variant="outline-primary">List a Property</Button></Link>
               </Navbar.Text>
-              {" "}
-              &nbsp;
-              {/* <Nav.Link as={Link} to="/signup" className='login'>Login/Signup</Nav.Link> */}
-              {!authState ? (
+              ) : (
                 <Button className='login' onClick={googleAuth}>Login/Signup</Button>
-              ):""}
+              )}
           </Navbar.Collapse>
           <NavDropdown alignRight title={<FontAwesomeIcon icon={faUserCircle} size="lg"
             className={pos === "top" ? "text-light dropdown-menu-bar" : "text-dark dropdown-menu-bar"} />} className=" align-toggle" onClick={alignMenu} >
