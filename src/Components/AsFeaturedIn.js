@@ -14,15 +14,15 @@ export default function AsFeaturedIn() {
       <Container>
       <h2 className="mt-5 text-center">As Featured In</h2>
         <Row className="mt-5 d-flex justify-content-center">
-          <img src={fibree} className="img-fluid hero-pic align-middle mx-3" width="500px" height="200px" alt="hero-img" />
-          <img src={rogueSignal} className="img-fluid hero-pic align-middle mx-3" width="500px" height="200px" alt="hero-img" />
+          <img src={fibree} className="img-fluid align-middle mx-3" width="500px" height="200px" alt="hero-img" />
+          <img src={rogueSignal} className="img-fluid align-middle mx-3" width="500px" height="200px" alt="hero-img" />
         </Row>
         <Row className="mt-5 d-flex justify-content-center">
-          <img src={sdnc} className="img-fluid hero-pic align-middle mx-3" width="500px" height="200px" alt="hero-img" />
-          <img src={tenx} className="img-fluid hero-pic align-middle mx-3" width="500px" height="200px" alt="hero-img" />
+          <img src={sdnc} className="img-fluid align-middle mx-3" width="500px" height="200px" alt="hero-img" />
+          <img src={tenx} className="img-fluid align-middle mx-3" width="500px" height="200px" alt="hero-img" />
         </Row>
         <Row className="mt-5 d-flex justify-content-center">
-          <img src={southcarolina} className="img-fluid hero-pic align-middle mx-3" width="500px" alt="hero-img" />
+          <img src={southcarolina} className="img-fluid align-middle mx-3" width="500px" alt="hero-img" />
         </Row>
       </Container>
     </div>
