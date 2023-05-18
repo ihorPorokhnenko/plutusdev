@@ -839,7 +839,7 @@ export default function BecomeHost({ match }) {
             <Form.Row>
               {/* <a href="#" onClick={uploadFiles}>test</a> */}
               <Form.Group as={Col}>
-                <Form.Label>Multi-Upload Property Images</Form.Label>
+                <Form.Label>Multi-Upload Property Images (Suggested file dimensions are 2400x1600px and compressed to be under 7MB. Use TinyPNG.com to Compress)</Form.Label>
                 <input type="file" accept="image/*" className="form-control" onChange={uploadMultipleFiles} multiple />
               </Form.Group>
             </Form.Row>
